@@ -15,6 +15,7 @@ const color = {
     accent_secondary: "#7a00eb",
     dark: "#0e0e0e",
     dark_grey: "#222222",
+    grey: "#444444",
     light_grey: "#dddddd",
     light: "#eeeeee"
 };
@@ -27,6 +28,7 @@ const radius = {
 
 const fx = {
     blur: "blur(15px)",
+    transition: "1s"
 }
 
 export { font, color, radius, fx};
