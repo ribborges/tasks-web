@@ -28,7 +28,7 @@ const radius = {
 
 const fx = {
     blur: "blur(15px)",
-    transition: "1s"
+    transition: "0.5s"
 }
 
 export { font, color, radius, fx};

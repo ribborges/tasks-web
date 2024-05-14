@@ -1,11 +1,26 @@
 import styled from "styled-components";
+import { PlusCircle } from "react-bootstrap-icons";
+
 import { color, font, fx, radius } from "./styles/theme";
+import TaskCard from "./components/TaskCard";
+import Title from "./components/Title";
+import Button from "./components/Button";
+import TaskList from "./components/TaskList";
 
 export default function App() {
   return (
     <AppContainer>
       <AppBody>
-        <h1>Hello, World!</h1>
+        <Title />
+        <Button>
+          <PlusCircle />
+        </Button>
+        <TaskList>
+          <TaskCard taskName="Buy milk" />
+          <TaskCard taskName="Do home work" />
+          <TaskCard taskName="Call Gabriel" />
+          <TaskCard taskName="Buy Chang birthday present" />
+        </TaskList>
       </AppBody>
     </AppContainer>
   );
