@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckLg, PenFill, TrashFill, X } from "react-bootstrap-icons";
+import { CheckLg, PenFill, TrashFill } from "react-bootstrap-icons";
 
 import Button from "../Button";
 
