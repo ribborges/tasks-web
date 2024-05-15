@@ -19,7 +19,7 @@ export default function TaskCard(props: TaskCardProps) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const completeTask = () => {
-        fetch(`${baseURL}/complete-task/${props.taskData.id}`, {
+        fetch(`${baseURL}complete-task/${props.taskData.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export default function TaskCard(props: TaskCardProps) {
     };
 
     const deleteTask = () => {
-        fetch(`${baseURL}/tasks/${props.taskData.id}`, {
+        fetch(`${baseURL}tasks/${props.taskData.id}`, {
             method: 'DELETE',
         })
             .then(response => {

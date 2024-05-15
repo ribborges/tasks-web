@@ -26,7 +26,7 @@ export default function NewTask(props: NewTaskProps) {
         }
 
         try {
-            const response = await fetch(`${baseURL}`, {
+            const response = await fetch(`${baseURL}tasks`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

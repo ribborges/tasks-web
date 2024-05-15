@@ -13,7 +13,7 @@ export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    fetch(`${baseURL}/tasks`).then((response) => response.json()).then((data) => {
+    fetch(`${baseURL}tasks`).then((response) => response.json()).then((data) => {
       setTasks(data);
     });
   }, []);
