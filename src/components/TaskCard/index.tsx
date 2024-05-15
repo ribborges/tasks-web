@@ -6,6 +6,7 @@ import Button from "../Button";
 import { StyledTaskCard, StyledTaskData, StyledTaskName, StyledTaskOptions } from "./styles";
 import { Task } from "../../types/task";
 import EditTaskModal from "../EditTaskModal";
+import { baseURL } from "../../api/data";
 
 interface TaskCardProps {
     onTaskUpdated(updatedTask: { id: string; name: string; isCompleted: boolean; }): unknown;
@@ -18,9 +19,7 @@ export default function TaskCard(props: TaskCardProps) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const completeTask = () => {
-        const url = new URL("http://localhost:3000/complete-task");
-
-        fetch(`${url}/${props.taskData.id}`, {
+        fetch(`${baseURL}/complete-task/${props.taskData.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,9 +44,7 @@ export default function TaskCard(props: TaskCardProps) {
     };
 
     const deleteTask = () => {
-        const url = new URL("http://localhost:3000/tasks");
-        
-        fetch(`${url}/${props.taskData.id}`, {
+        fetch(`${baseURL}/tasks/${props.taskData.id}`, {
             method: 'DELETE',
         })
             .then(response => {

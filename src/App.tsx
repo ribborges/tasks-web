@@ -7,14 +7,13 @@ import Title from "./components/Title";
 import TaskList from "./components/TaskList";
 import NewTask from "./components/NewTask";
 import { Task } from "./types/task";
+import { baseURL } from "./api/data";
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    const url = new URL("http://localhost:3000/tasks");
-
-    fetch(url).then((response) => response.json()).then((data) => {
+    fetch(`${baseURL}/tasks`).then((response) => response.json()).then((data) => {
       setTasks(data);
     });
   }, []);

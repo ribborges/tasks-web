@@ -4,6 +4,7 @@ import { CheckLg, X } from "react-bootstrap-icons";
 import Button from "../Button";
 
 import { ButtonsContainer, StyledEditTaskModal, StyledEditTaskModalBody, StyledEditTaskModalTitle, StyledInput } from "./style";
+import { baseURL } from "../../api/data";
 
 interface EditTaskModalProps {
     isOpen: boolean;
@@ -18,16 +19,14 @@ export default function EditTaskModal(props: EditTaskModalProps) {
 
     const updateTask = async () => {
         setLoading(true);
-
-        const url = new URL("http://localhost:3000/tasks");
-
+        
         if (!name) {
             setLoading(false);
             return;
         }
 
         try {
-            const response = await fetch(`${url}/${props.task.id}`, {
+            const response = await fetch(`${baseURL}/tasks/${props.task.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

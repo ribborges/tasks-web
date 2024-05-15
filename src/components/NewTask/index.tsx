@@ -4,6 +4,7 @@ import { PlusCircle } from "react-bootstrap-icons";
 import Button from "../Button";
 
 import { CreateTaskCard, ErrorMessage, StyledInput, StyledNewTask } from "./style";
+import { baseURL } from "../../api/data";
 
 interface NewTaskProps {
     new: (task: { id: string, name: string, isCompleted: boolean }) => void;
@@ -18,8 +19,6 @@ export default function NewTask(props: NewTaskProps) {
         setLoading(true);
         setMessage({success: false, message: ''});
 
-        const url = new URL("http://localhost:3000/tasks");
-
         if (!name) {
             setMessage({success: false, message: 'Task name is required'});
             setLoading(false);
@@ -27,7 +26,7 @@ export default function NewTask(props: NewTaskProps) {
         }
 
         try {
-            const response = await fetch(url, {
+            const response = await fetch(`${baseURL}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

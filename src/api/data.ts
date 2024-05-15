@@ -1,0 +1,1 @@
+export const baseURL = new URL(import.meta.env.API_URL);
