@@ -6,7 +6,7 @@ import { StyledTaskCard, StyledTaskData, StyledTaskName, StyledTaskOptions } fro
 
 interface TaskCardProps {
     taskName: string;
-    isComplete?: boolean;
+    isCompleted?: boolean;
 }
 
 export default function TaskCard(props: TaskCardProps) {

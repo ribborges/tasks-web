@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { PlusCircle } from "react-bootstrap-icons";
 
@@ -7,7 +8,23 @@ import Title from "./components/Title";
 import Button from "./components/Button";
 import TaskList from "./components/TaskList";
 
+interface Task {
+  id: string;
+  name: string;
+  isCompleted: boolean;
+}
+
 export default function App() {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    const url = new URL("http://localhost:3000/getTasks");
+
+    fetch(url).then((response) => response.json()).then((data) => {
+      setTasks(data);
+    });
+  }, []);
+
   return (
     <AppContainer>
       <AppBody>
@@ -16,10 +33,13 @@ export default function App() {
           <PlusCircle />
         </Button>
         <TaskList>
-          <TaskCard taskName="Buy milk" />
-          <TaskCard taskName="Do home work" />
-          <TaskCard taskName="Call Gabriel" />
-          <TaskCard taskName="Buy Chang birthday present" />
+          {
+            tasks.map((task) => {
+              return (
+                <TaskCard key={task.id} taskName={task.name} isCompleted={task.isCompleted} />
+              );
+            })
+          }
         </TaskList>
       </AppBody>
     </AppContainer>
