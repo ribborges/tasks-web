@@ -6,7 +6,7 @@ import Button from "../Button";
 import { StyledTaskCard, StyledTaskData, StyledTaskName, StyledTaskOptions } from "./styles";
 import { Task } from "../../types/task";
 import EditTaskModal from "../EditTaskModal";
-import { baseURL } from "../../api/data";
+import { baseURL } from "../../api/url";
 
 interface TaskCardProps {
     onTaskUpdated(updatedTask: { id: string; name: string; isCompleted: boolean; }): unknown;

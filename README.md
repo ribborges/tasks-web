@@ -4,7 +4,7 @@
 
 Download and install [node.js](https://nodejs.org/en).
 
-Create a .env and set the variable API-URL to your api URL.
+Set the baseURL variable on src/api/url.ts to your API URL.
 
 Open your terminal/cmd on the repo directory and run:
 

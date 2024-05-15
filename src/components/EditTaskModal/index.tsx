@@ -4,7 +4,7 @@ import { CheckLg, X } from "react-bootstrap-icons";
 import Button from "../Button";
 
 import { ButtonsContainer, StyledEditTaskModal, StyledEditTaskModalBody, StyledEditTaskModalTitle, StyledInput } from "./style";
-import { baseURL } from "../../api/data";
+import { baseURL } from "../../api/url";
 
 interface EditTaskModalProps {
     isOpen: boolean;

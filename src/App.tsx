@@ -7,7 +7,7 @@ import Title from "./components/Title";
 import TaskList from "./components/TaskList";
 import NewTask from "./components/NewTask";
 import { Task } from "./types/task";
-import { baseURL } from "./api/data";
+import { baseURL } from "./api/url";
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);

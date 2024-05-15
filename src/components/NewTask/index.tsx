@@ -4,7 +4,7 @@ import { PlusCircle } from "react-bootstrap-icons";
 import Button from "../Button";
 
 import { CreateTaskCard, ErrorMessage, StyledInput, StyledNewTask } from "./style";
-import { baseURL } from "../../api/data";
+import { baseURL } from "../../api/url";
 
 interface NewTaskProps {
     new: (task: { id: string, name: string, isCompleted: boolean }) => void;
