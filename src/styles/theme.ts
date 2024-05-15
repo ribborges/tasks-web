@@ -3,7 +3,9 @@
 const font = {
     family: "'Ubuntu', sans-serif",
     size: {
-        default: "100%"
+        default: "100%",
+        h1: "2rem",
+        h2: "1.5rem",
     },
     weight: {
         default: "normal"
@@ -11,6 +13,8 @@ const font = {
 };
 
 const color = {
+    green: "#00ff00",
+    red: "#ff0000",
     accent_primary: "#0000ff",
     accent_secondary: "#7a00eb",
     dark: "#0e0e0e",

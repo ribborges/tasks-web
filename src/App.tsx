@@ -1,42 +1,60 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { PlusCircle } from "react-bootstrap-icons";
 
 import { color, font, fx, radius } from "./styles/theme";
 import TaskCard from "./components/TaskCard";
 import Title from "./components/Title";
-import Button from "./components/Button";
 import TaskList from "./components/TaskList";
-
-interface Task {
-  id: string;
-  name: string;
-  isCompleted: boolean;
-}
+import NewTask from "./components/NewTask";
+import { Task } from "./types/task";
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    const url = new URL("http://localhost:3000/getTasks");
+    const url = new URL("http://localhost:3000/tasks");
 
     fetch(url).then((response) => response.json()).then((data) => {
       setTasks(data);
     });
   }, []);
 
+  const addTask = (task: Task) => {
+    setTasks([task, ...tasks]);
+  }
+
+  const setIsCompleted = (id: string) => {
+    setTasks(tasks.map(task => {
+      if (task.id === id) {
+        task.isCompleted = true;
+      }
+      return task;
+    }));
+  }
+
+  const updateTask = (task: Task) => {
+    setTasks(tasks.map(t => {
+      if (t.id === task.id) {
+        return task;
+      }
+      return t;
+    }));
+  }
+
+  const removeTask = (id: string) => {
+    setTasks(tasks.filter(task => task.id !== id));
+  }
+
   return (
     <AppContainer>
       <AppBody>
         <Title />
-        <Button>
-          <PlusCircle />
-        </Button>
         <TaskList>
+          <NewTask new={addTask} />
           {
             tasks.map((task) => {
               return (
-                <TaskCard key={task.id} taskName={task.name} isCompleted={task.isCompleted} />
+                <TaskCard key={task.id} taskData={task} removed={removeTask} setIsCompleted={setIsCompleted} onTaskUpdated={updateTask} />
               );
             })
           }

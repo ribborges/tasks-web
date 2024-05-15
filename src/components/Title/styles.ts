@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { font } from "../../styles/theme";
+
 const StyledTitleContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -12,7 +14,7 @@ const StyledLogo = styled.img`
 `;
 
 const StyledTitle = styled.h1`
-  font-size: 2rem;
+  font-size: ${font.size.h1};
   font-weight: bold;
   margin: 1rem;
 `;

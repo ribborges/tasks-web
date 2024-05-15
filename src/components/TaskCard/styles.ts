@@ -33,13 +33,13 @@ const StyledTaskOptions = styled.div`
   padding: 0;
 `;
 
-const StyledTaskName = styled.span`
+const StyledTaskName = styled.span<{ isCompleted: boolean }>`
   display: flex;
   align-items: center;
 
   &::before {
     content: "";
-    background-color: ${color.accent_primary};
+    background-color: ${props => props.isCompleted ?  color.green : color.red};
     height: 25px;
     width: 5px;
     margin-right: 15px;
