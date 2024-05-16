@@ -26,7 +26,7 @@ export default function EditTaskModal(props: EditTaskModalProps) {
         }
 
         try {
-            const response = await fetch(`${baseURL}/tasks/${props.task.id}`, {
+            const response = await fetch(`${baseURL}tasks/${props.task.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
