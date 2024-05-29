@@ -4,7 +4,7 @@
 
 Download and install [node.js](https://nodejs.org/en).
 
-Set the baseURL variable on src/api/url.ts to your API URL.
+Set the .env variable to your API URL (Variable name: API_URL).
 
 Open your terminal/cmd on the repo directory and run:
 
@@ -15,3 +15,5 @@ Open your terminal/cmd on the repo directory and run:
 ```bash
 > npm run dev
 ```
+
+[API repo](https://github.com/ribborges/tasks-api)

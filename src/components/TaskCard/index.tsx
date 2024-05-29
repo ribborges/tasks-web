@@ -6,7 +6,7 @@ import Button from "../Button";
 import { StyledTaskCard, StyledTaskData, StyledTaskName, StyledTaskOptions } from "./styles";
 import { Task } from "../../types/task";
 import EditTaskModal from "../EditTaskModal";
-import { baseURL } from "../../api/url";
+import { CompleteTask, RemoveTask } from "../../api/api";
 
 interface TaskCardProps {
     onTaskUpdated(updatedTask: { id: string; name: string; isCompleted: boolean; }): unknown;
@@ -19,15 +19,7 @@ export default function TaskCard(props: TaskCardProps) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const completeTask = () => {
-        fetch(`${baseURL}complete-task/${props.taskData.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                isCompleted: true
-            }),
-        })
+        CompleteTask(props.taskData.id)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -44,9 +36,7 @@ export default function TaskCard(props: TaskCardProps) {
     };
 
     const deleteTask = () => {
-        fetch(`${baseURL}tasks/${props.taskData.id}`, {
-            method: 'DELETE',
-        })
+        RemoveTask(props.taskData.id)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

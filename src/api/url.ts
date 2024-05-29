@@ -1,1 +1,0 @@
-export const baseURL = new URL("https://tasks-api-dzw0.onrender.com");

@@ -2,9 +2,8 @@ import { useState } from "react";
 import { CheckLg, X } from "react-bootstrap-icons";
 
 import Button from "../Button";
-
 import { ButtonsContainer, StyledEditTaskModal, StyledEditTaskModalBody, StyledEditTaskModalTitle, StyledInput } from "./style";
-import { baseURL } from "../../api/url";
+import { UpdateTask } from "../../api/api";
 
 interface EditTaskModalProps {
     isOpen: boolean;
@@ -26,15 +25,7 @@ export default function EditTaskModal(props: EditTaskModalProps) {
         }
 
         try {
-            const response = await fetch(`${baseURL}tasks/${props.task.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name
-                }),
-            });
+            const response = await UpdateTask(props.task.id, name);
 
             if (response.ok) {
                 props.onTaskUpdated({ id: props.task.id, name, isCompleted: props.task.isCompleted });

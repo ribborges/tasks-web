@@ -7,13 +7,13 @@ import Title from "./components/Title";
 import TaskList from "./components/TaskList";
 import NewTask from "./components/NewTask";
 import { Task } from "./types/task";
-import { baseURL } from "./api/url";
+import { GetTasks } from "./api/api";
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
   useEffect(() => {
-    fetch(`${baseURL}tasks`).then((response) => response.json()).then((data) => {
+    GetTasks().then((response) => response.json()).then((data) => {
       setTasks(data);
     });
   }, []);
