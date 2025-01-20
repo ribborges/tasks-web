@@ -1,5 +1,5 @@
 // API URL
-const apiURL = import.meta.env.VITE_API_URL;
+const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 // GetTasks function
 const GetTasks = async () => await fetch(`${apiURL}/tasks`);

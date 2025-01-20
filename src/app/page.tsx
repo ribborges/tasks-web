@@ -1,13 +1,16 @@
+'use client';
+
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { color, font, fx, radius } from "./styles/theme";
-import TaskCard from "./components/TaskCard";
-import Title from "./components/Title";
-import TaskList from "./components/TaskList";
-import NewTask from "./components/NewTask";
-import { Task } from "./types/task";
-import { GetTasks } from "./api/api";
+import { color, font, fx, radius } from "@/styles/theme";
+import TaskCard from "@/components/TaskCard";
+import Title from "@/components/Title";
+import TaskList from "@/components/TaskList";
+import NewTask from "@/components/NewTask";
+import { Task } from "@/types/task";
+import { GetTasks } from "@/api/api";
+import GlobalStyle from "@/styles/GlobalStyle";
 
 export default function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -45,6 +48,8 @@ export default function App() {
   }
 
   return (
+    <>
+    <GlobalStyle />
     <AppContainer>
       <AppBody>
         <Title />
@@ -60,6 +65,7 @@ export default function App() {
         </TaskList>
       </AppBody>
     </AppContainer>
+    </>
   );
 }
 

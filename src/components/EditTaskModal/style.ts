@@ -1,3 +1,5 @@
+'use client';
+
 import styled from "styled-components";
 
 import { color, font, fx, radius } from "../../styles/theme";
