@@ -8,7 +8,7 @@ import Message from "@/components/Message";
 import Spinner from "@/components/Spinner";
 
 export default function Register() {
-    const { register, userState, error, handlerUserInput, loading } = useUserContext();
+    const { register, userState, message, handlerUserInput, loading } = useUserContext();
     const { name, username, email, password } = userState;
 
     return (
@@ -16,7 +16,7 @@ export default function Register() {
             {loading && <Spinner />}
             <div className="flex flex-col gap-6">
                 <h1 className="text-2xl font-bold text-center">Create a new account</h1>
-                <Message message={error} type="error" />
+                <Message message={message.message} type={message.type} />
                 <form className="flex flex-col gap-2">
                     <Input
                         id="name"
