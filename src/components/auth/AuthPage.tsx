@@ -1,10 +1,12 @@
-import AnimBackground from "../AnimBackground";
+import AnimBackground from "@/components/AnimBackground";
+import Footer from "@/components/Footer";
 
 export default function AuthPage({ children }: { children?: React.ReactNode }) {
     return (
         <div className="
                 h-screen w-screen
-                flex justify-center items-center
+                flex justify-between items-center flex-col
+                box-border
             ">
             <AnimBackground />
             <div className="
@@ -14,12 +16,13 @@ export default function AuthPage({ children }: { children?: React.ReactNode }) {
                 w-11/12 md:w-8/12 lg:w-4/12
                 bg-zinc-200 dark:bg-zinc-950
                 border border-solid border-zinc-300 dark:border-zinc-900
-                p-8
+                p-8 m-8
                 rounded-2xl
                 shadow-xl shadow-black/10 dark:shadow-white/10
             ">
                 {children}
             </div>
+            <Footer />
         </div>
     );
 }
