@@ -1,5 +1,4 @@
-// API URL
-const apiURL = process.env.NEXT_PUBLIC_API_URL;
+import { apiURL } from "@/config/env";
 
 // GetTasks function
 const GetTasks = async () => await fetch(`${apiURL}/tasks`);
