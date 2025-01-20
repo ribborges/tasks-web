@@ -5,9 +5,9 @@ import { XLg } from "react-bootstrap-icons";
 
 import classConcat from "@/utils/classConcat";
 
-interface MessageProps {
+export interface MessageProps {
     message: string;
-    type: "error" | "success" | "info" | "warning";
+    type?: "error" | "success" | "info" | "warning";
 }
 
 export default function Message({ message, type }: MessageProps) {

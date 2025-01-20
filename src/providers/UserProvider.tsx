@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { UserContext } from "@/context/UserContext";
 import { registerUser } from "@/api/user";
+import { MessageProps } from "@/components/Message";
 
 interface UserProviderProps {
     children: ReactNode;
@@ -19,7 +20,10 @@ export default function UserProvider({ children }: UserProviderProps) {
         password: '',
     });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [message, setMessage] = useState<MessageProps>({
+        message: '',
+        type: undefined,
+    });
 
     const router = useRouter();
 
@@ -28,19 +32,19 @@ export default function UserProvider({ children }: UserProviderProps) {
         setLoading(true);
 
         if (!userState.name || !userState.username || !userState.email || !userState.password) {
-            setError('Please fill all fields');
+            setMessage({ message: 'Please fill all fields', type: 'error' });
             setLoading(false);
             return;
         }
 
         if (userState.password.length < 8) {
-            setError('Password must be at least 8 characters long');
+            setMessage({ message: 'Password must have at least 8 characters', type: 'error' });
             setLoading(false);
             return;
         }
 
         if (!userState.email.includes('@')) {
-            setError('Invalid email');
+            setMessage({ message: 'Invalid email', type: 'error' });
             setLoading(false);
             return;
         }
@@ -48,7 +52,9 @@ export default function UserProvider({ children }: UserProviderProps) {
         const res = await registerUser(userState);
 
         if (res && res?.status !== 201) {
-            setError(res.status + ": " + res.data);
+            setMessage({ message: res.status + ": " + res.data, type: 'error' });
+            setLoading(false);
+            return;
         }
 
         setUserState({
@@ -78,7 +84,7 @@ export default function UserProvider({ children }: UserProviderProps) {
             loading,
             register,
             userState,
-            error
+            message
         }}>
             {children}
         </UserContext.Provider>
