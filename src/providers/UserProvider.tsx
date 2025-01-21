@@ -4,7 +4,7 @@ import { ReactNode, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import { UserContext } from "@/context/UserContext";
-import { registerUser } from "@/api/user";
+import { getLoginStatus, loginUser, logoutUser, registerUser } from "@/api/auth";
 import { MessageProps } from "@/components/Message";
 
 interface UserProviderProps {
@@ -51,7 +51,13 @@ export default function UserProvider({ children }: UserProviderProps) {
 
         const res = await registerUser(userState);
 
-        if (res && res?.status !== 201) {
+        if (!res) {
+            setMessage({ message: 'An error occurred', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        if (!res?.status.toString().startsWith('2')) {
             setMessage({ message: res.status + ": " + res.data, type: 'error' });
             setLoading(false);
             return;
@@ -69,6 +75,98 @@ export default function UserProvider({ children }: UserProviderProps) {
         router.push('/');
     };
 
+    const login = async (e: FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+
+        if (!userState.username || !userState.password) {
+            setMessage({ message: 'Please fill all fields', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        const res = await loginUser(userState);
+
+        console.log(res.statusText);
+
+        if (!res) {
+            setMessage({ message: 'An error occurred', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        if (!res?.status.toString().startsWith('2')) {
+            setMessage({ message: res.status + ": " + res.data, type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        setUserState({
+            name: '',
+            username: '',
+            email: '',
+            password: '',
+        });
+
+        setLoading(false);
+
+        router.push('/');
+    }
+
+    const loginStatus = async () => {
+        setLoading(true);
+        let isLoggedIn = false;
+
+        const res = await getLoginStatus();
+
+        isLoggedIn = res.data;
+
+        if (!res) {
+            setMessage({ message: 'An error occurred', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        if (!isLoggedIn) {
+            setMessage({ message: 'User not logged in', type: 'error' });
+            setLoading(false);
+            router.push('/login');
+            return;
+        }
+
+        if (!res?.status.toString().startsWith('2')) {
+            setMessage({ message: res.status + ": " + res.data, type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        setLoading(true);
+
+        return isLoggedIn;
+    }
+
+    const logout = async () => {
+        setLoading(true);
+
+        const res = await logoutUser();
+
+        if (!res) {
+            setMessage({ message: 'An error occurred', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        if (!res?.status.toString().startsWith('2')) {
+            setMessage({ message: res.status + ": " + res.data, type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        setLoading(false);
+
+        router.push('/login');
+    }
+
     const handlerUserInput = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
@@ -81,8 +179,11 @@ export default function UserProvider({ children }: UserProviderProps) {
     return (
         <UserContext.Provider value={{
             handlerUserInput,
-            loading,
             register,
+            login,
+            loginStatus,
+            logout,
+            loading,
             userState,
             message
         }}>
