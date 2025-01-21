@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState, FormEvent, useEffect } from "react";
+import { ReactNode, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import { UserContext } from "@/context/UserContext";

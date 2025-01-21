@@ -1,9 +1,8 @@
 import { useUserContext } from "@/context/UserContext";
 import { Button } from "@/components/Input";
-import { useEffect } from "react";
 
 export default function Header() {
-    const { logout, user, getUser } = useUserContext();
+    const { logout, user } = useUserContext();
     
     return (
         <header className="
