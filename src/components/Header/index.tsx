@@ -1,8 +1,9 @@
 import { useUserContext } from "@/context/UserContext";
 import { Button } from "@/components/Input";
+import { useEffect } from "react";
 
 export default function Header() {
-    const { logout } = useUserContext();
+    const { logout, user, getUser } = useUserContext();
     
     return (
         <header className="
@@ -15,7 +16,7 @@ export default function Header() {
             </div>
             <div className="flex items-center gap-4">
                 <div>
-                    <span className="font-bold">User</span>
+                    <span className="font-bold">{user.name}</span>
                 </div>
                 <Button onClick={logout}>Logout</Button>
             </div>

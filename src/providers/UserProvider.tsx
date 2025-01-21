@@ -1,11 +1,12 @@
 'use client';
 
-import { ReactNode, useState, FormEvent } from "react";
+import { ReactNode, useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { UserContext } from "@/context/UserContext";
 import { getLoginStatus, loginUser, logoutUser, registerUser } from "@/api/auth";
 import { MessageProps } from "@/components/Message";
+import { getLoggedUser } from "@/api/user";
 
 interface UserProviderProps {
     children: ReactNode;
@@ -119,25 +120,25 @@ export default function UserProvider({ children }: UserProviderProps) {
 
         const res = await getLoginStatus();
 
-        isLoggedIn = res.data;
+        isLoggedIn = res.data as boolean;
 
         if (!res) {
             setMessage({ message: 'An error occurred', type: 'error' });
             setLoading(false);
-            return;
+            return false;
         }
 
         if (!isLoggedIn) {
             setMessage({ message: 'User not logged in', type: 'error' });
             setLoading(false);
             router.push('/login');
-            return;
+            return false;
         }
 
         if (!res?.status.toString().startsWith('2')) {
             setMessage({ message: res.status + ": " + res.data, type: 'error' });
             setLoading(false);
-            return;
+            return false;
         }
 
         setLoading(true);
@@ -167,6 +168,28 @@ export default function UserProvider({ children }: UserProviderProps) {
         router.push('/login');
     }
 
+    const getUser = async () => {
+        setLoading(true);
+
+        const res = await getLoggedUser();
+
+        if (!res) {
+            setMessage({ message: 'An error occurred', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        if (!res?.status.toString().startsWith('2')) {
+            setMessage({ message: res.status + ": " + res.data, type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        setUser(res.data);
+
+        setLoading(false);
+    }
+
     const handlerUserInput = (name: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 
@@ -176,6 +199,21 @@ export default function UserProvider({ children }: UserProviderProps) {
         }));
     };
 
+    const checkAndGetUser = async () => {
+        setLoading(true);
+
+        const isLoggedIn = await loginStatus();
+
+        if (!isLoggedIn) {
+            await getUser();
+            router.push('/login');
+            setLoading(false);
+        }
+
+        await getUser();
+        setLoading(false);
+    };
+
     return (
         <UserContext.Provider value={{
             handlerUserInput,
@@ -183,9 +221,12 @@ export default function UserProvider({ children }: UserProviderProps) {
             login,
             loginStatus,
             logout,
+            getUser,
             loading,
             userState,
-            message
+            message,
+            user,
+            checkAndGetUser
         }}>
             {children}
         </UserContext.Provider>
