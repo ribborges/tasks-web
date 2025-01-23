@@ -7,11 +7,11 @@ export default function Footer() {
             bg-zinc-400 bg-opacity-50 dark:bg-zinc-800 dark:bg-opacity-50
             border border-solid border-zinc-500 border-opacity-50 dark:border-zinc-700 dark:border-opacity-50
             rounded-lg
-            p-10 m-5
+            p-4 md:p-8 lg:p-10 m-5
             hover:scale-95
             transition duration-500
         ">
-            <p>
+            <p className="text-center text-xs md:text-sm lg:text-base">
                 {`Developed by: `}
                 <a href='https://www.linkedin.com/in/ribborges/' target={'_blank'}>Richard de Carvalho Borges</a>
                 {` with `}

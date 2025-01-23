@@ -51,17 +51,17 @@ function InputGroup(props: inputGroupProps) {
             <div className={classConcat(
                 props.className || "",
                 `
-            m-1
-            relative
-            flex flex-nowrap items-stretch flex-1
-            w-auto h-auto
-            box-border
-            rounded-xl border-2 border-solid border-zinc-400 dark:border-zinc-700
-            hover:shadow-2xl focus:shadow-2xl
-            hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
-            dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
-            transition duration-500
-            `
+                m-1
+                relative
+                flex flex-nowrap items-stretch flex-1
+                w-auto h-auto
+                box-border
+                rounded-xl border-2 border-solid border-zinc-400 dark:border-zinc-700
+                hover:shadow-2xl focus:shadow-2xl
+                hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
+                dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
+                transition duration-500
+                `
             )}>
                 <div className="flex gap-2 items-center p-2 lg:p-4">
                     {
