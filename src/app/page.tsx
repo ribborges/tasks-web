@@ -1,6 +1,6 @@
 'use client';
 
-import Header from "@/components/Header";
+import Dashboard from "@/components/Dashboard";
 import Spinner from "@/components/Spinner";
 import { useUserContext } from "@/context/UserContext";
 import useRedirect from "@/hooks/useRedirect";
@@ -15,7 +15,7 @@ export default function App() {
       w-screen h-screen
     ">
       {
-        user ? <Header /> : <Spinner />
+        user ? <Dashboard /> : <Spinner />
       }
     </main>
   );
