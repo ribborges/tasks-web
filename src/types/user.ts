@@ -1,5 +1,5 @@
 export type UserSchema = {
-    _id: string
+    id: string
     username: string;
     name: string;
     email: string;

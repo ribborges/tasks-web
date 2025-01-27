@@ -1,19 +1,20 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { DependencyList, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-import { useUserContext } from "@/context/UserContext";
-
-const useRedirect = () => {
-  const { checkAndGetUser } = useUserContext();
+const useRedirect = (
+  route: string,
+  condition: boolean,
+  deps?: DependencyList
+) => {
+  const router = useRouter();
 
   useEffect(() => {
-    const redirectUser = async () => {
-      await checkAndGetUser();
-    };
-
-    redirectUser();
-  }, []);
+    if (condition) {
+      router.push(route);
+    }
+  }, [deps]);
 };
 
 export default useRedirect;

@@ -1,4 +1,6 @@
-import api from "./base";
+import { AxiosError } from "axios";
+
+import { api } from "@/api";
 
 async function getLoggedUser() {
     try {
@@ -8,8 +10,8 @@ async function getLoggedUser() {
 
         return res;
     } catch (error) {
-        if (error instanceof Error && 'response' in error) {
-            return (error as any).response;
+        if (error instanceof AxiosError && 'response' in error) {
+            return error.response;
         }
     }
 }

@@ -1,10 +1,10 @@
-import { useUserContext } from "@/context/UserContext";
 import { Button } from "@/components/Input";
 import UserBadge from "@/components/UserBadge";
+import useUserStore from "@/lib/store/user.store";
 
 export default function Header() {
-    const { logout, user } = useUserContext();
-    
+    const { logout, user } = useUserStore();
+
     return (
         <header className="
             flex items-center justify-between
@@ -15,7 +15,7 @@ export default function Header() {
                 <h1 className="text-3xl font-bold text-pink-500">Tasks</h1>
             </div>
             <div className="flex items-center gap-4">
-                <UserBadge user={user} />
+                {user && <UserBadge user={user} />}
                 <Button onClick={logout}>Logout</Button>
             </div>
         </header>

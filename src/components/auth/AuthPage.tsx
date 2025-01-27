@@ -1,7 +1,23 @@
+'use client';
+
+import { useEffect } from "react";
+
 import AnimBackground from "@/components/AnimBackground";
 import Footer from "@/components/Footer";
+import useRedirect from "@/hooks/useRedirect";
+import { useUserStore } from "@/lib/store";
 
 export default function AuthPage({ children }: { children?: React.ReactNode }) {
+    const { user, status } = useUserStore();
+
+    useEffect(() => {
+        if (user === undefined) {
+            status();
+        }
+    }, []);
+
+    useRedirect("/", user !== undefined, [user]);
+
     return (
         <div className="
                 h-screen w-screen

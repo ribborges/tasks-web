@@ -1,16 +1,7 @@
-import api from "./base";
+import { AxiosError } from "axios";
 
-interface RegisterData {
-    name: string;
-    username: string;
-    email: string;
-    password: string;
-}
-
-interface LoginData {
-    username: string;
-    password: string;
-}
+import { api } from "@/api";
+import { LoginData, RegisterData } from "@/interfaces/auth";
 
 async function registerUser({ name, username, email, password }: RegisterData) {
     try {
@@ -25,8 +16,8 @@ async function registerUser({ name, username, email, password }: RegisterData) {
 
         return res;
     } catch (error) {
-        if (error instanceof Error && 'response' in error) {
-            return (error as any).response;
+        if (error instanceof AxiosError && 'response' in error) {
+            return error.response;
         }
     }
 }
@@ -42,8 +33,8 @@ async function loginUser({ username, password }: LoginData) {
 
         return res;
     } catch (error) {
-        if (error instanceof Error && 'response' in error) {
-            return (error as any).response;
+        if (error instanceof AxiosError && 'response' in error) {
+            return error.response;
         }
     }
 }
@@ -56,8 +47,8 @@ async function getLoginStatus() {
 
         return res;
     } catch (error) {
-        if (error instanceof Error && 'response' in error) {
-            return (error as any).response;
+        if (error instanceof AxiosError && 'response' in error) {
+            return error.response;
         }
     }
 }
@@ -70,10 +61,9 @@ async function logoutUser() {
 
         return res;
     } catch (error) {
-        if (error instanceof Error && 'response' in error) {
-            return (error as any).response;
+        if (error instanceof AxiosError && 'response' in error) {
+            return error.response;
         }
     }
 }
-
 export { registerUser, loginUser, getLoginStatus, logoutUser };

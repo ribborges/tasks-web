@@ -1,15 +1,57 @@
 'use client';
 
+import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { KeyFill, PersonBadgeFill } from "react-bootstrap-icons";
 
-import { useUserContext } from "@/context/UserContext";
 import { Button, Input } from "@/components/Input";
-import Message from "@/components/Message";
+import Message, { MessageProps } from "@/components/Message";
 import Spinner from "@/components/Spinner";
+import useUserStore from "@/lib/store/user.store";
 
 export default function Login() {
-    const { login, userState, message, handlerUserInput, loading } = useUserContext();
-    const { username, password } = userState;
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState<MessageProps>({
+        message: '',
+        type: undefined,
+    });
+    const [credentials, setCredentials] = useState({
+        username: '',
+        password: '',
+    });
+
+    const router = useRouter();
+
+    const { login } = useUserStore();
+
+    const handleChange = (e: FormEvent<HTMLInputElement>) => {
+        const { name, value } = e.currentTarget;
+
+        setCredentials((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setLoading(true);
+
+        if (!credentials.username || !credentials.password) {
+            setMessage({ message: 'Please fill all fields', type: 'error' });
+            setLoading(false);
+            return;
+        }
+
+        try {
+            await login(credentials);
+            setLoading(false);
+            router.push('/');
+        } catch (error) {
+            setMessage({ message: 'An error occurred', type: 'error' });
+            setLoading(false);
+        }
+    }
 
     return (
         <>
@@ -20,8 +62,8 @@ export default function Login() {
                 <form className="flex flex-col gap-2">
                     <Input
                         id="username"
-                        value={username}
-                        onChange={handlerUserInput("username")}
+                        value={credentials.username}
+                        onChange={handleChange}
                         type="text"
                         name="username"
                         label="Username:"
@@ -30,15 +72,15 @@ export default function Login() {
                     />
                     <Input
                         id="password"
-                        value={password}
-                        onChange={handlerUserInput("password")}
+                        value={credentials.password}
+                        onChange={handleChange}
                         type="password"
                         name="password"
                         label="Password:"
                         icon={<KeyFill />}
                         placeholder="••••••••"
                     />
-                    <Button type="submit" onClick={login}>Login</Button>
+                    <Button type="submit" onClick={handleSubmit}>Login</Button>
                 </form>
 
                 <p className="text-center text-sm font-thin">Don't have an account? <a href="/register">Create one</a></p>

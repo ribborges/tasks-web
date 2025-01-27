@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from 'next/font/google';
 
-import UserProvider from "@/providers/UserProvider";
-
 import "@/styles/global.css";
 
 const poppins = Poppins({ weight: ["300", "400", "500", "700"], subsets: ["latin"], display: "swap", adjustFontFallback: false });
@@ -20,9 +18,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`text-zinc-950 dark:text-zinc-100 ${poppins.className}`}>
-                <UserProvider>
-                    {children}
-                </UserProvider>
+                {children}
             </body>
         </html>
     );
