@@ -7,7 +7,7 @@ export default function Dashboard() {
             <Header />
             <div className="flex-1 flex">
                 <Sidebar />
-                <div className="flex-1 bg-zinc-900 border border-solid border-zinc-800 rounded-xl m-1">
+                <div className="flex-1 bg-zinc-200 dark:bg-zinc-900 border border-solid border-zinc-300 dark:border-zinc-800 rounded-xl m-1">
 
                 </div>
             </div>
