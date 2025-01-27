@@ -6,12 +6,8 @@ export default function UserBadge({ user }: { user: UserSchema }) {
     return (
         <div className="
             flex items-center
-            p-2
             gap-2
             text-sm
-            border border-solid rounded-2xl
-            bg-zinc-200 dark:bg-zinc-900
-            border-zinc-300 dark:border-zinc-800
             hover:opacity-60
             transition duration-500
         ">
