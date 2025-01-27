@@ -17,7 +17,7 @@ export default function Sidebar() {
             <nav className="
 				flex flex-col items-center content-center justify-between
 				backdrop-blur-md bg-zinc-100 dark:bg-zinc-950 bg-opacity-50 dark:bg-opacity-50
-				top-0 z-50 p-4 m-2
+				top-0 p-4 m-2
 				border border-b-2 border-solid border-zinc-400 dark:border-zinc-800 border-opacity-40 dark:border-opacity-40 rounded-2xl
 				shadow-xl
 				select-none
