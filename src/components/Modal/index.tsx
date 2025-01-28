@@ -25,12 +25,17 @@ export default function Modal(props: modalProps) {
 
     return (
         <>
-            <Button className={props.className} onClick={openModal} disabled={props.disabled == undefined ? false : props.disabled}>{props.button}</Button>
+            {
+                props.className ?
+                <button className={props.className} onClick={openModal} disabled={props.disabled == undefined ? false : props.disabled}>{props.button}</button> :
+                <Button className={props.className} onClick={openModal} disabled={props.disabled == undefined ? false : props.disabled}>{props.button}</Button>
+            }
 
             {isOpen && (
                 <div className="
-                    fixed flex box-border
-                    z-[99] left-0 top-0
+                    absolute
+                    flex box-border
+                    z-[99]
                     w-screen h-screen
                     overflow-hidden
                     backdrop-blur-sm
@@ -43,13 +48,13 @@ export default function Modal(props: modalProps) {
                         bg-zinc-200 dark:bg-zinc-900
                         shadow-2xl shadow-black/20 dark:shadow-zinc-200/20
                     ">
-                        <div className="flex content-center items-center gap-5">
+                        <div className="flex items-center gap-5">
                             <button onClick={closeModal} className="p-1 m-1 rounded-full hover:bg-red-600 transition duration-500">
                                 <XLg />
                             </button>
                             <span className="text-4xl font-bold">{props.title}</span>
                         </div>
-                        <Spacer height={50} />
+                        <Spacer space={50} />
                         <div className="flex-1">
                             {props.children}
                         </div>

@@ -3,7 +3,7 @@
 import { ReactNode, useState } from 'react';
 
 import classConcat from '@/utils/classConcat';
-import { EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
+import { Check, CircleFill, EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 
 interface inputGroupProps {
     className?: string,
@@ -102,11 +102,25 @@ function Input(props: inputProps) {
             );
             break;
 
-        case "checkbox": case "radius":
+        case "checkbox":
             return (
-                <label htmlFor={props.id} className={props.className}>
+                <div className='flex items-center gap-2'>
                     <input
-                        className={inputStyle}
+                        className="
+                            appearance-none
+                            relative peer
+                            shrink-0
+                            m-1
+                            w-6 h-6
+                            border-2 border-solid rounded-lg
+                            bg-transparent
+                            border-zinc-400 dark:border-zinc-700
+                            hover:shadow-2xl focus:shadow-2xl
+                            hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
+                            dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
+                            hover:bg-zinc-400 dark:hover:bg-zinc-700
+                            checked:bg-purple-800 checked:border-purple-950 hover:checked:bg-purple-950
+                        "
                         type={props.type}
                         id={props.id}
                         name={props.name}
@@ -114,8 +128,63 @@ function Input(props: inputProps) {
                         onChange={props.onChange}
                         disabled={props.disabled}
                     />
-                    <span>{props.children}</span>
-                </label>
+                    <Check className='absolute w-6 h-6 m-[6px] self-center hidden peer-checked:block pointer-events-none' />
+                    {
+                        props.icon ?
+                            <div>
+                                {props.icon}
+                            </div> : <></>
+                    }
+                    {
+                        props.label ?
+                            <label htmlFor={props.id} className="pointer-events-none">
+                                {props.label}
+                            </label> : <></>
+                    }
+                </div>
+            );
+            break;
+
+        case "radio":
+            return (
+                <div className='flex items-center gap-2'>
+                    <input
+                        className="
+                            appearance-none
+                            relative peer
+                            shrink-0
+                            m-1
+                            w-6 h-6
+                            border-2 border-solid rounded-full
+                            bg-transparent
+                            border-zinc-400 dark:border-zinc-700
+                            hover:shadow-2xl focus:shadow-2xl
+                            hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
+                            dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
+                            hover:bg-zinc-400 dark:hover:bg-zinc-700
+                            checked:bg-purple-800 checked:border-purple-950 hover:checked:bg-purple-950
+                        "
+                        type={props.type}
+                        id={props.id}
+                        name={props.name}
+                        value={props.value}
+                        onChange={props.onChange}
+                        disabled={props.disabled}
+                    />
+                    <CircleFill className='absolute w-3 h-3 m-[12px] self-center hidden peer-checked:block pointer-events-none' />
+                    {
+                        props.icon ?
+                            <div>
+                                {props.icon}
+                            </div> : <></>
+                    }
+                    {
+                        props.label ?
+                            <label htmlFor={props.id} className="pointer-events-none">
+                                {props.label}
+                            </label> : <></>
+                    }
+                </div>
             );
             break;
 

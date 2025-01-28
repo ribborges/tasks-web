@@ -1,19 +1,28 @@
+import classConcat from "@/utils/classConcat";
+
 interface SeparatorProps {
-    height?: number;
+    space?: number;
+    vertical?: boolean;
+    className?: string;
 }
 
-function Spacer({ height = 120 }: SeparatorProps) {
+function Spacer({ space = 120, vertical, className }: SeparatorProps) {
     return <hr
-        style={{ marginTop: `${height / 2}px`, marginBottom: `${height / 2}px` }}
-        className="
-            box-border w-full border-t-1 border-solid border-t-zinc-500/50
-    "/>;
+        style={ vertical? { marginRight: `${space / 2}px`, marginLeft: `${space / 2}px` } : { marginTop: `${space / 2}px`, marginBottom: `${space / 2}px` }}
+        className={classConcat(
+            "box-border border-solid border-zinc-500/50",
+            vertical ? "h-full border-r" : "w-full border-t",
+            className || ""
+        )}/>;
 }
 2
-function Blanckspace({ height = 60 }: SeparatorProps) {
+function Blanckspace({ space = 60, vertical, className }: SeparatorProps) {
     return <hr
-        style={{ height: `${height}px` }}
-        className="border-none"
+        style={ vertical? { width: `${space}px` } : { height: `${space}px` }}
+        className={classConcat(
+            "border-none",
+            className || ""
+        )}
     />;
 }
 
