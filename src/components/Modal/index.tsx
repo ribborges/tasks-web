@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { X } from "react-bootstrap-icons";
+import { XLg } from "react-bootstrap-icons";
 
 import { Button } from '@/components/Input';
 import { Spacer } from '@/components/Separator';
@@ -44,9 +44,9 @@ export default function Modal(props: modalProps) {
                         shadow-2xl shadow-black/20 dark:shadow-zinc-200/20
                     ">
                         <div className="flex content-center items-center gap-5">
-                            <Button onClick={closeModal}>
-                                <X />
-                            </Button>
+                            <button onClick={closeModal} className="p-1 m-1 rounded-full hover:bg-red-600 transition duration-500">
+                                <XLg />
+                            </button>
                             <span className="text-4xl font-bold">{props.title}</span>
                         </div>
                         <Spacer height={50} />
