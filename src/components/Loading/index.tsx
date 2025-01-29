@@ -2,7 +2,7 @@ import { ArrowRepeat } from "react-bootstrap-icons";
 
 export default function Spinner({ withLogo = false }: { withLogo?: boolean }) {
     return (
-        <div className="absolute backdrop-blur-sm flex flex-col gap-24 justify-center items-center h-full w-full z-10">
+        <div className="backdrop-blur-sm flex flex-col gap-24 justify-center items-center h-full w-full z-[2]">
             {withLogo && <img className="w-28 h-28" src="/icon.png" alt="Tasks logo" />}
             <div className="
                 p-1
