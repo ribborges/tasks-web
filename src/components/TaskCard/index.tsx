@@ -7,7 +7,7 @@ import EditTask from "../EditTask";
 import classConcat from "@/utils/classConcat";
 import useModal from '@/hooks/useModal';
 import { RemoveTask } from "@/services/task.service";
-import { useTaskStore } from "@/lib/store";
+import { useCategoryStore, useTaskStore } from "@/lib/store";
 
 interface TaskCardProps {
     taskData: TaskSchema;
@@ -17,8 +17,11 @@ export default function TaskCard(props: TaskCardProps) {
     const createdAt = new Date(props.taskData.createdAt);
 
     const { removeTask } = useTaskStore();
+    const { getCategory } = useCategoryStore();
 
     const { show } = useModal();
+
+    const category = getCategory(props.taskData.categoryId);
 
     const editModal = () => {
         show({
@@ -51,7 +54,7 @@ export default function TaskCard(props: TaskCardProps) {
                         props.taskData.status === 'in-progress' ? 'before:bg-yellow-500' :
                             props.taskData.status === 'pending' ? 'before:bg-red-500' : 'before:bg-gray-500'
                 )}>{props.taskData.name}</h2>
-                <span className="rounded-lg text-xs font-bold text-blue-500">Category</span>
+                <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold">{category?.name}</span>
                 <p className="text-sm">{props.taskData.description}</p>
             </div>
             <div className="flex justify-between items-end">

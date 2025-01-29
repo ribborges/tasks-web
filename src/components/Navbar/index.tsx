@@ -7,6 +7,8 @@ import { X, ThreeDots, Calendar2Fill, StarFill, Collection, CollectionFill, Hous
 import { Spacer } from '@/components/Separator';
 import classConcat from '@/utils/classConcat';
 import useModal from '@/hooks/useModal';
+import { useCategoryStore } from '@/lib/store';
+import Loading from '@/components/Loading';
 
 export default function Sidebar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,10 +48,7 @@ export default function Sidebar() {
                     </NavItemContainer>
                     <Spacer space={5} className='hidden lg:block' />
                     <NavItemContainer className="hidden lg:flex">
-                        <NavItem className='text-red-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
-                        <NavItem className='text-blue-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
-                        <NavItem className='text-yellow-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
-                        <NavItem className='text-green-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                        <CategoryList />
                     </NavItemContainer>
                 </div>
             </nav>
@@ -63,10 +62,7 @@ export default function Sidebar() {
                     <Spacer space={10} />
                     <div className="flex flex-col items-center justify-center h-full space-y-8">
                         <NavItemContainer className='flex-col'>
-                            <NavItem className='text-red-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
-                            <NavItem className='text-blue-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
-                            <NavItem className='text-yellow-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
-                            <NavItem className='text-green-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                            <CategoryList />
                         </NavItemContainer>
                     </div>
                 </div>
@@ -86,7 +82,7 @@ export function NavItemContainer(props: { className?: string, children: ReactNod
     );
 }
 
-export function NavItem(props: { icon: any, onClick?: () => void, className?: string, label?: string }) {
+export function NavItem(props: { icon: any, iconColor?: string, onClick?: () => void, className?: string, label?: string }) {
     return (
         <button type='button' onClick={props.onClick} className={classConcat(
             `
@@ -99,8 +95,25 @@ export function NavItem(props: { icon: any, onClick?: () => void, className?: st
                 cursor-pointer
             `, props.className || ""
         )}>
-            {props.icon ? <div className="text-base md:text-lg lg:text-xl">{props.icon}</div> : <></>}
+            {props.icon ? <div style={{ color: props.iconColor }} className="text-base md:text-lg lg:text-xl">{props.icon}</div> : <></>}
             {props.label ? <i className="text-zinc-900 dark:text-zinc-200 not-italic text-[0.6rem]">{props.label}</i> : <></>}
         </button>
+    );
+}
+
+function CategoryList() {
+    const { categories } = useCategoryStore();
+
+    const router = useRouter();
+
+    return (
+        <>
+            {
+                !categories ? <Loading /> :
+                    categories?.map((category, index) => (
+                        <NavItem key={index} iconColor={category.color} onClick={() => router.push('/')} icon={<Collection />} label={category.name} />
+                    ))
+            }
+        </>
     );
 }

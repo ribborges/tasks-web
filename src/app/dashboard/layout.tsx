@@ -1,10 +1,14 @@
 'use client';
 
+import { useCallback, useEffect } from "react";
+
 import Header from "@/components/Header";
 import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import { useCheckUser, useRedirect } from "@/hooks";
-import { useLoadingStore, useUserStore } from "@/lib/store";
+import { useCategoryStore, useLoadingStore, useTaskStore, useUserStore } from "@/lib/store";
+import { GetTasks } from "@/services/task.service";
+import { GetCategories } from "@/services/category.service";
 
 export default function DashboardLayout({
     children,
@@ -13,10 +17,46 @@ export default function DashboardLayout({
 }) {
     const { isLoading } = useLoadingStore();
     const { user } = useUserStore();
+    const { setTasks } = useTaskStore();
+    const { setCategories } = useCategoryStore();
 
     useCheckUser();
 
     useRedirect("/login", user === undefined && !isLoading, [user]);
+
+    const loadData = useCallback(async () => {
+        if (user) {
+            await GetCategories(user?.id).then((res) => {
+                const data = res?.data;
+
+                if (Array.isArray(data)) {
+                    setCategories(data);
+                } else {
+                    setCategories([]);
+                }
+            }).catch((error) => {
+                console.error("Error fetching categories:", error);
+                setCategories([]);
+            });
+
+            await GetTasks(user?.id).then((res) => {
+                const data = res?.data;
+
+                if (Array.isArray(data)) {
+                    setTasks(data);
+                } else {
+                    setTasks([]);
+                }
+            }).catch((error) => {
+                console.error("Error fetching tasks:", error);
+                setTasks([]);
+            });
+        }
+    }, [user, GetTasks, GetCategories, setTasks, setCategories]);
+
+    useEffect(() => {
+        loadData();
+    }, [user]);
 
     return (
         <main className="
@@ -28,7 +68,7 @@ export default function DashboardLayout({
                 <div className="flex-1 flex overflow-hidden flex-col-reverse lg:flex-row">
                     <Navbar />
                     <div className="
-                        flex-1
+                        flex flex-col flex-1
                         m-0.5 lg:m-1
                         bg-zinc-200 dark:bg-zinc-900
                         border border-solid rounded-xl
