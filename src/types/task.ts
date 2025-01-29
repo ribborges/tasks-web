@@ -1,5 +1,11 @@
-export interface Task {
+export type TaskSchema = {
     id: string;
+    categoryId: string;
+    userId: string;
     name: string;
-    isCompleted: boolean;
+    description?: string;
+    status: "pending" | "completed" | "in-progress";
+    isImportant: boolean;
+    createdAt: string;
+    updatedAt?: string;
 }
