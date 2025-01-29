@@ -27,13 +27,13 @@ export default function Modal(props: ModalProps) {
                 bg-zinc-200 dark:bg-zinc-900
                 shadow-2xl shadow-black/20 dark:shadow-zinc-200/20
             ">
-                <div className="flex items-center gap-5">
+                <div className="flex items-center justify-between">
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-bold">{props.title}</span>
                     <button onClick={props.closeBtn} className="p-1 m-1 rounded-full hover:bg-red-600 transition duration-500">
                         <XLg />
                     </button>
-                    <span className="text-4xl font-bold">{props.title}</span>
                 </div>
-                <Spacer space={50} />
+                <Spacer space={30} />
                 <div className="flex-1">
                     {props.children}
                 </div>
