@@ -3,7 +3,7 @@
 import AnimBackground from "@/components/AnimBackground";
 import Footer from "@/components/Footer";
 import Loading from "@/components/Loading";
-import {useCheckUser, useRedirect} from "@/hooks";
+import { useCheckUser, useRedirect } from "@/hooks";
 import { useLoadingStore, useUserStore } from "@/lib/store";
 
 export default function AuthPage({ children }: { children?: React.ReactNode }) {
@@ -37,7 +37,11 @@ export default function AuthPage({ children }: { children?: React.ReactNode }) {
                 shadow-xl shadow-black/10 dark:shadow-white/10
             ">
                 {children}
-                {isLoading && <Loading />}
+                {isLoading &&
+                    <div className="absolute">
+                        <Loading />
+                    </div>
+                }
             </div>
             <Footer />
         </div>

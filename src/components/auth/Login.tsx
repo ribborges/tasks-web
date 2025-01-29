@@ -6,11 +6,10 @@ import { KeyFill, PersonBadgeFill } from "react-bootstrap-icons";
 
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
-import Spinner from "@/components/Loading";
-import useUserStore from "@/lib/store/user.store";
+import { useLoadingStore, useUserStore } from "@/lib/store";
 
 export default function Login() {
-    const [loading, setLoading] = useState(false);
+    const { setIsLoading } = useLoadingStore();
     const [message, setMessage] = useState<MessageProps>({
         message: '',
         type: undefined,
@@ -35,56 +34,53 @@ export default function Login() {
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setLoading(true);
+        setIsLoading(true);
 
         if (!credentials.username || !credentials.password) {
             setMessage({ message: 'Please fill all fields', type: 'error' });
-            setLoading(false);
+            setIsLoading(false);
             return;
         }
 
         try {
             await login(credentials);
-            setLoading(false);
+            setIsLoading(false);
             router.push('/');
         } catch (error) {
             setMessage({ message: 'An error occurred', type: 'error' });
-            setLoading(false);
+            setIsLoading(false);
         }
     }
 
     return (
-        <>
-            {loading && <Spinner />}
-            <div className="flex flex-col gap-6">
-                <h1 className="text-2xl font-bold text-center">Login to your account</h1>
-                <Message message={message.message} type={message.type} />
-                <form className="flex flex-col gap-2">
-                    <Input
-                        id="username"
-                        value={credentials.username}
-                        onChange={handleChange}
-                        type="text"
-                        name="username"
-                        label="Username:"
-                        icon={<PersonBadgeFill />}
-                        placeholder="ana.Silva"
-                    />
-                    <Input
-                        id="password"
-                        value={credentials.password}
-                        onChange={handleChange}
-                        type="password"
-                        name="password"
-                        label="Password:"
-                        icon={<KeyFill />}
-                        placeholder="••••••••"
-                    />
-                    <Button type="submit" onClick={handleSubmit}>Login</Button>
-                </form>
+        <div className="flex flex-col gap-6">
+            <h1 className="text-2xl font-bold text-center">Login to your account</h1>
+            <Message message={message.message} type={message.type} />
+            <form className="flex flex-col gap-2">
+                <Input
+                    id="username"
+                    value={credentials.username}
+                    onChange={handleChange}
+                    type="text"
+                    name="username"
+                    label="Username:"
+                    icon={<PersonBadgeFill />}
+                    placeholder="ana.Silva"
+                />
+                <Input
+                    id="password"
+                    value={credentials.password}
+                    onChange={handleChange}
+                    type="password"
+                    name="password"
+                    label="Password:"
+                    icon={<KeyFill />}
+                    placeholder="••••••••"
+                />
+                <Button type="submit" onClick={handleSubmit}>Login</Button>
+            </form>
 
-                <p className="text-center text-sm font-thin">Don't have an account? <a href="/register">Create one</a></p>
-            </div>
-        </>
+            <p className="text-center text-sm font-thin">Don't have an account? <a href="/register">Create one</a></p>
+        </div>
     );
 }
