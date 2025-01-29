@@ -43,7 +43,7 @@ export default function Dropdown({ align = 'center', showCaret = true, ...props 
             </button>
             {isOpen && (
                 <div className={classConcat(
-                    "absolute top-full mt-2 w-fit min-w-full",
+                    "absolute top-full mt-2 w-fit min-w-full z-[5]",
                     align === 'left' ? " left-full transform -translate-x-full" : "",
                     align === 'right' ? " right-full transform translate-x-full" : "",
                     align === 'center' ? " left-1/2 transform -translate-x-1/2" : ""
