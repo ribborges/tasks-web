@@ -1,11 +1,12 @@
 import { BoxArrowRight, Gear, Person, PersonFill } from "react-bootstrap-icons";
 
-import { UserSchema } from "@/types/user";
 import Dropdown from "@/components/Dropdown";
 import { useUserStore } from "@/lib/store";
 import useModal from '@/hooks/useModal';
+import Loading from "@/components/Loading";
 
-export default function UserBadge({ user }: { user: UserSchema }) {
+export default function UserBadge() {
+    const { user } = useUserStore();
     const { logout } = useUserStore();
 
     const { show } = useModal();
@@ -21,6 +22,7 @@ export default function UserBadge({ user }: { user: UserSchema }) {
         <Dropdown
             align="left"
             showCaret={false}
+            disabled={!user}
             className="
                 flex items-center
                 gap-2
@@ -55,13 +57,15 @@ export default function UserBadge({ user }: { user: UserSchema }) {
                         border-zinc-400 dark:border-zinc-700
                     ">
                     {
-                        user.profilePic
-                            ? <img
-                                className="w-10 h-10 rounded-full"
-                                src={user.profilePic}
-                                alt={user.username}
-                            />
-                            : <PersonFill className="w-6 h-6 text-zinc-500" />
+                        user ?
+                            user?.profilePic ?
+                                <img
+                                    className="w-10 h-10 rounded-full"
+                                    src={user.profilePic}
+                                    alt={user.username}
+                                /> :
+                                <PersonFill className="w-6 h-6 text-zinc-500" /> :
+                            <Loading />
                     }
                 </div>
             </>}
@@ -76,7 +80,7 @@ export default function UserBadge({ user }: { user: UserSchema }) {
                         border-zinc-400 dark:border-zinc-700
                     ">
                     {
-                        user.profilePic
+                        user?.profilePic
                             ? <img
                                 className="w-12 h-12 rounded-full"
                                 src={user.profilePic}
@@ -86,8 +90,8 @@ export default function UserBadge({ user }: { user: UserSchema }) {
                     }
                 </div>
                 <div className="flex flex-col p-2 whitespace-nowrap">
-                    <span className="font-bold text-sm">{user.name}</span>
-                    <span className="text-xs">{user.username}</span>
+                    <span className="font-bold text-sm">{user?.name}</span>
+                    <span className="text-xs">{user?.username}</span>
                 </div>
             </div>
         </Dropdown>
