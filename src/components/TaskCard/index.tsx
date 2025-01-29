@@ -50,7 +50,7 @@ export default function TaskCard(props: TaskCardProps) {
                     props.taskData.status === 'completed' ? 'before:bg-green-500' :
                         props.taskData.status === 'in-progress' ? 'before:bg-yellow-500' :
                             props.taskData.status === 'pending' ? 'before:bg-red-500' : 'before:bg-gray-500'
-                )}>{props.taskData.name}: {props.taskData.id}</h2>
+                )}>{props.taskData.name}</h2>
                 <span className="rounded-lg text-xs font-bold text-blue-500">Category</span>
                 <p className="text-sm">{props.taskData.description}</p>
             </div>
