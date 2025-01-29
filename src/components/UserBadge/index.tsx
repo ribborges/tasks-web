@@ -1,9 +1,9 @@
-import { BoxArrowRight, Gear, Person, PersonFill } from "react-bootstrap-icons";
+import { BoxArrowRight, Gear, Person } from "react-bootstrap-icons";
 
 import Dropdown from "@/components/Dropdown";
 import { useUserStore } from "@/lib/store";
 import useModal from '@/hooks/useModal';
-import Loading from "@/components/Loading";
+import { Profile, ProfilePic, Settings, UserInfo } from "@/components/User";
 
 export default function UserBadge() {
     const { user } = useUserStore();
@@ -11,10 +11,17 @@ export default function UserBadge() {
 
     const { show } = useModal();
 
+    const profileModal = () => {
+        show({
+            title: 'Profile',
+            content: <Profile />
+        });
+    }
+
     const settingsModal = () => {
         show({
             title: 'Settings',
-            content: <div>Content</div>
+            content: <Settings />
         });
     }
 
@@ -34,7 +41,7 @@ export default function UserBadge() {
                 {
                     icon: <Person />,
                     title: "Profile",
-                    action: () => { }
+                    action: profileModal
                 },
                 {
                     icon: <Gear />,
@@ -47,52 +54,11 @@ export default function UserBadge() {
                     action: logout
                 }
             ]}
-            button={<>
-                <div className="
-                        w-10 h-10
-                        flex items-center justify-center
-                        overflow-hidden
-                        border-2 border-solid rounded-full
-                        bg-zinc-300 dark:bg-zinc-800
-                        border-zinc-400 dark:border-zinc-700
-                    ">
-                    {
-                        user ?
-                            user?.profilePic ?
-                                <img
-                                    className="w-10 h-10 rounded-full"
-                                    src={user.profilePic}
-                                    alt={user.username}
-                                /> :
-                                <PersonFill className="w-6 h-6 text-zinc-500" /> :
-                            <Loading />
-                    }
-                </div>
-            </>}
+            button={<ProfilePic user={user} />}
         >
             <div className="flex gap-2 m-1">
-                <div className="
-                        w-12 h-12
-                        flex items-center justify-center
-                        overflow-hidden
-                        border-2 border-solid rounded-full
-                        bg-zinc-300 dark:bg-zinc-800
-                        border-zinc-400 dark:border-zinc-700
-                    ">
-                    {
-                        user?.profilePic
-                            ? <img
-                                className="w-12 h-12 rounded-full"
-                                src={user.profilePic}
-                                alt={user.username}
-                            />
-                            : <PersonFill className="w-8 h-8" />
-                    }
-                </div>
-                <div className="flex flex-col p-2 whitespace-nowrap">
-                    <span className="font-bold text-sm">{user?.name}</span>
-                    <span className="text-xs">{user?.username}</span>
-                </div>
+                <ProfilePic className="h-16 w-16" user={user} />
+                <UserInfo user={user} />
             </div>
         </Dropdown>
     );
