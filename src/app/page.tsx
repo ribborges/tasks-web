@@ -1,22 +1,17 @@
 'use client';
 
-import { useEffect } from "react";
-
-import Dashboard from "@/components/Dashboard";
-import Spinner from "@/components/Spinner";
-import useRedirect from "@/hooks/useRedirect";
-import useUserStore from "@/lib/store/user.store";
+import Loading from "@/components/Loading";
+import { useCheckUser, useRedirect } from "@/hooks";
+import { useUserStore, useLoadingStore } from "@/lib/store";
 
 export default function App() {
-  const { user, status } = useUserStore();
+  const { isLoading } = useLoadingStore();
+  const { user } = useUserStore();
 
-  useEffect(() => {
-    if (user === undefined) {
-      status();
-    }
-  }, []);
+  useCheckUser();
 
-  useRedirect("/login", !user, [user]);
+  useRedirect("/login", user === undefined && !isLoading, [user]);
+  useRedirect("/dashboard", user !== undefined && !isLoading, [user]);
 
   return (
     <main className="
@@ -24,7 +19,7 @@ export default function App() {
       w-screen h-screen
     ">
       {
-        user ? <Dashboard /> : <Spinner />
+        isLoading ? <Loading withLogo /> : <></>
       }
     </main>
   );

@@ -1,22 +1,18 @@
 'use client';
 
-import { useEffect } from "react";
-
 import AnimBackground from "@/components/AnimBackground";
 import Footer from "@/components/Footer";
-import useRedirect from "@/hooks/useRedirect";
-import { useUserStore } from "@/lib/store";
+import Loading from "@/components/Loading";
+import {useCheckUser, useRedirect} from "@/hooks";
+import { useLoadingStore, useUserStore } from "@/lib/store";
 
 export default function AuthPage({ children }: { children?: React.ReactNode }) {
-    const { user, status } = useUserStore();
+    const { isLoading } = useLoadingStore();
+    const { user } = useUserStore();
 
-    useEffect(() => {
-        if (user === undefined) {
-            status();
-        }
-    }, []);
+    useCheckUser();
 
-    useRedirect("/", user !== undefined, [user]);
+    useRedirect("/", user !== undefined && !isLoading, [user]);
 
     return (
         <div className="
@@ -41,6 +37,7 @@ export default function AuthPage({ children }: { children?: React.ReactNode }) {
                 shadow-xl shadow-black/10 dark:shadow-white/10
             ">
                 {children}
+                {isLoading && <Loading />}
             </div>
             <Footer />
         </div>
