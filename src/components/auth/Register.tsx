@@ -6,7 +6,7 @@ import { EnvelopeFill, KeyFill, PersonBadgeFill, PersonFill } from "react-bootst
 
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/Loading";
 import useUserStore from "@/lib/store/user.store";
 
 export default function Register() {
