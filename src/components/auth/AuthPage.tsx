@@ -25,6 +25,10 @@ export default function AuthPage({ children }: { children?: React.ReactNode }) {
                 box-border
             ">
             <AnimBackground />
+            <div className="flex items-center gap-4 p-10">
+                <img className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16" src="/icon.png" alt="Tasks logo" />
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-pink-500">Tasks</h1>
+            </div>
             <div className="
                 relative
                 overflow-hidden
