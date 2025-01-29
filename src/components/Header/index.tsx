@@ -1,3 +1,5 @@
+'use client';
+
 import UserBadge from "@/components/UserBadge";
 import useUserStore from "@/lib/store/user.store";
 
