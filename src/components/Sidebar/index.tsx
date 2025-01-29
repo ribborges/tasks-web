@@ -2,63 +2,74 @@
 
 import { ReactNode, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { X, ThreeDots, Calendar2Fill, GearFill, PlusLg, StarFill, UiChecksGrid, Collection } from 'react-bootstrap-icons';
-import { Spacer } from '../Separator';
+import { X, ThreeDots, Calendar2Fill, PlusLg, StarFill, UiChecksGrid, Collection } from 'react-bootstrap-icons';
+
+import { Spacer } from '@/components/Separator';
 import classConcat from '@/utils/classConcat';
+import useModal from '@/hooks/useModal';
 
 export default function Sidebar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+    const { show } = useModal();
+
+    const addModal = () => {
+        show({
+            title: 'Create Task',
+            content: <div>Content</div>
+        });
+    }
 
     const router = useRouter();
 
     return (
         <>
             <nav className="
-				flex flex-col items-center content-center justify-between
-				backdrop-blur-md bg-zinc-100 dark:bg-zinc-950 bg-opacity-50 dark:bg-opacity-50
-				top-0 p-4 m-2
-				border border-b-2 border-solid border-zinc-400 dark:border-zinc-800 border-opacity-40 dark:border-opacity-40 rounded-2xl
+                absolute lg:static z-10 h-12 lg:h-auto top-[90%]
+                backdrop-blur-md lg:backdrop-blur-none
+				flex lg:flex-col items-center content-center justify-between
+				bg-zinc-100/40 dark:bg-zinc-950/40
+				p-2 md:p-3 lg:p-4 m-2
+				border border-b-2 border-solid rounded-full lg:rounded-2xl
+                border-zinc-400/40 dark:border-zinc-800/40
 				shadow-xl
 				select-none
 			">
-                <div className="hidden lg:flex lg:flex-col flex-1 items-center content-between justify-between gap-5">
-                    <NavItemContainer>
-                        <NavItem onclick={() => router.push('/')} icon={<UiChecksGrid />} />
-                        <NavItem onclick={() => router.push('/')} icon={<Calendar2Fill />} />
-                        <NavItem onclick={() => router.push('/')} icon={<StarFill />} />
-                        <NavItem onclick={() => router.push('/')} icon={<PlusLg />} />
-                        <Spacer height={10} />
-                        <NavItem className='text-red-600' onclick={() => router.push('/')} icon={<Collection />} />
-                        <NavItem className='text-blue-600' onclick={() => router.push('/')} icon={<Collection />} />
-                        <NavItem className='text-yellow-600' onclick={() => router.push('/')} icon={<Collection />} />
-                        <NavItem className='text-green-600' onclick={() => router.push('/')} icon={<Collection />} />
-                        <Spacer height={10} />
+                <div className="flex lg:flex-col flex-1 items-center content-between gap-5">
+                    <NavItemContainer className='justify-between flex-1 lg:flex-none'>
+                        <NavItem onClick={() => router.push('/')} icon={<UiChecksGrid />} label='Tasks' />
+                        <NavItem onClick={() => router.push('/')} icon={<Calendar2Fill />} label='Calendar' />
+                        <NavItem onClick={() => router.push('/')} icon={<StarFill />} label='Important' />
+                        <NavItem onClick={addModal} icon={<PlusLg />} label='Add' />
+                        <NavItem className='lg:hidden' onClick={toggleMenu} icon={
+                            isMenuOpen ? <X /> : <ThreeDots />
+                        } label='Categories' />
                     </NavItemContainer>
-                    <NavItem onclick={() => router.push('/')} icon={<GearFill />} />
-                </div>
-                <div className="flex flex-col lg:hidden">
-                    <NavButton onClick={toggleMenu} icon={
-                        isMenuOpen ? <X /> : <ThreeDots />
-                    } />
+                    <Spacer space={5} className='hidden lg:block' />
+                    <NavItemContainer className="hidden lg:flex">
+                        <NavItem className='text-red-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                        <NavItem className='text-blue-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                        <NavItem className='text-yellow-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                        <NavItem className='text-green-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                    </NavItemContainer>
                 </div>
             </nav>
             {isMenuOpen && (
-                <div className="lg:hidden fixed inset-0 z-40 bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-90 backdrop-blur-sm">
+                <div className="lg:hidden fixed z-40 backdrop-blur-md">
+                    <div className="flex items-center p-2">
+                        <NavItem onClick={toggleMenu} icon={
+                            isMenuOpen ? <X /> : <ThreeDots />
+                        } />
+                    </div>
+                    <Spacer space={10} />
                     <div className="flex flex-col items-center justify-center h-full space-y-8">
-                        <NavItemContainer>
-                            <NavItem onclick={() => router.push('/')} icon={<UiChecksGrid />} />
-                            <NavItem onclick={() => router.push('/')} icon={<Calendar2Fill />} />
-                            <NavItem onclick={() => router.push('/')} icon={<StarFill />} />
-                            <NavItem onclick={() => router.push('/')} icon={<PlusLg />} />
-                            <Spacer height={10} />
-                            <NavItem className='text-red-600' onclick={() => router.push('/')} icon={<Collection />} />
-                            <NavItem className='text-blue-600' onclick={() => router.push('/')} icon={<Collection />} />
-                            <NavItem className='text-yellow-600' onclick={() => router.push('/')} icon={<Collection />} />
-                            <NavItem className='text-green-600' onclick={() => router.push('/')} icon={<Collection />} />
-                            <Spacer height={10} />
+                        <NavItemContainer className='flex-col'>
+                            <NavItem className='text-red-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                            <NavItem className='text-blue-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                            <NavItem className='text-yellow-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
+                            <NavItem className='text-green-600' onClick={() => router.push('/')} icon={<Collection />} label='Category' />
                         </NavItemContainer>
-                        <NavItem onclick={() => router.push('/')} icon={<GearFill />} />
                     </div>
                 </div>
             )}
@@ -66,54 +77,32 @@ export default function Sidebar() {
     );
 }
 
-export function NavItemContainer(props: { children: ReactNode }) {
+export function NavItemContainer(props: { className?: string, children: ReactNode }) {
     return (
-        <div className="flex flex-col items-center content-center gap-5">
+        <div className={classConcat(
+            "flex flex-row lg:flex-col gap-2",
+            props.className || ''
+        )}>
             {props.children}
         </div>
     );
 }
 
-export function NavItem(props: { icon: any, onclick?: () => void, className?: string }) {
+export function NavItem(props: { icon: any, onClick?: () => void, className?: string, label?: string }) {
     return (
-        <button onClick={props.onclick} className={classConcat(
-            props.className || "",
+        <button type='button' onClick={props.onClick} className={classConcat(
             `
-                flex items-center content-center gap-4
-                text-xl
-                p-3
+                flex flex-col items-center content-center gap-2 flex-1
+                p-2 lg:p-3
                 hover:bg-zinc-400 dark:hover:bg-zinc-800
                 hover:no-underline
                 border border-solid border-transparent rounded-2xl hover:border-zinc-500 dark:hover:border-zinc-700
                 transition duration-500
                 cursor-pointer
-            `
+            `, props.className || ""
         )}>
-            {props.icon}
-        </button>
-    );
-}
-
-export function NavButton(props: { label?: string, icon: any, onClick?: () => void }) {
-    return (
-        <button className="
-			flex items-center content-center gap-2
-			text-xl
-			p-2
-			hover:bg-zinc-400 dark:hover:bg-zinc-800
-			text-zinc-900 hover:text-zinc-900 dark:text-zinc-200 dark:hover:text-zinc-200 hover:no-underline
-			border border-solid border-transparent rounded-2xl hover:border-zinc-500 dark:hover:border-zinc-700
-			transition duration-500
-			cursor-pointer
-		"
-            onClick={props.onClick}>
-            {props.icon}
-            {
-                props.label ?
-                    <i className="text-zinc-900 dark:text-zinc-200 not-italic text-lg">{props.label}</i>
-                    :
-                    <></>
-            }
+            {props.icon ? <div className="text-base md:text-lg lg:text-xl">{props.icon}</div> : <></>}
+            {props.label ? <i className="text-zinc-900 dark:text-zinc-200 not-italic text-[0.6rem]">{props.label}</i> : <></>}
         </button>
     );
 }
