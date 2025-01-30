@@ -36,7 +36,7 @@ export default function Modal(props: ModalProps) {
                     </button>
                 </div>
                 <Spacer space={30} />
-                <div className="flex-1">
+                <div className="flex-1 relative">
                     {props.children}
                 </div>
             </div>
