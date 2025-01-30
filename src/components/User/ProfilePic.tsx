@@ -1,15 +1,16 @@
 import { PersonFill } from "react-bootstrap-icons";
 
-import { UserSchema } from "@/types/user";
 import classConcat from "@/utils/classConcat";
 import Loading from "@/components/Loading";
 
 interface ProfilePicProps {
     className?: string;
-    user?: UserSchema;
+    alt?: string;
+    src?: string;
+    loading?: boolean;
 }
 
-export default function ProfilePic({ className = "h-10 w-10", user }: ProfilePicProps) {
+export default function ProfilePic({ className = "h-10 w-10", alt, src, loading = true }: ProfilePicProps) {
     return (
         <div className={classConcat(
             `
@@ -21,18 +22,18 @@ export default function ProfilePic({ className = "h-10 w-10", user }: ProfilePic
             `, className
         )}>
             {
-                user ?
-                    user?.profilePic ?
+                loading ?
+                    <Loading /> :
+                    src ?
                         <img
                             className={classConcat(
                                 className,
                                 "rounded-full"
                             )}
-                            src={user.profilePic}
-                            alt={user.username}
+                            src={src}
+                            alt={alt}
                         /> :
-                        <PersonFill className="h-4/6 w-4/6 text-zinc-500" /> :
-                    <Loading />
+                        <PersonFill className="h-4/6 w-4/6 text-zinc-500" />
             }
         </div>
     );

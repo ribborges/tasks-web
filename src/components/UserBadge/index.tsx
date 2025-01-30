@@ -54,11 +54,11 @@ export default function UserBadge() {
                     action: logout
                 }
             ]}
-            button={<ProfilePic user={user} />}
+            button={<ProfilePic src={user?.profilePic} alt={user?.username} loading={!user} />}
         >
             <div className="flex gap-2 m-1">
-                <ProfilePic className="h-16 w-16" user={user} />
-                <UserInfo user={user} />
+                <ProfilePic className="h-16 w-16" src={user?.profilePic} alt={user?.username} loading={!user} />
+                <UserInfo name={user?.name} username={user?.username} />
             </div>
         </Dropdown>
     );
