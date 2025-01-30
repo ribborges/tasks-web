@@ -18,7 +18,7 @@ function Button({ type = "button", autofocus, disabled, id, name, value, onClick
     return (
         <button
             className={classConcat(`
-                text-zinc-800 dark:text-zinc-200 disabled:text-zinc-600 dark:disabled:text-zinc-400
+                text-zinc-800 dark:text-zinc-200 disabled:text-zinc-500/40
                 bg-transparent hover:bg-purple-700 focus:bg-purple-700
                 disabled:bg-transparent
                 hover:shadow-2xl focus:shadow-2xl
@@ -29,7 +29,7 @@ function Button({ type = "button", autofocus, disabled, id, name, value, onClick
                 p-2 lg:p-4 m-1
                 text-sm lg:text-base
                 rounded-xl border border-solid
-                border-purple-700 disabled:border-zinc-400
+                border-purple-700 disabled:border-zinc-500/40
                 transition duration-500
                 select-none
             `, className || "")}
