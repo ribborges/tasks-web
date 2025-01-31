@@ -4,10 +4,9 @@ import { useState } from "react";
 import { CheckCircle, Collection, CollectionFill, ExclamationDiamond, Person } from "react-bootstrap-icons";
 
 import Loading from "@/components/Loading";
-import { Button, Input } from "@/components/Input";
+import { Button, Input, OptionSelector } from "@/components/Input";
 import handleInputChange from "@/utils/handleInputChange";
 import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
-import OptionSelector from "../Input/OptionSelector";
 import { CreateTask } from "@/services/task.service";
 import { TaskData } from "@/interfaces/task";
 
