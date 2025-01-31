@@ -11,7 +11,8 @@ type State = {
 }
 
 type Actions = {
-    setUser: (user: UserSchema, token: string) => void;
+    setUser: (user: UserSchema) => void;
+    setToken: (token: string) => void;
     login: (data: LoginData) => Promise<void>;
     register: (data: RegisterData) => Promise<void>;
     status: () => Promise<void>;
@@ -21,8 +22,11 @@ type Actions = {
 const useUserStore = create<State & Actions>((set) => ({
     user: undefined,
     token: undefined,
-    setUser: (user: UserSchema, token: string) => {
-        set({ user, token });
+    setUser: (user: UserSchema) => {
+        set({ user });
+    },
+    setToken: (token: string) => {
+        set({ token });
     },
     login: async (data: LoginData) => {
         try {

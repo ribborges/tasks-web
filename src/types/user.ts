@@ -4,6 +4,6 @@ export type UserSchema = {
     name: string;
     email: string;
     profilePic?: string;
-    createdAt: Date;
-    updatedAt?: Date;
+    createdAt: string;
+    updatedAt?: string;
 }
