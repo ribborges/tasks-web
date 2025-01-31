@@ -7,6 +7,7 @@ import { KeyFill, PersonBadgeFill } from "react-bootstrap-icons";
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
 import { useLoadingStore, useUserStore } from "@/lib/store";
+import handleInputChange from "@/utils/handleInputChange";
 
 export default function Login() {
     const { setIsLoading } = useLoadingStore();
@@ -23,14 +24,7 @@ export default function Login() {
 
     const { login } = useUserStore();
 
-    const handleChange = (e: FormEvent<HTMLInputElement>) => {
-        const { name, value } = e.currentTarget;
-
-        setCredentials((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, setCredentials);
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();

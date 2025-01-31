@@ -7,6 +7,7 @@ import { EnvelopeFill, KeyFill, PersonBadgeFill, PersonFill } from "react-bootst
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
 import { useLoadingStore, useUserStore } from "@/lib/store";
+import handleInputChange from "@/utils/handleInputChange";
 
 export default function Register() {
     const { setIsLoading } = useLoadingStore();
@@ -23,14 +24,7 @@ export default function Register() {
 
     const { register } = useUserStore();
 
-    const handleChange = (e: FormEvent<HTMLInputElement>) => {
-        const { name, value } = e.currentTarget;
-
-        setUser((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, setUser);
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
