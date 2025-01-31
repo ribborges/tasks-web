@@ -1,6 +1,6 @@
 'use client';
 
-import TaskCard from "@/components/TaskCard";
+import { TaskCard } from "./";
 import { useTaskStore } from "@/lib/store";
 import Loading from "@/components/Loading";
 

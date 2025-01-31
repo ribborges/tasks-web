@@ -1,6 +1,7 @@
-import TaskList from "@/components/TaskList";
-import { Blanckspace } from "@/components/Separator";
 import { House } from "react-bootstrap-icons";
+
+import { TaskList } from "@/components/Task";
+import { Blanckspace } from "@/components/Separator";
 
 export default function DashboardPage() {
     return (
