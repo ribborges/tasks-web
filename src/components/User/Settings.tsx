@@ -8,7 +8,11 @@ export default function Settings() {
     return (
         <div className="flex flex-col gap-4">
             <form className="flex flex-col gap-2">
-                <Input icon={<MoonStars />} label="Dark theme" type="checkbox" />
+                <Input icon={<MoonStars />} label="Theme" type="select">
+                    <option value="auto">System</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </Input>
                 <div className="flex justify-end">
                     <Button type="submit">Save</Button>
                 </div>

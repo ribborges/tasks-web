@@ -206,10 +206,10 @@ function Input(props: inputProps) {
             );
             break;
 
-        case "option":
+        case "select":
             return (
                 <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
-                    <select className={classConcat(inputStyle, "w-full")} id={props.id} name={props.name} value={props.value} onChange={props.onChange}>
+                    <select className={classConcat(inputStyle, "flex-1")} id={props.id} name={props.name} value={props.value} onChange={props.onChange}>
                         {props.children}
                     </select>
                 </InputGroup>
