@@ -8,6 +8,7 @@ import { Button, Input } from "@/components/Input";
 import handleInputChange from "@/utils/handleInputChange";
 import { useCategoryStore, useUserStore } from "@/lib/store";
 import { CategoryData } from "@/interfaces/category";
+import { CreateCategory } from "@/services/category.service";
 
 export default function AddCategory() {
     const { user } = useUserStore();
@@ -23,7 +24,7 @@ export default function AddCategory() {
     const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setIsLoading(true);
-/*
+
         if (user?.id) {
             await CreateCategory(categoryData)
                 .then((res) => {
@@ -41,14 +42,13 @@ export default function AddCategory() {
                     setIsLoading(false);
                     setCategoryData({
                         name: '',
-                        color: '',
+                        color: '#999999',
                     });
                 })
                 .catch((error) => {
                     console.error('There has been a problem with your fetch operation: ', error);
                 });
         }
-*/
 
         setIsLoading(false);
     }
