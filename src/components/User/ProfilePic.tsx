@@ -26,10 +26,6 @@ export default function ProfilePic({ className = "h-10 w-10", alt, src, loading 
                     <Loading /> :
                     src ?
                         <img
-                            className={classConcat(
-                                className,
-                                "rounded-full"
-                            )}
                             src={src}
                             alt={alt}
                         /> :
