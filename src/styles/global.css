@@ -32,6 +32,14 @@ nav {
     right: 0;
 }
 
+input[type='color']::-webkit-color-swatch {
+    border: none;
+}
+
+input[type='color']::-moz-color-swatch {
+    border: none;
+}
+
 img,
 video {
     height: auto;

@@ -18,7 +18,8 @@ interface toggleContainerProps {
     items: Array<{
         label: string,
         content: ReactNode
-    }>
+    }>,
+    itemsAlign?: "center" | "start" | "end" | "stretch" | "baseline",
 }
 
 function ToggleButton(props: toggleButtonProps) {
@@ -46,7 +47,7 @@ export default function Toggle(props: toggleContainerProps) {
     const [active, setActive] = useState(0);
 
     return (
-        <FlexContainer id={props.id} direction="col" items="center">
+        <FlexContainer id={props.id} direction="col" items={props.itemsAlign ? props.itemsAlign : "center"}>
             <div className="flex justify-center w-11/12 m-4 overflow-x-scroll whitespace-nowrap select-none">
                 {
                     props.items?.map((value, index) => (

@@ -10,6 +10,8 @@ import useModal from '@/hooks/useModal';
 import { useCategoryStore } from '@/lib/store';
 import Loading from '@/components/Loading';
 import { AddTask } from '@/components/Task';
+import { Toggle } from '@/components/Input';
+import { AddCategory } from '@/components/Category';
 
 export default function Sidebar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +22,10 @@ export default function Sidebar() {
     const addModal = () => {
         show({
             title: 'Add',
-            content: <AddTask />
+            content: <Toggle id='add' itemsAlign="baseline" items={[
+                { label: 'Task', content: <AddTask /> },
+                { label: 'Category', content: <AddCategory /> }
+            ]} />
         });
     }
 

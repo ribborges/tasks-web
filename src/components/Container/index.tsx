@@ -43,3 +43,4 @@ function GridContainer({
 }
 
 export { FlexContainer, GridContainer };
+export type { FlexContainerProps, GridContainerProps };

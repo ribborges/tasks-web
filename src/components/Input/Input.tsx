@@ -32,12 +32,14 @@ interface inputProps {
 }
 
 const inputStyle = `
-    p-2 lg:p-4 h-auto
+    h-auto
     bg-transparent
-    rounded-xl
+    rounded-lg
     outline-4 outline-none outline-offset-0 outline-purple-700/0 focus:outline-purple-700/50
     transition duration-500
 `;
+
+const inputPadding = "p-2 lg:p-4";
 
 function InputGroup(props: inputGroupProps) {
     return (
@@ -91,7 +93,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} className="flex-col" icon={props.icon} label={props.label}>
                     <textarea
-                        className={inputStyle}
+                        className={classConcat(inputStyle, inputPadding)}
                         id={props.id}
                         name={props.name}
                         value={props.value as string}
@@ -204,7 +206,7 @@ function Input(props: inputProps) {
                 <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
                     <div>
                         <input
-                            className={inputStyle}
+                            className={classConcat(inputStyle, inputPadding)}
                             type={props.type}
                             id={props.id}
                             name={props.name}
@@ -237,7 +239,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
-                        className={classConcat(inputStyle, "w-full")}
+                        className={classConcat(inputStyle, inputPadding, "w-full")}
                         type={showPassword ? "text" : "password"}
                         id={props.id}
                         name={props.name}
@@ -255,11 +257,32 @@ function Input(props: inputProps) {
             );
             break;
 
-        default:
+        case "color":
             return (
                 <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
                         className={classConcat(inputStyle, "w-full")}
+                        type={props.type}
+                        id={props.id}
+                        name={props.name}
+                        value={props.value as string}
+                        pattern={props.pattern}
+                        accept={props.accept}
+                        minLength={props.minLength}
+                        onChange={props.onChange}
+                        placeholder={props.placeholder}
+                        disabled={props.disabled}
+                    />
+                    <span className="flex items-center p-2 text-sm">{props.value}</span>
+                </InputGroup>
+            );
+            break;
+
+        default:
+            return (
+                <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
+                    <input
+                        className={classConcat(inputStyle, inputPadding, "w-full")}
                         type={props.type}
                         id={props.id}
                         name={props.name}
