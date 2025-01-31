@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, ChangeEvent } from 'react';
 
 import classConcat from '@/utils/classConcat';
 import { Check, CircleFill, EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
@@ -19,11 +19,11 @@ interface inputProps {
     type?: React.HTMLInputTypeAttribute | "textarea" | "option",
     id?: string,
     name?: string,
-    onChange?: any,
+    onChange?: (e: ChangeEvent<any>) => void,
     pattern?: string,
     minLength?: number,
     accept?: string,
-    value?: string,
+    value?: string | number | boolean,
     className?: string,
     icon?: ReactNode,
     placeholder?: string,
@@ -94,7 +94,7 @@ function Input(props: inputProps) {
                         className={inputStyle}
                         id={props.id}
                         name={props.name}
-                        value={props.value}
+                        value={props.value as string}
                         onChange={props.onChange}
                         placeholder={props.placeholder}
                     />
@@ -124,8 +124,19 @@ function Input(props: inputProps) {
                         type={props.type}
                         id={props.id}
                         name={props.name}
-                        value={props.value}
-                        onChange={props.onChange}
+                        checked={props.value as boolean}
+                        onChange={(e) => {
+                            if (props.onChange) {
+                                const event = {
+                                    currentTarget: {
+                                        name: props.name,
+                                        value: e.currentTarget.checked
+                                    }
+                                } as unknown as ChangeEvent<HTMLInputElement>;
+
+                                props.onChange(event);
+                            }
+                        }}
                         disabled={props.disabled}
                     />
                     <Check className='absolute w-6 h-6 m-[6px] self-center hidden peer-checked:block pointer-events-none' />
@@ -167,7 +178,7 @@ function Input(props: inputProps) {
                         type={props.type}
                         id={props.id}
                         name={props.name}
-                        value={props.value}
+                        value={props.value as string}
                         onChange={props.onChange}
                         disabled={props.disabled}
                     />
@@ -197,7 +208,7 @@ function Input(props: inputProps) {
                             type={props.type}
                             id={props.id}
                             name={props.name}
-                            value={props.value}
+                            value={props.value as string}
                             onChange={props.onChange}
                             disabled={props.disabled}
                         />
@@ -209,7 +220,13 @@ function Input(props: inputProps) {
         case "select":
             return (
                 <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
-                    <select className={classConcat(inputStyle, "flex-1")} id={props.id} name={props.name} value={props.value} onChange={props.onChange}>
+                    <select
+                        className={classConcat(inputStyle, "flex-1")}
+                        id={props.id}
+                        name={props.name}
+                        value={props.value as string}
+                        onChange={props.onChange}
+                    >
                         {props.children}
                     </select>
                 </InputGroup>
@@ -224,7 +241,7 @@ function Input(props: inputProps) {
                         type={showPassword ? "text" : "password"}
                         id={props.id}
                         name={props.name}
-                        value={props.value}
+                        value={props.value as string}
                         pattern={props.pattern}
                         minLength={props.minLength}
                         onChange={props.onChange}
@@ -246,7 +263,7 @@ function Input(props: inputProps) {
                         type={props.type}
                         id={props.id}
                         name={props.name}
-                        value={props.value}
+                        value={props.value as string}
                         pattern={props.pattern}
                         accept={props.accept}
                         minLength={props.minLength}

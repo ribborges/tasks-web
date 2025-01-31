@@ -1,10 +1,12 @@
+export type TaskStatus = "pending" | "completed" | "in-progress";
+
 export type TaskSchema = {
     id: string;
     categoryId: string;
     userId: string;
     name: string;
     description?: string;
-    status: "pending" | "completed" | "in-progress";
+    status: TaskStatus;
     isImportant: boolean;
     createdAt: string;
     updatedAt?: string;

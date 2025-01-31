@@ -9,6 +9,7 @@ import classConcat from '@/utils/classConcat';
 import useModal from '@/hooks/useModal';
 import { useCategoryStore } from '@/lib/store';
 import Loading from '@/components/Loading';
+import { AddTask } from '@/components/Task';
 
 export default function Sidebar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,8 +19,8 @@ export default function Sidebar() {
 
     const addModal = () => {
         show({
-            title: 'Create Task',
-            content: <div>Content</div>
+            title: 'Add',
+            content: <AddTask />
         });
     }
 

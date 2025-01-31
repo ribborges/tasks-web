@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 import { api } from "@/api";
-import { TaskSchema } from "@/types/task";
+import { TaskData } from "@/interfaces/task";
 
 async function GetTasks(userId: string) {
     try {
@@ -34,10 +34,20 @@ async function RemoveTask(taskId: string) {
     }
 }
 
-async function AddTask(data: Omit<TaskSchema, "id">) {
+async function CreateTask({
+    name,
+    description,
+    categoryId,
+    status,
+    isImportant
+}: TaskData) {
     try {
         const res = await api.post("/task", {
-            data
+            name,
+            description,
+            categoryId,
+            status,
+            isImportant
         }, {
             withCredentials: true
         });
@@ -50,4 +60,4 @@ async function AddTask(data: Omit<TaskSchema, "id">) {
     }
 }
 
-export { GetTasks, RemoveTask, AddTask };
+export { GetTasks, RemoveTask, CreateTask };
