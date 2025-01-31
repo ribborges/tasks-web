@@ -31,7 +31,6 @@ export default function TaskCard(props: TaskCardProps) {
     }
 
     const deleteTask = () => {
-        console.log('ID:', props.taskData.id);
         RemoveTask(props.taskData.id)
             .then(response => {
                 if (response?.status !== 200) {
