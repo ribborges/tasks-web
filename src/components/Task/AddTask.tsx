@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { CheckCircle, Collection, CollectionFill, ExclamationDiamond, Person } from "react-bootstrap-icons";
+import { CheckCircle, Collection, CollectionFill, ExclamationDiamond, ListTask, TextParagraph } from "react-bootstrap-icons";
 
 import Loading from "@/components/Loading";
 import { Button, Input, OptionSelector } from "@/components/Input";
@@ -73,7 +73,7 @@ export default function AddTask() {
                         type="text"
                         name="name"
                         label="Name"
-                        icon={<Person />}
+                        icon={<ListTask />}
                     />
                     <Input
                         id="description"
@@ -82,7 +82,7 @@ export default function AddTask() {
                         type="textarea"
                         name="description"
                         label="Description"
-                        icon={<Person />}
+                        icon={<TextParagraph />}
                     />
                     <OptionSelector
                         id="categoryId"

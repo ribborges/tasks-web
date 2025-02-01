@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { Palette, Person } from "react-bootstrap-icons";
+import { Collection, Palette } from "react-bootstrap-icons";
 
 import Loading from "@/components/Loading";
 import { Button, Input } from "@/components/Input";
@@ -65,7 +65,7 @@ export default function AddCategory() {
                         type="text"
                         name="name"
                         label="Name"
-                        icon={<Person />}
+                        icon={<Collection />}
                     />
                     <Input
                         id="color"
