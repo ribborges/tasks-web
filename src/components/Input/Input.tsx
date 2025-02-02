@@ -121,7 +121,7 @@ function Input(props: inputProps) {
                             hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
                             dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
                             hover:bg-zinc-400 dark:hover:bg-zinc-700
-                            checked:bg-purple-800 checked:border-purple-950 hover:checked:bg-purple-950
+                            checked:bg-purple-800 checked:border-purple-900 hover:checked:bg-purple-900
                         "
                         type={props.type}
                         id={props.id}
