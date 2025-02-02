@@ -21,7 +21,7 @@ export default function DashboardPage() {
                 <Collapse title="Completed">
                     <TaskList tasks={tasks.filter(task => task.status === "completed")} />
                 </Collapse>
-                <Blanckspace className="lg:hidden" space={68} />
+                <Blanckspace className="lg:hidden mt-14" />
             </div>
         </>
     );
