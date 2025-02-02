@@ -18,7 +18,7 @@ export default function Collapse({ title, themed = true, showCarret = true, clas
     }
 
     return (
-        <details className={classConcat("flex gap-5", className || '')}>
+        <details className={classConcat("flex gap-5 cursor-pointer", className || '')}>
             <summary
                 onClick={handleClick}
                 className={classConcat(
