@@ -1,13 +1,14 @@
 'use client';
 
+import { useState } from "react";
 import { PencilSquare, Star, StarFill, TrashFill } from "react-bootstrap-icons";
 
 import { TaskSchema } from "@/types/task";
-import EditTask from "../EditTask";
 import classConcat from "@/utils/classConcat";
 import useModal from '@/hooks/useModal';
-import { RemoveTask } from "@/services/task.service";
+import { RemoveTask, UpdateTask } from "@/services/task.service";
 import { useCategoryStore, useTaskStore } from "@/lib/store";
+import { EditTask } from "@/components/Task";
 
 interface TaskCardProps {
     taskData: TaskSchema;
@@ -16,12 +17,34 @@ interface TaskCardProps {
 export default function TaskCard(props: TaskCardProps) {
     const createdAt = new Date(props.taskData.createdAt);
 
-    const { removeTask } = useTaskStore();
+    const { removeTask, updateTask } = useTaskStore();
     const { getCategory } = useCategoryStore();
+    const [isImportantState, setIsImportantState] = useState(props.taskData.isImportant);
 
     const { show } = useModal();
 
     const category = getCategory(props.taskData.categoryId);
+
+    const setIsImportant = () => {
+        UpdateTask(props.taskData.id, {
+            isImportant: !props.taskData.isImportant
+        })
+            .then(response => {
+                if (response?.status !== 200) {
+                    console.error('Error updating task:', response);
+                    return;
+                }
+
+                props.taskData.isImportant = !props.taskData.isImportant;
+
+                updateTask(props.taskData.id, {
+                    ...props.taskData,
+                    isImportant: !props.taskData.isImportant
+                });
+                setIsImportantState(!isImportantState);
+            })
+            .catch(error => console.error('There has been a problem with your fetch operation: ', error));
+    }
 
     const editModal = () => {
         show({
@@ -66,16 +89,22 @@ export default function TaskCard(props: TaskCardProps) {
                     </span>
                 </div>
                 <div className="flex gap-4 p-1">
-                    <button className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-yellow-400 transition duration-500">
-                        {props.taskData.isImportant ? <StarFill /> : <Star />}
-                    </button>
                     <button
                         className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-yellow-400 transition duration-500"
+                        onClick={setIsImportant}
+                    >
+                        {isImportantState ? <StarFill /> : <Star />}
+                    </button>
+                    <button
+                        className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-blue-400 transition duration-500"
                         onClick={editModal}
                     >
                         <PencilSquare />
                     </button>
-                    <button className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-red-400 transition duration-500" onClick={deleteTask}>
+                    <button
+                        className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-red-400 transition duration-500"
+                        onClick={deleteTask}
+                    >
                         <TrashFill />
                     </button>
                 </div>

@@ -60,4 +60,24 @@ async function CreateTask({
     }
 }
 
-export { GetTasks, RemoveTask, CreateTask };
+async function UpdateTask(taskId: string, data: {
+    name?: string,
+    description?: string,
+    categoryId?: string,
+    status?: string,
+    isImportant?: boolean
+}) {
+    try {
+        const res = await api.patch(`/task/${taskId}`, data, {
+            withCredentials: true
+        });
+
+        return res;
+    } catch (error) {
+        if (error instanceof AxiosError && 'response' in error) {
+            return error.response;
+        }
+    }
+}
+
+export { GetTasks, RemoveTask, CreateTask, UpdateTask };
