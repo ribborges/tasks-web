@@ -6,6 +6,7 @@ export type TaskSchema = {
     userId: string;
     name: string;
     description?: string;
+    dueDate?: string;
     status: TaskStatus;
     isImportant: boolean;
     createdAt: string;

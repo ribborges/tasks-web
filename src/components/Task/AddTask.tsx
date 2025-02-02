@@ -18,6 +18,7 @@ export default function AddTask() {
         name: '',
         description: '',
         categoryId: '',
+        dueDate: '',
         status: 'pending',
         isImportant: false
     });
@@ -48,6 +49,7 @@ export default function AddTask() {
                     setTaskData({
                         name: '',
                         description: '',
+                        dueDate: '',
                         categoryId: '',
                         status: 'pending',
                         isImportant: false
@@ -64,62 +66,73 @@ export default function AddTask() {
     return (
         <>
             {isLoading ? <div className="absolute z-[2]"><Loading /></div> : <></>}
-            <div className="relative flex flex-col">
-                <form className="flex flex-col gap-2">
-                    <Input
-                        id="name"
-                        value={taskData?.name}
-                        onChange={handleChange}
-                        type="text"
-                        name="name"
-                        label="Name"
-                        icon={<ListTask />}
-                    />
-                    <Input
-                        id="description"
-                        value={taskData?.description}
-                        onChange={handleChange}
-                        type="textarea"
-                        name="description"
-                        label="Description"
-                        icon={<TextParagraph />}
-                    />
-                    <OptionSelector
-                        id="categoryId"
-                        value={taskData?.categoryId}
-                        onChange={handleChange}
-                        name="categoryId"
-                        label="Category"
-                        icon={<Collection />}
-                        options={categories.map((category) => ({
-                            label: category.name,
-                            value: category.id,
-                            children: <CollectionFill size={24} style={{ color: category.color }} />
-                        }))}
-                    />
-                    <Input
-                        id="status"
-                        value={taskData?.status}
-                        onChange={handleChange}
-                        type="select"
-                        name="status"
-                        label="Status"
-                        icon={<CheckCircle />}
-                    >
-                        <option value="pending">Pending</option>
-                        <option value="in-progress">In Progress</option>
-                        <option value="completed">Completed</option>
-                    </Input>
-                    <Input
-                        id="isImportant"
-                        value={taskData?.isImportant}
-                        onChange={handleChange}
-                        type="checkbox"
-                        name="isImportant"
-                        label="Is important?"
-                        icon={<ExclamationDiamond />}
-                    />
-                    <div className="flex justify-end">
+            <div className="flex flex-col flex-1 w-full overflow-hidden">
+                <form className="flex flex-1 flex-col gap-2 overflow-hidden">
+                    <div className="flex flex-1 flex-col gap-2 px-4 overflow-auto">
+                        <Input
+                            id="name"
+                            value={taskData?.name}
+                            onChange={handleChange}
+                            type="text"
+                            name="name"
+                            label="Name"
+                            icon={<ListTask />}
+                        />
+                        <Input
+                            id="description"
+                            value={taskData?.description}
+                            onChange={handleChange}
+                            type="textarea"
+                            name="description"
+                            label="Description"
+                            icon={<TextParagraph />}
+                        />
+                        <Input
+                            id="dueDate"
+                            value={taskData?.dueDate}
+                            onChange={handleChange}
+                            type="date"
+                            name="dueDate"
+                            label="Due date"
+                            icon={<TextParagraph />}
+                        />
+                        <OptionSelector
+                            id="categoryId"
+                            value={taskData?.categoryId}
+                            onChange={handleChange}
+                            name="categoryId"
+                            label="Category"
+                            icon={<Collection />}
+                            options={categories.map((category) => ({
+                                label: category.name,
+                                value: category.id,
+                                children: <CollectionFill size={24} style={{ color: category.color }} />
+                            }))}
+                        />
+                        <Input
+                            id="status"
+                            value={taskData?.status}
+                            onChange={handleChange}
+                            type="select"
+                            name="status"
+                            label="Status"
+                            icon={<CheckCircle />}
+                        >
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </Input>
+                        <Input
+                            id="isImportant"
+                            value={taskData?.isImportant}
+                            onChange={handleChange}
+                            type="checkbox"
+                            name="isImportant"
+                            label="Is important?"
+                            icon={<ExclamationDiamond />}
+                        />
+                    </div>
+                    <div className="flex justify-end p-4">
                         <Button disabled={
                             !taskData.name ||
                             !taskData.categoryId ||

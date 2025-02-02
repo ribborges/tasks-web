@@ -7,7 +7,8 @@ import useModal from '@/hooks/useModal';
 import { RemoveTask, UpdateTask } from "@/services/task.service";
 import { useCategoryStore, useTaskStore } from "@/lib/store";
 import { EditTask } from "@/components/Task";
-import Collapse from "../Collapse";
+import Collapse from "@/components/Collapse";
+import { formatDate } from "@/utils/formatDate";
 
 interface TaskCardProps {
     taskID: string;
@@ -21,7 +22,6 @@ export default function TaskCard(props: TaskCardProps) {
 
     const task = getTask(props?.taskID);
     const category = getCategory(task ? task.categoryId : '');
-    const createdAt = new Date(task ? task.createdAt : '');
 
     const completeTask = () => {
         if (task) UpdateTask(task?.id, {
@@ -109,14 +109,14 @@ export default function TaskCard(props: TaskCardProps) {
                         <div className="flex flex-col gap-2 p-1">
                             <p>{task?.description}</p>
                             <span className="text-xs text-gray-500">
-                                Created at:
-                                {`
-                            ${String(createdAt.getDate()).padStart(2, '0')}/${String(createdAt.getMonth() + 1).padStart(2, '0')}/${createdAt.getFullYear()}
-                        `}
+                                {`Created at: ${formatDate('en-US', task?.createdAt)}`}
                             </span>
                         </div>
                     </Collapse>
                 </h2>
+                <span className="text-xs font-bold">
+                    {task?.dueDate ? `Due date: ${formatDate('en-US', task?.dueDate)}` : ''}
+                </span>
                 <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold">
                     {category?.name}
                 </span>

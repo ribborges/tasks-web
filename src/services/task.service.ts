@@ -37,6 +37,7 @@ async function RemoveTask(taskId: string) {
 async function CreateTask({
     name,
     description,
+    dueDate,
     categoryId,
     status,
     isImportant
@@ -45,6 +46,7 @@ async function CreateTask({
         const res = await api.post("/task", {
             name,
             description,
+            dueDate,
             categoryId,
             status,
             isImportant
@@ -63,6 +65,7 @@ async function CreateTask({
 async function UpdateTask(taskId: string, data: {
     name?: string,
     description?: string,
+    dueDate?: string,
     categoryId?: string,
     status?: string,
     isImportant?: boolean

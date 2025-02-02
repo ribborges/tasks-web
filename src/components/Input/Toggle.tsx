@@ -2,7 +2,6 @@
 
 import { ReactNode, useState } from "react";
 
-import { FlexContainer } from "@/components/Container";
 import classConcat from "@/utils/classConcat";
 
 interface toggleButtonProps {
@@ -47,8 +46,8 @@ export default function Toggle(props: toggleContainerProps) {
     const [active, setActive] = useState(0);
 
     return (
-        <FlexContainer id={props.id} direction="col" items={props.itemsAlign ? props.itemsAlign : "center"}>
-            <div className="flex justify-center w-11/12 m-4 overflow-x-scroll whitespace-nowrap select-none">
+        <div id={props.id} className="flex-1 flex flex-col items-center gap-2 overflow-hidden">
+            <div className="flex max-w-full overflow-x-scroll whitespace-nowrap select-none">
                 {
                     props.items?.map((value, index) => (
                         <ToggleButton
@@ -63,6 +62,6 @@ export default function Toggle(props: toggleContainerProps) {
             {
                 props.items[active].content
             }
-        </FlexContainer>
+        </div>
     );
 }
