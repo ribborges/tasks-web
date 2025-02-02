@@ -1,12 +1,16 @@
+import classConcat from '@/utils/classConcat';
 import { ReactNode, useState } from 'react';
 import { CaretRightFill } from 'react-bootstrap-icons';
 
 interface collapseProps {
     title: ReactNode,
+    themed?: boolean,
+    showCarret?: boolean,
+    className?: string,
     children?: ReactNode
 }
 
-export default function Collapse(props: collapseProps) {
+export default function Collapse({ title, themed = true, showCarret = true, className, children }: collapseProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleClick = () => {
@@ -14,13 +18,23 @@ export default function Collapse(props: collapseProps) {
     }
 
     return (
-        <details className="flex gap-5">
-            <summary onClick={handleClick} className="flex gap-5 items-center text-purple-700 hover:text-pink-700 transition duration-500 flex-2">
-                <CaretRightFill className={`transform ${isOpen ? 'rotate-90' : ''} transition duration-500`} />
-                {props.title}
+        <details className={classConcat("flex gap-5", className || '')}>
+            <summary
+                onClick={handleClick}
+                className={classConcat(
+                    "flex gap-5 items-center transition duration-500 flex-2",
+                    themed ? "text-purple-700 hover:text-pink-700" : '',
+                )}
+            >
+                {
+                    showCarret ?
+                        <CaretRightFill className={`transform ${isOpen ? 'rotate-90' : ''} transition duration-500`} /> :
+                        <></>
+                }
+                {title}
             </summary>
             <div className="pt-4">
-                {props.children}
+                {children}
             </div>
         </details>
     );
