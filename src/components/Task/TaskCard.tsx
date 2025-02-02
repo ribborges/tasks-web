@@ -1,9 +1,7 @@
 'use client';
 
-import { useState } from "react";
 import { PencilSquare, Star, StarFill, TrashFill } from "react-bootstrap-icons";
 
-import { TaskSchema } from "@/types/task";
 import classConcat from "@/utils/classConcat";
 import useModal from '@/hooks/useModal';
 import { RemoveTask, UpdateTask } from "@/services/task.service";
@@ -11,23 +9,22 @@ import { useCategoryStore, useTaskStore } from "@/lib/store";
 import { EditTask } from "@/components/Task";
 
 interface TaskCardProps {
-    taskData: TaskSchema;
+    taskID: string;
 }
 
 export default function TaskCard(props: TaskCardProps) {
-    const createdAt = new Date(props.taskData.createdAt);
-
-    const { removeTask, updateTask } = useTaskStore();
+    const { removeTask, updateTask, getTask } = useTaskStore();
     const { getCategory } = useCategoryStore();
-    const [isImportantState, setIsImportantState] = useState(props.taskData.isImportant);
 
     const { show } = useModal();
 
-    const category = getCategory(props.taskData.categoryId);
+    const task = getTask(props?.taskID);
+    const category = getCategory(task ? task.categoryId : '');
+    const createdAt = new Date(task ? task.createdAt : '');
 
     const setIsImportant = () => {
-        UpdateTask(props.taskData.id, {
-            isImportant: !props.taskData.isImportant
+        if (task) UpdateTask(task?.id, {
+            isImportant: !task.isImportant
         })
             .then(response => {
                 if (response?.status !== 200) {
@@ -35,13 +32,10 @@ export default function TaskCard(props: TaskCardProps) {
                     return;
                 }
 
-                props.taskData.isImportant = !props.taskData.isImportant;
-
-                updateTask(props.taskData.id, {
-                    ...props.taskData,
-                    isImportant: !props.taskData.isImportant
+                updateTask(task.id, {
+                    ...task,
+                    isImportant: !task.isImportant
                 });
-                setIsImportantState(!isImportantState);
             })
             .catch(error => console.error('There has been a problem with your fetch operation: ', error));
     }
@@ -49,19 +43,19 @@ export default function TaskCard(props: TaskCardProps) {
     const editModal = () => {
         show({
             title: 'Edit Task',
-            content: <EditTask task={props.taskData} />
+            content: task ? <EditTask task={task} /> : <div>Task not found</div>
         });
     }
 
     const deleteTask = () => {
-        RemoveTask(props.taskData.id)
+        if (task) RemoveTask(task.id)
             .then(response => {
                 if (response?.status !== 200) {
                     console.error('Error removing task:', response);
                     return;
                 }
 
-                removeTask(props.taskData.id);
+                removeTask(task.id);
             })
             .catch(error => console.error('There has been a problem with your fetch operation: ', error));
     };
@@ -72,12 +66,12 @@ export default function TaskCard(props: TaskCardProps) {
                 <h2 className={classConcat(
                     `flex items-center text-base`,
                     `before:h-5 before:w-1 before:mr-2 before:rounded-full before:block`,
-                    props.taskData.status === 'completed' ? 'before:bg-green-500' :
-                        props.taskData.status === 'in-progress' ? 'before:bg-yellow-500' :
-                            props.taskData.status === 'pending' ? 'before:bg-red-500' : 'before:bg-gray-500'
-                )}>{props.taskData.name}</h2>
+                    task?.status === 'completed' ? 'before:bg-green-500' :
+                        task?.status === 'in-progress' ? 'before:bg-yellow-500' :
+                            task?.status === 'pending' ? 'before:bg-red-500' : 'before:bg-gray-500'
+                )}>{task?.name}</h2>
                 <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold">{category?.name}</span>
-                <p className="text-sm">{props.taskData.description}</p>
+                <p className="text-sm">{task?.description}</p>
             </div>
             <div className="flex justify-between items-end">
                 <div>
@@ -93,7 +87,7 @@ export default function TaskCard(props: TaskCardProps) {
                         className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-yellow-400 transition duration-500"
                         onClick={setIsImportant}
                     >
-                        {isImportantState ? <StarFill /> : <Star />}
+                        {task?.isImportant ? <StarFill /> : <Star />}
                     </button>
                     <button
                         className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-blue-400 transition duration-500"

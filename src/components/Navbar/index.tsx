@@ -46,9 +46,9 @@ export default function Sidebar() {
 			">
                 <div className="flex lg:flex-col flex-1 items-center content-between gap-5">
                     <NavItemContainer className='justify-between flex-1 lg:flex-none'>
-                        <NavItem onClick={() => router.push('/')} icon={<HouseFill />} label='Tasks' />
-                        <NavItem onClick={() => router.push('/')} icon={<Calendar2Fill />} label='Calendar' />
-                        <NavItem onClick={() => router.push('/')} icon={<StarFill />} label='Important' />
+                        <NavItem onClick={() => router.push('/dashboard')} icon={<HouseFill />} label='Tasks' />
+                        <NavItem onClick={() => router.push('/dashboard/calendar')} icon={<Calendar2Fill />} label='Calendar' />
+                        <NavItem onClick={() => router.push('/dashboard/important')} icon={<StarFill />} label='Important' />
                         <NavItem onClick={addModal} icon={<PlusSquareFill />} label='Add' />
                         <NavItem className='lg:hidden' onClick={toggleMenu} icon={<CollectionFill />} label='Categories' />
                     </NavItemContainer>

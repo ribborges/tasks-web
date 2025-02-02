@@ -7,6 +7,7 @@ type State = {
 }
 
 type Actions = {
+    getTask: (taskId: string) => TaskSchema | undefined;
     setTasks: (tasks: TaskSchema[]) => void;
     addTask: (task: TaskSchema) => void;
     removeTask: (taskId: string) => void;
@@ -15,6 +16,9 @@ type Actions = {
 
 const useTaskStore = create<State & Actions>((set) => ({
     tasks: [],
+    getTask: (taskId: string): TaskSchema | undefined => {
+        return useTaskStore.getState().tasks.find((task: TaskSchema) => task.id === taskId);
+    },
     setTasks: (tasks: TaskSchema[]) => {
         set({ tasks });
     },
