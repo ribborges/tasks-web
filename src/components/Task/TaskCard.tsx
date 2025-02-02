@@ -105,8 +105,18 @@ export default function TaskCard(props: TaskCardProps) {
                                 <Check className="text-zinc-300 dark:text-zinc-800 hover:text-purple-600 transition duration-500" />
                             </button>
                     }
-                    <Collapse title={task?.name} showCarret={false} themed={false} className="flex-1">
+                    <Collapse title={task?.name} showCarret={false} themed={false} className="flex-1 text-xs md:text-sm lg:text-base">
                         <div className="flex flex-col gap-2 p-1">
+                            <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold md:hidden">
+                                {category?.name}
+                            </span>
+                            {
+                                task?.dueDate ?
+                                    <span className="text-xs md:hidden">
+                                        {`Due date: ${formatDate('en-US', task?.dueDate)}`}
+                                    </span>
+                                    : <></>
+                            }
                             <p>{task?.description}</p>
                             <span className="text-xs text-gray-500">
                                 {`Created at: ${formatDate('en-US', task?.createdAt)}`}
@@ -114,10 +124,14 @@ export default function TaskCard(props: TaskCardProps) {
                         </div>
                     </Collapse>
                 </h2>
-                <span className="text-xs font-bold">
-                    {task?.dueDate ? `Due date: ${formatDate('en-US', task?.dueDate)}` : ''}
-                </span>
-                <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold">
+                {
+                    task?.dueDate ?
+                        <span className="text-xs hidden md:block">
+                            {`Due date: ${formatDate('en-US', task?.dueDate)}`}
+                        </span>
+                        : <></>
+                }
+                <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold hidden md:block">
                     {category?.name}
                 </span>
                 <div className="flex gap-4 p-1">
