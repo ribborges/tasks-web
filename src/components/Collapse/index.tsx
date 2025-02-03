@@ -1,6 +1,9 @@
-import classConcat from '@/utils/classConcat';
+'use client';
+
 import { ReactNode, useState } from 'react';
 import { CaretRightFill } from 'react-bootstrap-icons';
+
+import classConcat from '@/utils/classConcat';
 
 interface collapseProps {
     title: ReactNode,
