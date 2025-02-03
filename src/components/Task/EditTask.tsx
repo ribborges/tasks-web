@@ -7,11 +7,10 @@ import { Button, Input, OptionSelector } from "@/components/Input";
 import { TaskSchema } from "@/types/task";
 import Loading from "@/components/Loading";
 import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
-import handleInputChange from "@/utils/handleInputChange";
+import { handleInputChange } from "@/utils/handleInputChange";
 import { UpdateTask } from "@/services/task.service";
 import { TaskData } from "@/interfaces/task";
 import { useModal } from "@/hooks";
-import { removeTime } from "@/utils/formatDate";
 
 interface EditTaskModalProps {
     task: TaskSchema;
@@ -24,7 +23,7 @@ export default function EditTask(props: EditTaskModalProps) {
         categoryId: props.task.categoryId,
         name: props.task.name,
         description: props.task.description,
-        dueDate: props.task.dueDate ? removeTime(props.task.dueDate) : '',
+        dueDate: props.task.dueDate ? props.task.dueDate : '',
         status: props.task.status,
         isImportant: props.task.isImportant
     });
@@ -65,6 +64,7 @@ export default function EditTask(props: EditTaskModalProps) {
                         categoryId: taskData.categoryId ? taskData.categoryId : props.task.categoryId,
                         name: taskData.name ? taskData.name : props.task.name,
                         description: taskData.description ? taskData.description : props.task.description,
+                        dueDate: taskData.dueDate ? taskData.dueDate : props.task.dueDate,
                         status: taskData.status ? taskData.status : props.task.status,
                         isImportant: taskData.isImportant ? taskData.isImportant : props.task.isImportant
                     });
@@ -107,7 +107,7 @@ export default function EditTask(props: EditTaskModalProps) {
                             id="dueDate"
                             value={taskData?.dueDate}
                             onChange={handleChange}
-                            type="date"
+                            type="datetime-local"
                             name="dueDate"
                             label="Due date"
                             icon={<TextParagraph />}

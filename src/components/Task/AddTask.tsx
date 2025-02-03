@@ -5,7 +5,7 @@ import { CheckCircle, Collection, CollectionFill, ExclamationDiamond, ListTask, 
 
 import Loading from "@/components/Loading";
 import { Button, Input, OptionSelector } from "@/components/Input";
-import handleInputChange from "@/utils/handleInputChange";
+import { handleInputChange } from "@/utils/handleInputChange";
 import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
 import { CreateTask } from "@/services/task.service";
 import { TaskData } from "@/interfaces/task";
@@ -18,7 +18,7 @@ export default function AddTask() {
         name: '',
         description: '',
         categoryId: '',
-        dueDate: '',
+        dueDate: undefined,
         status: 'pending',
         isImportant: false
     });
@@ -91,7 +91,7 @@ export default function AddTask() {
                             id="dueDate"
                             value={taskData?.dueDate}
                             onChange={handleChange}
-                            type="date"
+                            type="datetime-local"
                             name="dueDate"
                             label="Due date"
                             icon={<TextParagraph />}
