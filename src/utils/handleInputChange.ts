@@ -9,4 +9,4 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, setState: Dis
     }));
 }
 
-export default handleInputChange;
+export { handleInputChange };
