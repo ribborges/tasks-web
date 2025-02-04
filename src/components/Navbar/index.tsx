@@ -117,7 +117,7 @@ function CategoryList() {
             {
                 !categories ? <Loading /> :
                     categories?.map((category, index) => (
-                        <NavItem key={index} iconColor={category.color} onClick={() => router.push('/')} icon={<Collection />} label={category.name} />
+                        <NavItem key={index} iconColor={category.color} onClick={() => router.push(`/dashboard/category?name=${category.name}`)} icon={<Collection />} label={category.name} />
                     ))
             }
         </>
