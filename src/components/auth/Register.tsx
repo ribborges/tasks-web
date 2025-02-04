@@ -7,7 +7,7 @@ import { EnvelopeFill, KeyFill, PersonBadgeFill, PersonFill } from "react-bootst
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
 import { useLoadingStore, useUserStore } from "@/lib/store";
-import handleInputChange from "@/utils/handleInputChange";
+import { handleInputChange } from "@/utils/handleInputChange";
 
 export default function Register() {
     const { setIsLoading } = useLoadingStore();

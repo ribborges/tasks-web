@@ -7,7 +7,7 @@ import { KeyFill, PersonBadgeFill } from "react-bootstrap-icons";
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
 import { useLoadingStore, useUserStore } from "@/lib/store";
-import handleInputChange from "@/utils/handleInputChange";
+import { handleInputChange } from "@/utils/handleInputChange";
 
 export default function Login() {
     const { setIsLoading } = useLoadingStore();
