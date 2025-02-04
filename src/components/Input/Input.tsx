@@ -1,9 +1,8 @@
 'use client';
 
 import { ReactNode, useState, ChangeEvent } from 'react';
-
-import classConcat from '@/utils/classConcat';
 import { Check, CircleFill, EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
+import { clsx } from 'clsx';
 
 interface inputGroupProps {
     className?: string,
@@ -50,7 +49,7 @@ function InputGroup(props: inputGroupProps) {
                         {props.label}
                     </label> : <></>
             }
-            <div className={classConcat(
+            <div className={clsx(
                 props.className || "",
                 `
                 m-1
@@ -93,7 +92,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} className="flex-col" icon={props.icon} label={props.label}>
                     <textarea
-                        className={classConcat(inputStyle, inputPadding)}
+                        className={clsx(inputStyle, inputPadding)}
                         id={props.id}
                         name={props.name}
                         value={props.value as string}
@@ -206,7 +205,7 @@ function Input(props: inputProps) {
                 <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
                     <div>
                         <input
-                            className={classConcat(inputStyle, inputPadding)}
+                            className={clsx(inputStyle, inputPadding)}
                             type={props.type}
                             id={props.id}
                             name={props.name}
@@ -223,7 +222,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
                     <select
-                        className={classConcat(inputStyle, "flex-1")}
+                        className={clsx(inputStyle, "flex-1")}
                         id={props.id}
                         name={props.name}
                         value={props.value as string}
@@ -239,7 +238,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
-                        className={classConcat(inputStyle, inputPadding, "w-full")}
+                        className={clsx(inputStyle, inputPadding, "w-full")}
                         type={showPassword ? "text" : "password"}
                         id={props.id}
                         name={props.name}
@@ -261,7 +260,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
-                        className={classConcat(inputStyle, "w-full")}
+                        className={clsx(inputStyle, "w-full")}
                         type={props.type}
                         id={props.id}
                         name={props.name}
@@ -282,7 +281,7 @@ function Input(props: inputProps) {
             return (
                 <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
-                        className={classConcat(inputStyle, inputPadding, "w-full")}
+                        className={clsx(inputStyle, inputPadding, "w-full")}
                         type={props.type}
                         id={props.id}
                         name={props.name}

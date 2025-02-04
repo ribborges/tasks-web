@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
+import { clsx } from 'clsx';
 
-import classConcat from "@/utils/classConcat";
 import { InputGroup } from "./Input";
 
 interface OptionSelectorProps {
@@ -72,7 +72,7 @@ function OptionSelector({
 function OptionItem({ label, value, children, isSelected, onClick }: OptionItemProps) {
     return (
         <button
-            className={classConcat(
+            className={clsx(
                 `
                     flex flex-col items-center gap-2
                     p-6

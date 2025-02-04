@@ -1,8 +1,7 @@
 'use client';
 
 import { ReactNode, useState } from "react";
-
-import classConcat from "@/utils/classConcat";
+import { clsx } from 'clsx';
 
 interface toggleButtonProps {
     id?: string,
@@ -27,7 +26,7 @@ function ToggleButton(props: toggleButtonProps) {
             id={props.id}
             onClick={props.onClick}
             className={
-                classConcat(
+                clsx(
                     props.className || '',
                     "inline-block p-2 rounded-lg",
                     "after:content-[\"\"] after:block after:mt-2 after:w-full after:h-1 after:rounded-lg after:transiton after:duration-500",

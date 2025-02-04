@@ -3,9 +3,9 @@
 import { ReactNode, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { X, ThreeDots, Calendar2Fill, StarFill, Collection, CollectionFill, HouseFill, PlusSquareFill } from 'react-bootstrap-icons';
+import { clsx } from 'clsx';
 
 import { Spacer } from '@/components/Separator';
-import classConcat from '@/utils/classConcat';
 import useModal from '@/hooks/useModal';
 import { useCategoryStore } from '@/lib/store';
 import Loading from '@/components/Loading';
@@ -79,7 +79,7 @@ export default function Sidebar() {
 
 export function NavItemContainer(props: { className?: string, children: ReactNode }) {
     return (
-        <div className={classConcat(
+        <div className={clsx(
             "flex flex-row lg:flex-col gap-2",
             props.className || ''
         )}>
@@ -90,7 +90,7 @@ export function NavItemContainer(props: { className?: string, children: ReactNod
 
 export function NavItem(props: { icon: any, iconColor?: string, onClick?: () => void, className?: string, label?: string }) {
     return (
-        <button type='button' onClick={props.onClick} className={classConcat(
+        <button type='button' onClick={props.onClick} className={clsx(
             `
                 flex flex-col items-center content-center gap-1 flex-1
                 p-2 lg:p-3

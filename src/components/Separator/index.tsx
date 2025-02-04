@@ -1,4 +1,4 @@
-import classConcat from "@/utils/classConcat";
+import { clsx } from 'clsx';
 
 interface SeparatorProps {
     space?: number;
@@ -9,7 +9,7 @@ interface SeparatorProps {
 function Spacer({ space = 120, vertical, className }: SeparatorProps) {
     return <hr
         style={ vertical? { marginRight: `${space / 2}px`, marginLeft: `${space / 2}px` } : { marginTop: `${space / 2}px`, marginBottom: `${space / 2}px` }}
-        className={classConcat(
+        className={clsx(
             "box-border border-solid border-zinc-500/50",
             vertical ? "h-full border-r" : "w-full border-t",
             className || ""
@@ -19,7 +19,7 @@ function Spacer({ space = 120, vertical, className }: SeparatorProps) {
 function Blanckspace({ space = 60, vertical, className }: SeparatorProps) {
     return <hr
         style={ vertical? { width: `${space}px` } : { height: `${space}px` }}
-        className={classConcat(
+        className={clsx(
             "border-none",
             className || ""
         )}

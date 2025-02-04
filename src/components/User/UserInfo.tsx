@@ -1,4 +1,4 @@
-import classConcat from "@/utils/classConcat";
+import { clsx } from 'clsx';
 
 interface UserInfoProps {
     name?: string;
@@ -9,7 +9,7 @@ interface UserInfoProps {
 export default function UserInfo({ name, username, size = "sm" }: UserInfoProps) {
     return (
         <div className="flex flex-col p-2 whitespace-nowrap">
-            <span className={classConcat(
+            <span className={clsx(
                 "font-bold",
                 size === "sm" ? "text-sm": size === "md" ? "text-base" : size === "lg" ? "text-lg" : size === "xl" ? "text-xl" : "text-2xl",
             )}>{name}</span>

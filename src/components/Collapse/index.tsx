@@ -2,8 +2,7 @@
 
 import { ReactNode, useState } from 'react';
 import { CaretRightFill } from 'react-bootstrap-icons';
-
-import classConcat from '@/utils/classConcat';
+import { clsx } from 'clsx';
 
 interface collapseProps {
     title: ReactNode,
@@ -21,10 +20,10 @@ export default function Collapse({ title, themed = true, showCarret = true, clas
     }
 
     return (
-        <details className={classConcat("flex gap-5 cursor-pointer", className || '')}>
+        <details className={clsx("flex gap-5 cursor-pointer", className || '')}>
             <summary
                 onClick={handleClick}
-                className={classConcat(
+                className={clsx(
                     "flex gap-5 items-center transition duration-500 flex-2",
                     themed ? "text-purple-700 hover:text-pink-700" : '',
                 )}

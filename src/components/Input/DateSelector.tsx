@@ -1,4 +1,5 @@
-import classConcat from "@/utils/classConcat";
+import { clsx } from 'clsx';
+
 import { addDays, removeDate, removeTime, subtractDays } from "@/utils/formatDate";
 
 interface DateSelectorProps {
@@ -106,7 +107,7 @@ export default function DateSelector({ id, name, label, value = new Date(2026, 1
 
 function Day({ date, onClick, selected }: { date: DateProps, onClick?: () => void, selected?: boolean }) {
     return (
-        <button type="button" className={classConcat(
+        <button type="button" className={clsx(
             `
                 flex-1 flex flex-col items-center gap-2
                 p-4

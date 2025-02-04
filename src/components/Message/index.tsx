@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { XLg } from "react-bootstrap-icons";
-
-import classConcat from "@/utils/classConcat";
+import { clsx } from 'clsx';
 
 export interface MessageProps {
     message: string;
@@ -25,7 +24,7 @@ export default function Message({ message, type }: MessageProps) {
     }, [message]);
 
     return (
-        <div className={classConcat(
+        <div className={clsx(
             "p-4 rounded-md border-2 border-solid gap-2",
             type === "error" ? "border-red-700 bg-red-500" :
                 type === "success" ? "border-green-700 bg-green-500" :

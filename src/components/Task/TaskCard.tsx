@@ -1,8 +1,8 @@
 'use client';
 
 import { Check, PencilSquare, Star, StarFill, TrashFill } from "react-bootstrap-icons";
+import { clsx } from 'clsx';
 
-import classConcat from "@/utils/classConcat";
 import useModal from '@/hooks/useModal';
 import { RemoveTask, UpdateTask } from "@/services/task.service";
 import { useCategoryStore, useTaskStore } from "@/lib/store";
@@ -82,7 +82,7 @@ export default function TaskCard(props: TaskCardProps) {
     return (
         <div className="flex flex-col gap-1 p-2 rounded-xl border border-solid border-zinc-300 dark:border-zinc-800 hover:bg-zinc-500/20 trasition duration-500">
             <div className="flex gap-6 items-center">
-                <h2 className={classConcat(
+                <h2 className={clsx(
                     `flex items-center gap-2 text-base flex-1`,
                     `before:h-5 before:w-1 before:rounded-full before:block`,
                     task?.status === 'completed' ? 'before:bg-green-500' :

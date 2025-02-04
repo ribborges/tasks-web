@@ -1,6 +1,6 @@
 import { PersonFill } from "react-bootstrap-icons";
+import { clsx } from 'clsx';
 
-import classConcat from "@/utils/classConcat";
 import Loading from "@/components/Loading";
 
 interface ProfilePicProps {
@@ -12,7 +12,7 @@ interface ProfilePicProps {
 
 export default function ProfilePic({ className = "h-10 w-10", alt, src, loading = true }: ProfilePicProps) {
     return (
-        <div className={classConcat(
+        <div className={clsx(
             `
                 flex items-center justify-center
                 overflow-hidden

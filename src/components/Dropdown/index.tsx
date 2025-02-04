@@ -2,8 +2,8 @@
 
 import { ReactNode, useState } from "react";
 import { CaretDownFill } from "react-bootstrap-icons";
+import { clsx } from 'clsx';
 
-import classConcat from "@/utils/classConcat";
 import { Spacer } from "@/components/Separator";
 
 interface DropdownProps {
@@ -37,12 +37,12 @@ export default function Dropdown({ align = 'center', showCaret = true, ...props 
                 </div>
                 {showCaret && (
                     <div>
-                        <CaretDownFill size={16} className={classConcat(isOpen ? "rotate-180" : "", "transition duration-500")} />
+                        <CaretDownFill size={16} className={clsx(isOpen ? "rotate-180" : "", "transition duration-500")} />
                     </div>
                 )}
             </button>
             {isOpen && (
-                <div className={classConcat(
+                <div className={clsx(
                     "absolute top-full mt-2 w-fit min-w-full z-[5]",
                     align === 'left' ? " left-full transform -translate-x-full" : "",
                     align === 'right' ? " right-full transform translate-x-full" : "",
