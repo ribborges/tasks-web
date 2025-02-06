@@ -90,7 +90,7 @@ export default function DateSelector({ id, name, label, value = new Date(2026, 1
                     border-2 border-solid rounded-3xl p-1 text-xs
                     border-zinc-400 dark:border-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-700
                     transition duration-500
-                    outline-4 outline-none outline-offset-0 outline-purple-700/0 focus:outline-purple-700/50
+                    outline-4 outline-none outline-offset-0 outline-purple-700/0 focus:outline-indigo-500/50
                     cursor-pointer
                 "
                 onChange={(e) => {
@@ -111,10 +111,10 @@ function Day({ date, onClick, selected }: { date: DateProps, onClick?: () => voi
             `
                 flex-1 flex flex-col items-center gap-2
                 p-4
-                border-2 border-solid rounded-3xl
+                rounded-3xl
                 transition duration-500
-            `, selected ? 'bg-purple-800 border-purple-900 hover:bg-purple-900' :
-            `border-zinc-400 dark:border-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-700`
+            `, selected ? 'bg-indigo-500' :
+            `hover:opacity-50`
         )} onClick={onClick}>
             <div className="text-xs first-letter:uppercase">{date.month}</div>
             <div className="font-bold text-2xl">{date.day}</div>

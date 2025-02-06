@@ -30,8 +30,8 @@ function ToggleButton(props: toggleButtonProps) {
                     props.className || '',
                     "inline-block p-2 rounded-lg",
                     "after:content-[\"\"] after:block after:mt-2 after:w-full after:h-1 after:rounded-lg after:transiton after:duration-500",
-                    props.active ? "after:bg-pink-700" : "after:bg-transparent",
-                    "hover:after:bg-violet-700",
+                    props.active ? "after:bg-indigo-500" : "after:bg-transparent",
+                    "hover:after:bg-indigo-800",
                     "select-none"
                 )
             }
