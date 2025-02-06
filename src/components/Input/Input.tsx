@@ -34,7 +34,7 @@ const inputStyle = `
     h-auto
     bg-transparent
     rounded-lg
-    outline-4 outline-none outline-offset-0 outline-purple-700/0 focus:outline-purple-700/50
+    outline-4 outline-none outline-offset-0 outline-indigo-600/0 focus:outline-indigo-600/50
     transition duration-500
 `;
 
@@ -120,7 +120,7 @@ function Input(props: inputProps) {
                             hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
                             dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
                             hover:bg-zinc-400 dark:hover:bg-zinc-700
-                            checked:bg-purple-800 checked:border-purple-900 hover:checked:bg-purple-900
+                            checked:bg-indigo-500 checked:border-indigo-800 hover:checked:bg-indigo-800
                         "
                         type={props.type}
                         id={props.id}
@@ -174,7 +174,7 @@ function Input(props: inputProps) {
                             hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
                             dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
                             hover:bg-zinc-400 dark:hover:bg-zinc-700
-                            checked:bg-purple-800 checked:border-purple-950 hover:checked:bg-purple-950
+                            checked:bg-indigo-500 checked:border-indigo-800 hover:checked:bg-indigo-800
                         "
                         type={props.type}
                         id={props.id}
