@@ -15,7 +15,7 @@ function Spacer({ space = 120, vertical, className }: SeparatorProps) {
             className || ""
         )}/>;
 }
-2
+
 function Blanckspace({ space = 60, vertical, className }: SeparatorProps) {
     return <hr
         style={ vertical? { width: `${space}px` } : { height: `${space}px` }}
