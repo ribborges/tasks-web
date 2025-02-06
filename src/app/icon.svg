@@ -10,6 +10,9 @@
    xml:space="preserve"
    inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
    sodipodi:docname="icon.svg"
+   inkscape:export-filename="icon.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -44,10 +47,10 @@
          id="stop6" /></linearGradient><linearGradient
        id="linearGradient2"
        inkscape:collect="always"><stop
-         style="stop-color:#00bebe;stop-opacity:1;"
+         style="stop-color:#6366f1;stop-opacity:1;"
          offset="0"
          id="stop2" /><stop
-         style="stop-color:#004bc5;stop-opacity:1;"
+         style="stop-color:#3730a3;stop-opacity:1;"
          offset="1"
          id="stop3" /></linearGradient><linearGradient
        inkscape:collect="always"
@@ -168,7 +171,10 @@
        id="path2"
        cx="135.46666"
        cy="135.46666"
-       r="115.91853" /><path
+       r="115.91853"
+       inkscape:export-filename="/home/richard/Documentos/tasks-mobile/assets/images/icon.png"
+       inkscape:export-xdpi="98.303986"
+       inkscape:export-ydpi="98.303986" /><path
        style="fill:url(#linearGradient6);stroke:none;stroke-width:2.8924;filter:url(#filter5)"
        d="m 134.11492,198.48771 c -3.23146,-0.30252 -5.65399,-1.07216 -9.4324,-2.99677 -2.51156,-1.27933 -5.10685,-3.74856 -29.802515,-28.35526 -14.878268,-14.82465 -27.856074,-28.06972 -28.839538,-29.43349 -5.349191,-7.41755 -6.078079,-17.53608 -1.846036,-25.62695 4.259476,-8.14328 11.824685,-13.052501 20.989892,-13.620684 4.203629,-0.260534 8.033969,0.513399 12.346094,2.494844 3.135053,1.44055 3.421533,1.70257 21.163303,19.35485 l 17.98528,17.89451 42.73581,-42.683713 c 46.50588,-46.449217 44.19133,-44.335781 50.7927,-46.378728 4.1386,-1.280751 10.00997,-1.280751 14.1486,0 8.39956,2.599426 14.39737,8.601669 16.94932,16.961782 0.67984,2.227107 0.90046,3.908347 0.90252,6.877811 0.003,6.385605 -1.77084,11.320517 -5.85961,16.28826 -1.16632,1.417102 -25.0783,25.482858 -53.13765,53.479528 -38.55714,38.47097 -51.56974,51.22536 -53.28018,52.22297 -4.90268,2.85942 -10.22505,4.04432 -15.81559,3.52104 z"
        id="path1"
