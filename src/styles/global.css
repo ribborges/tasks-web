@@ -100,11 +100,11 @@ h4 {
 }
 
 a {
-    color: #6d28d9;
+    color: #4f46e5;
     transition: 1s;
 
     &:hover {
-        color: #be185d;
+        color: #3730a3;
         text-shadow: 0 0 20px #ffffff82;
         text-decoration: underline;
     }

@@ -18,7 +18,7 @@ function Button({ type = "button", autofocus, disabled, id, name, value, onClick
         <button
             className={clsx(`
                 text-zinc-800 dark:text-zinc-200 disabled:text-zinc-500/40
-                bg-transparent hover:bg-purple-700 focus:bg-purple-700
+                bg-transparent hover:bg-indigo-600 focus:bg-indigo-600
                 disabled:bg-transparent
                 hover:shadow-2xl focus:shadow-2xl
                 hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
@@ -28,7 +28,7 @@ function Button({ type = "button", autofocus, disabled, id, name, value, onClick
                 p-2 lg:p-4 m-1
                 text-sm lg:text-base
                 rounded-xl border border-solid
-                border-purple-700 disabled:border-zinc-500/40
+                border-indigo-600 disabled:border-zinc-500/40
                 transition duration-500
                 select-none
             `, className || "")}

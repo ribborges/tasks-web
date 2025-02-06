@@ -25,7 +25,7 @@ export default function Collapse({ title, themed = true, showCarret = true, clas
                 onClick={handleClick}
                 className={clsx(
                     "flex gap-5 items-center transition duration-500 flex-2",
-                    themed ? "text-purple-700 hover:text-pink-700" : '',
+                    themed ? "text-indigo-600 hover:text-indigo-800" : '',
                 )}
             >
                 {
