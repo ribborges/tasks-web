@@ -56,8 +56,8 @@ export default function AddCategory() {
     return (
         <>
             {isLoading ? <div className="absolute z-[2]"><Loading /></div> : <></>}
-            <div className="relative flex flex-col">
-                <form className="flex flex-col gap-2">
+            <div className="flex flex-col flex-1 w-full">
+                <form className="flex flex-1 flex-col gap-2 px-4">
                     <Input
                         id="name"
                         value={categoryData?.name}
