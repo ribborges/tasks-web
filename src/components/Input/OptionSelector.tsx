@@ -81,7 +81,7 @@ function OptionItem({ label, value, children, isSelected, onClick }: OptionItemP
                     transition duration-500
                     cursor-pointer
                 `,
-                isSelected ? 'border-indigo-500' : 'border-zinc-400 dark:border-zinc-700'
+                isSelected ? "border-indigo-600 bg-indigo-600/50" : "border-zinc-200 dark:border-zinc-800"
             )}
             type="button"
             onClick={() => {

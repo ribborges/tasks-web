@@ -57,7 +57,7 @@ function InputGroup(props: inputGroupProps) {
                 flex flex-nowrap items-stretch flex-1
                 w-auto h-auto
                 box-border
-                rounded-xl border-2 border-solid border-zinc-400 dark:border-zinc-700
+                rounded-xl border-2 border-solid border-zinc-200 dark:border-zinc-800
                 hover:shadow-2xl focus:shadow-2xl
                 hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
                 dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
@@ -105,22 +105,23 @@ function Input(props: inputProps) {
 
         case "checkbox":
             return (
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-2 relative'>
                     <input
                         className="
                             appearance-none
-                            relative peer
+                            peer
                             shrink-0
                             m-1
                             w-6 h-6
                             border-2 border-solid rounded-lg
                             bg-transparent
-                            border-zinc-400 dark:border-zinc-700
+                            border-zinc-200 dark:border-zinc-800
                             hover:shadow-2xl focus:shadow-2xl
                             hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
                             dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
-                            hover:bg-zinc-400 dark:hover:bg-zinc-700
-                            checked:bg-indigo-500 checked:border-indigo-800 hover:checked:bg-indigo-800
+                            hover:bg-zinc-200 dark:hover:bg-zinc-800
+                            checked:border-indigo-600 checked:bg-indigo-600/50 hover:checked:bg-indigo-600
+                            transition duration-500
                         "
                         type={props.type}
                         id={props.id}
