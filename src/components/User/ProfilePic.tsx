@@ -1,8 +1,6 @@
 import { PersonFill } from "react-bootstrap-icons";
 import { clsx } from 'clsx';
 
-import Loading from "@/components/Loading";
-
 interface ProfilePicProps {
     className?: string;
     alt?: string;
@@ -10,7 +8,7 @@ interface ProfilePicProps {
     loading?: boolean;
 }
 
-export default function ProfilePic({ className = "h-10 w-10", alt, src, loading = true }: ProfilePicProps) {
+export default function ProfilePic({ className = "h-10 w-10", alt, src }: ProfilePicProps) {
     return (
         <div className={clsx(
             `
@@ -22,14 +20,12 @@ export default function ProfilePic({ className = "h-10 w-10", alt, src, loading 
             `, className
         )}>
             {
-                loading ?
-                    <Loading /> :
-                    src ?
-                        <img
-                            src={src}
-                            alt={alt}
-                        /> :
-                        <PersonFill className="h-4/6 w-4/6 text-zinc-500" />
+                src ?
+                    <img
+                        src={src}
+                        alt={alt}
+                    /> :
+                    <PersonFill className="h-4/6 w-4/6 text-zinc-500" />
             }
         </div>
     );

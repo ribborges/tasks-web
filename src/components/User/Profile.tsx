@@ -90,7 +90,7 @@ export default function Profile() {
             {isLoading ? <div className="absolute z-[2]"><Loading /></div> : <></>}
             <div className="relative flex flex-col gap-4">
                 <div className="flex items-center gap-4">
-                    <ProfilePic className="h-24 w-24" src={user?.profilePic} alt={user?.username} loading={false} />
+                    <ProfilePic className="h-24 w-24" src={user?.profilePic} alt={user?.username} />
                     <UserInfo size="2xl" name={userData.name} username={userData.username} />
                 </div>
                 <Spacer space={0} />
