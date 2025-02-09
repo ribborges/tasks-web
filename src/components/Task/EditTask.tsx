@@ -5,7 +5,7 @@ import { CheckCircle, CheckLg, Collection, CollectionFill, ExclamationDiamond, L
 
 import { Button, Input, OptionSelector } from "@/components/Input";
 import { TaskSchema } from "@/types/task";
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
 import { handleInputChange } from "@/utils/handleInputChange";
 import { UpdateTask } from "@/services/task.service";

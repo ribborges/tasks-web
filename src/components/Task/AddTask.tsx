@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckCircle, Collection, CollectionFill, ExclamationDiamond, ListTask, TextParagraph } from "react-bootstrap-icons";
 
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import { Button, Input, OptionSelector } from "@/components/Input";
 import { handleInputChange } from "@/utils/handleInputChange";
 import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
