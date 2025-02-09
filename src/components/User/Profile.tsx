@@ -6,7 +6,7 @@ import { Button, Input } from "@/components/Input";
 import { useUserStore } from "@/lib/store";
 import { ProfilePic, UserInfo } from "./";
 import { handleInputChange } from "@/utils/handleInputChange";
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import { ChangePassword, UpdateUser } from "@/services/user.service";
 
 export default function Profile() {

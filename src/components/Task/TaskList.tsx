@@ -1,5 +1,5 @@
 import { TaskCard } from "./";
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import { TaskSchema } from "@/types/task";
 
 export default function TaskList({ tasks }: { tasks: TaskSchema[] }) {
