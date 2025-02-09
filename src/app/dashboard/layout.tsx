@@ -36,9 +36,6 @@ export default function DashboardLayout({
                     <div className="
                         flex flex-col flex-1 gap-2
                         m-0.5 lg:m-1
-                        bg-zinc-200 dark:bg-zinc-900
-                        border border-solid rounded-xl
-                        border-zinc-300 dark:border-zinc-800
                         overflow-hidden
                     ">
                         {children}
