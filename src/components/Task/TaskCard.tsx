@@ -80,83 +80,60 @@ export default function TaskCard(props: TaskCardProps) {
     };
 
     return (
-        <div className="flex flex-col gap-1 p-2 rounded-xl border border-solid border-zinc-300 dark:border-zinc-800 hover:bg-zinc-500/20 trasition duration-500">
-            <div className="flex gap-6 items-center">
-                <h2 className={clsx(
-                    `flex items-center gap-2 text-base flex-1`,
-                    `before:h-5 before:w-1 before:rounded-full before:block`,
-                    task?.status === 'completed' ? 'before:bg-green-500' :
-                        task?.status === 'in-progress' ? 'before:bg-yellow-500' :
-                            task?.status === 'pending' ? 'before:bg-red-500' : 'before:bg-gray-500'
-                )}>
-                    {
-                        task?.status === 'completed' ? <></> :
-                            <button
-                                type="button"
-                                className="
-                                    border border-solid rounded-full
-                                    bg-zinc-300 dark:bg-zinc-800
-                                    hover:bg-zinc-400 dark:hover:bg-zinc-700
-                                    border-zinc-400 dark:border-zinc-700
-                                    transition duration-500
-                                "
-                                onClick={completeTask}
-                            >
-                                <Check className="text-zinc-300 dark:text-zinc-800 hover:text-purple-600 transition duration-500" />
-                            </button>
-                    }
-                    <Collapse title={task?.name} showCarret={false} themed={false} className="flex-1 text-xs md:text-sm lg:text-base">
-                        <div className="flex flex-col gap-2 p-1">
-                            <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold md:hidden">
-                                {category?.name}
-                            </span>
-                            {
-                                task?.dueDate ?
-                                    <span className="text-xs md:hidden">
-                                        {`Due date: ${formatDate('en-US', task?.dueDate)}`}
-                                    </span>
-                                    : <></>
-                            }
-                            <p>{task?.description}</p>
-                            <span className="text-xs text-gray-500">
-                                {`Created at: ${formatDate('en-US', task?.createdAt)}`}
-                            </span>
-                        </div>
-                    </Collapse>
-                </h2>
-                {
-                    task?.dueDate ?
-                        <span className="text-xs hidden md:block">
-                            {`Due date: ${formatDate('en-US', task?.dueDate)}`}
-                        </span>
-                        : <></>
-                }
-                <span style={{ color: category?.color }} className="rounded-lg text-xs font-bold hidden md:block">
-                    {category?.name}
-                </span>
-                <div className="flex gap-4 p-1">
-                    <button
-                        className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-yellow-400 transition duration-500"
-                        onClick={setIsImportant}
-                    >
-                        {task?.isImportant ? <StarFill /> : <Star />}
-                    </button>
-                    <button
-                        className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-blue-400 transition duration-500"
-                        onClick={editModal}
-                    >
-                        <PencilSquare />
-                    </button>
-                    <button
-                        className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-red-400 transition duration-500"
-                        onClick={deleteTask}
-                    >
-                        <TrashFill />
-                    </button>
-                </div>
-            </div>
-            <div className="flex justify-between items-end">
-
+        <div className="
+            flex flex-row items-center gap-2 p-3
+            bg-zinc-100 dark:bg-zinc-900
+            border border-solid rounded-xl
+            border-zinc-200 dark:border-zinc-800
+        ">
+            <div className={clsx(
+                "h-8 w-1 rounded-full",
+                task?.status === 'completed' ? "bg-green-500" :
+                    task?.status === 'in-progress' ? "bg-yellow-500" :
+                        task?.status === 'pending' ? "bg-red-500" : "bg-blue-500"
+            )} />
+            <button
+                type="button"
+                className={clsx(
+                    `
+                        h-7 w-7
+                        flex items-center justify-center
+                        border border-solid rounded-full
+                        transition duration-500
+                    `, task?.status === 'completed' ? "border-indigo-600 bg-indigo-600/50 hover:bg-indigo-600" :
+                    "bg-zinc-300 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-700"
+                )}
+                onClick={completeTask}
+            >
+                <Check className="h-5/6 w-5/6 text-black dark:text-white" />
+            </button>
+            <Collapse title={task?.name ?? "Untitled Task"} showCaret={false} className="flex-1" themed={false}>
+                {task?.categoryId && <span className="text-sm font-semibold md:hidden" style={{ color: category?.color }}>{category?.name}</span>}
+                {task?.description && <span className="text-zinc-700 dark:text-zinc-300">{task?.description}</span>}
+                {task?.dueDate && <span className="text-gray-500 md:hidden">{`Due: ${formatDate('en-US', task?.dueDate)}`}</span>}
+                <span className="text-gray-500">{`Created: ${formatDate('en-US', task?.createdAt)}`}</span>
+            </Collapse>
+            {task?.dueDate && <span className="w-72 text-gray-500 hidden md:flex">{`Due: ${formatDate('en-US', task?.dueDate)}`}</span>}
+            {task?.categoryId && <span className="w-32 text-sm font-semibold hidden md:flex" style={{ color: category?.color }}>{category?.name}</span>}
+            <div className="flex items-center gap-4">
+                <button
+                    className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-yellow-400 transition duration-500"
+                    onClick={setIsImportant}
+                >
+                    {task?.isImportant ? <StarFill /> : <Star />}
+                </button>
+                <button
+                    className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-blue-400 transition duration-500"
+                    onClick={editModal}
+                >
+                    <PencilSquare />
+                </button>
+                <button
+                    className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-red-400 transition duration-500"
+                    onClick={deleteTask}
+                >
+                    <TrashFill />
+                </button>
             </div>
         </div>
     );
