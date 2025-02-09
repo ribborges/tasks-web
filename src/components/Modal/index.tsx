@@ -36,7 +36,7 @@ export default function Modal(props: ModalProps) {
                         <XLg />
                     </button>
                 </div>
-                <Spacer className="mx-4" space={10} />
+                <Spacer space={20} />
                 <div className="flex flex-1 overflow-hidden relative">
                     {props.children}
                 </div>
