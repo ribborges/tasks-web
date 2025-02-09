@@ -40,7 +40,7 @@ export default function CalendarPage() {
                         }
                     />
                 </Collapse>
-                <Blanckspace space={120} className="lg:hidden" />
+                <Blanckspace className="lg:hidden mt-32" />
             </div>
         </>
     );
