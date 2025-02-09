@@ -21,7 +21,7 @@ export default function ImportantPage() {
                 <Collapse title="Completed">
                     <TaskList tasks={tasks.filter(task => task.isImportant === true && task.status === "completed")} />
                 </Collapse>
-                <Blanckspace className="lg:hidden mt-14" />
+                <Blanckspace space={120} className="lg:hidden" />
             </div>
         </>
     );

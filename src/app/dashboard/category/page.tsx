@@ -31,7 +31,7 @@ export default function CategoryPage() {
                             <Collapse title="Completed">
                                 <TaskList tasks={tasks.filter(task => task.categoryId === category?.id && task.status === "completed")} />
                             </Collapse>
-                            <Blanckspace className="lg:hidden mt-14" />
+                            <Blanckspace space={120} className="lg:hidden" />
                         </> :
                         <span className="text-center text-lg text-gray-500/60">
                             Category not found
