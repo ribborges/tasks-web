@@ -88,7 +88,7 @@ export default function DateSelector({ id, name, label, value = new Date(2026, 1
             <input
                 className="
                     border-2 border-solid rounded-3xl p-1 text-xs
-                    border-zinc-400 dark:border-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-700
+                    border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800
                     transition duration-500
                     outline-4 outline-none outline-offset-0 outline-purple-700/0 focus:outline-indigo-500/50
                     cursor-pointer
@@ -111,14 +111,14 @@ function Day({ date, onClick, selected }: { date: DateProps, onClick?: () => voi
             `
                 flex-1 flex flex-col items-center gap-2
                 p-4
-                rounded-3xl
+                border border-solid rounded-3xl
                 transition duration-500
-            `, selected ? 'bg-indigo-500' :
-            `hover:opacity-50`
+            `, selected ? "border-indigo-600 bg-indigo-600/50 hover:bg-indigo-600":
+            "border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800"
         )} onClick={onClick}>
-            <div className="text-xs first-letter:uppercase">{date.month}</div>
-            <div className="font-bold text-2xl">{date.day}</div>
-            <div className="text-xs first-letter:uppercase">{date.weekday}</div>
+            <div className="text-sm first-letter:uppercase">{date.month}</div>
+            <div className="font-bold text-3xl">{date.day}</div>
+            <div className="text-sm first-letter:uppercase">{date.weekday}</div>
         </button>
     );
 }
