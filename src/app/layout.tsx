@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 
 import "@/styles/global.css";
 import ModalProvider from "@/providers/Modal";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 const poppins = Poppins({ weight: ["300", "400", "500", "700"], subsets: ["latin"], display: "swap", adjustFontFallback: false });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`text-zinc-950 dark:text-zinc-100 ${poppins.className}`}>
-                <ModalProvider>
-                    {children}
-                </ModalProvider>
+                <AuthProvider>
+                    <ModalProvider>
+                        {children}
+                    </ModalProvider>
+                </AuthProvider>
             </body>
         </html>
     );

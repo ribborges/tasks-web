@@ -1,26 +1,31 @@
-'use client';
+import { useEffect, useState } from "react";
 
-import { useEffect } from "react";
-
-import { useLoadingStore, useUserStore } from "@/lib/store";
+import { useUserStore } from "@/lib/store";
+import { getLoggedUser } from "@/services/user.service";
 
 export default function useCheckUser() {
-    const { setIsLoading } = useLoadingStore();
-    const { user, status } = useUserStore();
+    const [userLoading, setUserLoading] = useState(true);
+    const { user, setToken, setUser } = useUserStore();
 
     useEffect(() => {
-        const checkUser = async () => {
-            try {
-                await status();
-
-                setIsLoading(false);
-            } catch (error) {
-                setIsLoading(false);
-            }
-        }
+        const loadUser = async () => {
+            await getLoggedUser()
+                .then((res) => {
+                    const { token, ...user } = res?.data;
+                    setToken(token);
+                    setUser(user);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
 
         if (user === undefined) {
-            checkUser();
+            loadUser();
         }
+
+        setUserLoading(false);
     }, []);
+
+    return { userLoading };
 }

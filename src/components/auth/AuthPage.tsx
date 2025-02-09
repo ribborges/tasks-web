@@ -3,16 +3,19 @@
 import AnimBackground from "@/components/AnimBackground";
 import Footer from "@/components/Footer";
 import Loading from "@/components/Loading";
-import { useCheckUser, useRedirect } from "@/hooks";
-import { useLoadingStore, useUserStore } from "@/lib/store";
+import Redirect from "@/components/Redirect";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AuthPage({ children }: { children?: React.ReactNode }) {
-    const { isLoading } = useLoadingStore();
-    const { user } = useUserStore();
+    const { authenticated, isLoading } = useAuth();
 
-    useCheckUser();
+    if (isLoading) {
+        return <Loading />;
+    }
 
-    useRedirect("/", user !== undefined && !isLoading, [user]);
+    if (authenticated) {
+        return <Redirect path="/dashboard" />
+    }
 
     return (
         <div className="

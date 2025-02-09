@@ -1,26 +1,19 @@
 'use client';
 
 import Loading from "@/components/Loading";
-import { useCheckUser, useRedirect } from "@/hooks";
-import { useUserStore, useLoadingStore } from "@/lib/store";
+import Redirect from "@/components/Redirect";
+import { useAuth } from "@/hooks/useAuth";
+import useCheckUser from "@/hooks/useCheckUser";
+import useLoadData from "@/hooks/useLoadData";
 
 export default function App() {
-  const { isLoading } = useLoadingStore();
-  const { user } = useUserStore();
+  const { authenticated, isLoading } = useAuth();
+  const { userLoading } = useCheckUser();
+  const { dataLoading } = useLoadData();
 
-  useCheckUser();
+  if (isLoading || userLoading || dataLoading) {
+    return <Loading />;
+  }
 
-  useRedirect("/login", user === undefined && !isLoading, [user]);
-  useRedirect("/dashboard", user !== undefined && !isLoading, [user]);
-
-  return (
-    <main className="
-      bg-zinc-100 dark:bg-zinc-950
-      w-screen h-screen
-    ">
-      {
-        isLoading ? <Loading withLogo /> : <></>
-      }
-    </main>
-  );
+  return authenticated ? (<Redirect path="/dashboard" />) : (<Redirect path="/login" />);
 }

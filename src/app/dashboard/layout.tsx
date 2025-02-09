@@ -1,62 +1,28 @@
 'use client';
 
-import { useCallback, useEffect } from "react";
-
 import Header from "@/components/Header";
 import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
-import { useCheckUser, useRedirect } from "@/hooks";
-import { useCategoryStore, useLoadingStore, useTaskStore, useUserStore } from "@/lib/store";
-import { GetTasks } from "@/services/task.service";
-import { GetCategories } from "@/services/category.service";
+
+import { useAuth } from "@/hooks/useAuth";
+import Redirect from "@/components/Redirect";
+import { useUserStore } from "@/lib/store";
 
 export default function DashboardLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
-    const { isLoading } = useLoadingStore();
+    const { isLoading } = useAuth();
     const { user } = useUserStore();
-    const { setTasks } = useTaskStore();
-    const { setCategories } = useCategoryStore();
 
-    useCheckUser();
+    if (isLoading) {
+        return <Loading />;
+    }
 
-    useRedirect("/login", user === undefined && !isLoading, [user]);
-
-    const loadData = useCallback(async () => {
-        if (user) {
-            await GetCategories(user?.id).then((res) => {
-                const data = res?.data;
-
-                if (Array.isArray(data)) {
-                    setCategories(data);
-                } else {
-                    setCategories([]);
-                }
-            }).catch((error) => {
-                console.error("Error fetching categories:", error);
-                setCategories([]);
-            });
-
-            await GetTasks(user?.id).then((res) => {
-                const data = res?.data;
-
-                if (Array.isArray(data)) {
-                    setTasks(data);
-                } else {
-                    setTasks([]);
-                }
-            }).catch((error) => {
-                console.error("Error fetching tasks:", error);
-                setTasks([]);
-            });
-        }
-    }, [user, GetTasks, GetCategories, setTasks, setCategories]);
-
-    useEffect(() => {
-        loadData();
-    }, [user]);
+    if (!user) {
+        return <Redirect path="/" />
+    }
 
     return (
         <main className="
@@ -75,7 +41,7 @@ export default function DashboardLayout({
                         border-zinc-300 dark:border-zinc-800
                         overflow-hidden
                     ">
-                        {isLoading ? <Loading /> : children}
+                        {children}
                     </div>
                 </div>
             </div>

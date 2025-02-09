@@ -10,7 +10,7 @@ import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
 import { handleInputChange } from "@/utils/handleInputChange";
 import { UpdateTask } from "@/services/task.service";
 import { TaskData } from "@/interfaces/task";
-import { useModal } from "@/hooks";
+import useModal from "@/hooks/useModal";
 
 interface EditTaskModalProps {
     task: TaskSchema;
