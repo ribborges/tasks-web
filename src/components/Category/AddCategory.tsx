@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Collection, Palette } from "react-bootstrap-icons";
 
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import { Button, Input } from "@/components/Input";
 import { handleInputChange } from "@/utils/handleInputChange";
 import { useCategoryStore, useUserStore } from "@/lib/store";
