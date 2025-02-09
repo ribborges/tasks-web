@@ -8,7 +8,7 @@ import { clsx } from 'clsx';
 import { Spacer } from '@/components/Separator';
 import useModal from '@/hooks/useModal';
 import { useCategoryStore } from '@/lib/store';
-import Loading from '@/components/Loading';
+import { Loading } from '@/components/Loading';
 import { AddTask } from '@/components/Task';
 import { Toggle } from '@/components/Input';
 import { AddCategory } from '@/components/Category';
