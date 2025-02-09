@@ -2,7 +2,7 @@
 
 import AnimBackground from "@/components/AnimBackground";
 import Footer from "@/components/Footer";
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import Redirect from "@/components/Redirect";
 import { useAuth } from "@/hooks/useAuth";
 

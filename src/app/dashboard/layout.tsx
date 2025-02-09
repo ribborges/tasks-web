@@ -1,7 +1,7 @@
 'use client';
 
 import Header from "@/components/Header";
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 
 import { useAuth } from "@/hooks/useAuth";

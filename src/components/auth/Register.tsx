@@ -6,11 +6,12 @@ import { EnvelopeFill, KeyFill, PersonBadgeFill, PersonFill } from "react-bootst
 
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
-import { useLoadingStore, useUserStore } from "@/lib/store";
 import { handleInputChange } from "@/utils/handleInputChange";
+import { useUserStore } from "@/lib/store";
+import { Spinner } from "@/components/Loading";
 
 export default function Register() {
-    const { setIsLoading } = useLoadingStore();
+    const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState<MessageProps>({
         message: '',
         type: undefined,
@@ -58,7 +59,9 @@ export default function Register() {
         }
     }
 
-    return (
+    return isLoading ? (
+        <Spinner />
+    ) : (
         <div className="flex flex-col gap-6">
             <h1 className="text-2xl font-bold text-center">Create a new account</h1>
             <Message message={message.message} type={message.type} />
@@ -108,5 +111,5 @@ export default function Register() {
 
             <p className="text-center text-sm font-thin">Already have an account? <a href="/login">Login</a></p>
         </div>
-    );
+    )
 }

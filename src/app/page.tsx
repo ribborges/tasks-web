@@ -1,6 +1,6 @@
 'use client';
 
-import Loading from "@/components/Loading";
+import { Loading } from "@/components/Loading";
 import Redirect from "@/components/Redirect";
 import { useAuth } from "@/hooks/useAuth";
 import useCheckUser from "@/hooks/useCheckUser";

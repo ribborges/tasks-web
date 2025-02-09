@@ -6,11 +6,12 @@ import { KeyFill, PersonBadgeFill } from "react-bootstrap-icons";
 
 import { Button, Input } from "@/components/Input";
 import Message, { MessageProps } from "@/components/Message";
-import { useLoadingStore, useUserStore } from "@/lib/store";
 import { handleInputChange } from "@/utils/handleInputChange";
+import { useUserStore } from "@/lib/store";
+import { Spinner } from "@/components/Loading";
 
 export default function Login() {
-    const { setIsLoading } = useLoadingStore();
+    const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState<MessageProps>({
         message: '',
         type: undefined,
@@ -46,7 +47,9 @@ export default function Login() {
         }
     }
 
-    return (
+    return isLoading ? (
+        <Spinner />
+    ) : (
         <div className="flex flex-col gap-6">
             <h1 className="text-2xl font-bold text-center">Login to your account</h1>
             <Message message={message.message} type={message.type} />
@@ -76,5 +79,5 @@ export default function Login() {
 
             <p className="text-center text-sm font-thin">Don't have an account? <a href="/register">Create one</a></p>
         </div>
-    );
+    )
 }
