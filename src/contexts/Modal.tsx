@@ -14,10 +14,10 @@ export interface ModalContextProps {
 
 export const defaultValue: ModalContextProps = {
     show: () => {
-        throw new Error('showDialog function is not implemented');
+        throw new Error('show function is not implemented');
     },
     hide: () => {
-        throw new Error('hideDialog function is not implemented');
+        throw new Error('hide function is not implemented');
     }
 }
 
