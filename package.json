@@ -1,8 +1,16 @@
 {
   "name": "tasks-app",
+  "description": "A simple tasks/to-do app with categories",
   "private": true,
   "version": "1.0.2",
   "type": "module",
+  "license": "MPL-2.0",
+  "repository": "https://github.com/ribborges/tasks-web",
+  "author": {
+    "name": "Richard Borges",
+    "email": "contato@richardborges.dev",
+    "url": "https://richardborges.dev"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
