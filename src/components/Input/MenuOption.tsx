@@ -27,7 +27,7 @@ export function MenuButton({ label, icon, className, onClick }: { onClick?: () =
             onClick={onClick}
         >
             {icon && icon}
-            {label && label}
+            {label && <span>{label}</span>}
         </button>
     );
 }
@@ -39,7 +39,7 @@ export function MenuLink({ label, icon, className, href }: { href?: string } & M
             href={href}
         >
             {icon && icon}
-            {label && label}
+            {label && <span>{label}</span>}
         </a>
     );
 }
