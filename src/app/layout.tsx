@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={`text-zinc-950 dark:text-zinc-100 ${poppins.className}`}>
+            <body className={`bg-white dark:bg-black text-zinc-950 dark:text-zinc-100 ${poppins.className}`}>
                 <AuthProvider>
                     <ModalProvider>
                         {children}
