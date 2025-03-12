@@ -1,6 +1,7 @@
 import { Input, InputGroup } from './Input';
 import { Button } from './Button';
+import { MenuButton, MenuLink } from './MenuOption';
 import OptionSelector from './OptionSelector';
 import Toggle from './Toggle';
 
-export { Input, InputGroup, Button, OptionSelector, Toggle };
+export { Input, InputGroup, Button, MenuButton, MenuLink, OptionSelector, Toggle };

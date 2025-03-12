@@ -5,7 +5,7 @@ import { CaretDownFill } from "react-bootstrap-icons";
 import { clsx } from 'clsx';
 
 import { Spacer } from "@/components/Separator";
-import { MenuButton, MenuLink } from "@/components/Input/MenuOption";
+import { MenuButton, MenuLink } from "@/components/Input";
 
 interface DropdownProps {
     align: 'left' | 'right' | 'center',
