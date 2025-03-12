@@ -34,7 +34,7 @@ const inputStyle = `
     h-auto
     bg-transparent
     rounded-lg
-    outline-4 outline-none outline-offset-0 outline-indigo-600/0 focus:outline-indigo-600/50
+    outline-4 outline-hidden outline-offset-0 outline-indigo-600/0 focus:outline-indigo-600/50
     transition duration-500
 `;
 

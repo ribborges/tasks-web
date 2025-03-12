@@ -5,7 +5,7 @@ export default function AnimBackground() {
                 <div className="absolute inset-0 opacity-20">
                     <div className="
                         absolute top-0 -left-1/4 w-1/2 h-1/2
-                        bg-gradient-to-br
+                        bg-linear-to-br
                         from-black dark:from-zinc-700
                         to-transparent
                         rounded-full blur-3xl
@@ -13,7 +13,7 @@ export default function AnimBackground() {
                     " />
                     <div className="
                         absolute top-1/2 -right-1/4 w-1/2 h-1/2
-                        bg-gradient-to-bl
+                        bg-linear-to-bl
                         from-zinc-800 dark:from-zinc-500
                         to-transparent
                         rounded-full blur-3xl
@@ -21,7 +21,7 @@ export default function AnimBackground() {
                     " />
                     <div className="
                         absolute -bottom-1/4 left-1/4 w-1/2 h-1/2
-                        bg-gradient-to-tr
+                        bg-linear-to-tr
                         from-zinc-950 dark:from-zinc-600
                         to-transparent
                         rounded-full blur-3xl

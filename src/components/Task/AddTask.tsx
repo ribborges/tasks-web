@@ -65,7 +65,7 @@ export default function AddTask() {
 
     return (
         <>
-            {isLoading ? <div className="absolute z-[2]"><Loading /></div> : <></>}
+            {isLoading ? <div className="absolute z-2"><Loading /></div> : <></>}
             <div className="flex flex-col flex-1 w-full overflow-hidden">
                 <form className="flex flex-1 flex-col gap-2 overflow-hidden">
                     <div className="flex flex-1 flex-col gap-2 px-4 overflow-auto">

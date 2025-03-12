@@ -35,7 +35,7 @@ export default function Sidebar() {
         <>
             <nav className="
                 absolute lg:static z-10 h-12 lg:h-auto top-[90%]
-                backdrop-blur-sm lg:backdrop-blur-none
+                backdrop-blur-xs lg:backdrop-blur-none
 				flex lg:flex-col items-center content-center justify-between
 				bg-zinc-100/40 dark:bg-zinc-950/40
 				p-2 m-2

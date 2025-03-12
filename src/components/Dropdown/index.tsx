@@ -43,7 +43,7 @@ export default function Dropdown({ align = 'center', showCaret = true, ...props 
             </button>
             {isOpen && (
                 <div className={clsx(
-                    "absolute top-full mt-2 w-fit min-w-full z-[5]",
+                    "absolute top-full mt-2 w-fit min-w-full z-5",
                     align === 'left' ? " left-full transform -translate-x-full" : "",
                     align === 'right' ? " right-full transform translate-x-full" : "",
                     align === 'center' ? " left-1/2 transform -translate-x-1/2" : ""
@@ -54,7 +54,7 @@ export default function Dropdown({ align = 'center', showCaret = true, ...props 
                         shadow-2xl shadow-black/10 dark:shadow-white/10
                         border border-solid rounded-xl
                         border-zinc-300 bg-zinc-200/50 dark:border-zinc-700 dark:bg-zinc-800/50
-                        backdrop-blur-sm
+                        backdrop-blur-xs
                     ">
                         {props.children &&
                             <>

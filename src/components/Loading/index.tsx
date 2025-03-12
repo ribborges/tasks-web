@@ -2,7 +2,7 @@ import { ArrowRepeat } from "react-bootstrap-icons";
 
 function Loading() {
     return (
-        <div className="flex flex-col gap-24 justify-center items-center bg-white dark:bg-black h-screen w-screen z-[2]">
+        <div className="flex flex-col gap-24 justify-center items-center bg-white dark:bg-black h-screen w-screen z-2">
             <img className="w-28 h-28" src="/icon.png" alt="Tasks logo" />
             <Spinner />
         </div>

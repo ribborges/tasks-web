@@ -1,23 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Reset CSS */
-* {
-    color: unset;
-    background-color: unset;
-    margin: 0;
-    padding: 0;
-    box-sizing: unset;
-    font-family: unset;
-    border: 0 none;
-    vertical-align: baseline;
-    font-size: unset;
-}
+@import 'tailwindcss';
 
 html,
 body {
     min-height: 100vh;
+
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
 }
 
 body,
@@ -32,41 +21,10 @@ nav {
     right: 0;
 }
 
-input[type='color']::-webkit-color-swatch {
-    border: none;
-}
-
-input[type='color']::-moz-color-swatch {
-    border: none;
-}
-
 img,
 video {
     height: auto;
     max-width: 100%;
-}
-
-ol,
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-    font-style: normal;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-a {
-    font-size: 100%;
-    font-weight: normal;
 }
 
 /* Global styles */
@@ -77,67 +35,4 @@ body {
     /* Scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
-}
-
-h1 {
-    font-size: 3em;
-    font-weight: bold;
-}
-
-h2 {
-    font-size: 2em;
-    font-weight: bold;
-}
-
-h3 {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-h4 {
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-a {
-    color: #6366f1;
-    transition: 1s;
-
-    &:hover {
-        color: #3730a3;
-        text-shadow: 0 0 20px #ffffff82;
-        text-decoration: underline;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    h1 {
-        font-size: 2em;
-        font-weight: bold;
-    }
-
-    h2 {
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-
-    h3 {
-        font-size: 1.2em;
-        font-weight: bold;
-    }
-
-    h4 {
-        font-size: 1em;
-        font-weight: bold;
-    }
-}
-
-.content {
-    padding: 5vw;
-
-    section {
-        padding: 4vw;
-        padding-top: 15vw;
-        padding-bottom: 15vw;
-    }
 }

@@ -90,7 +90,7 @@ export default function DateSelector({ id, name, label, value = new Date(2026, 1
                     border-2 border-solid rounded-3xl p-1 text-xs
                     border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800
                     transition duration-500
-                    outline-4 outline-none outline-offset-0 outline-purple-700/0 focus:outline-indigo-500/50
+                    outline-4 outline-hidden outline-offset-0 outline-purple-700/0 focus:outline-indigo-500/50
                     cursor-pointer
                 "
                 onChange={(e) => {

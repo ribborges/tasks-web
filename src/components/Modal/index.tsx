@@ -16,10 +16,10 @@ export default function Modal(props: ModalProps) {
         <div className="
             absolute
             flex box-border
-            z-[99]
+            z-99
             w-screen h-screen
             overflow-hidden
-            backdrop-blur-sm
+            backdrop-blur-xs
         ">
             <div className="
                 flex flex-col box-border
