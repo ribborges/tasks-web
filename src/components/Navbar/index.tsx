@@ -13,7 +13,12 @@ import { AddTask } from '@/components/Task';
 import { Toggle } from '@/components/Input';
 import { AddCategory } from '@/components/Category';
 
-export default function Sidebar() {
+interface ItemContainerProps {
+    className?: string;
+    children?: ReactNode;
+}
+
+export default function Navbar(props: ItemContainerProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -33,28 +38,20 @@ export default function Sidebar() {
 
     return (
         <>
-            <nav className="
+            <nav className={clsx(`
                 absolute lg:static z-10 h-12 lg:h-auto top-[90%]
                 backdrop-blur-xs lg:backdrop-blur-none
 				flex lg:flex-col items-center content-center justify-between
 				bg-zinc-100/40 dark:bg-zinc-950/40
 				p-2 m-2
-				border border-b-2 border-solid rounded-full lg:rounded-2xl
+				border border-b-2 border-solid rounded-full lg:rounded-4xl
                 border-zinc-400/40 dark:border-zinc-800/40
 				shadow-xl
 				select-none
-			">
+			`, props.className)}>
                 <div className="flex lg:flex-col flex-1 items-center content-between gap-5">
                     <NavItemContainer className='justify-between flex-1 lg:flex-none'>
-                        <NavItem onClick={() => router.push('/dashboard')} icon={<HouseFill />} label='Tasks' />
-                        <NavItem onClick={() => router.push('/dashboard/calendar')} icon={<Calendar2Fill />} label='Calendar' />
-                        <NavItem onClick={() => router.push('/dashboard/important')} icon={<StarFill />} label='Important' />
-                        <NavItem onClick={addModal} icon={<PlusSquareFill />} label='Add' />
-                        <NavItem className='lg:hidden' onClick={toggleMenu} icon={<CollectionFill />} label='Categories' />
-                    </NavItemContainer>
-                    <Spacer space={5} className='hidden lg:block' />
-                    <NavItemContainer className="hidden lg:flex">
-                        <CategoryList />
+                        {props.children}
                     </NavItemContainer>
                 </div>
             </nav>
