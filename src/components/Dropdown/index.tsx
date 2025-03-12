@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import { CaretDownFill } from "react-bootstrap-icons";
 import { clsx } from 'clsx';
 
 import { Spacer } from "@/components/Separator";
+import { MenuButton, MenuLink } from "@/components/Input/MenuOption";
 
 interface DropdownProps {
     align: 'left' | 'right' | 'center',
     showCaret?: boolean,
-    button: ReactNode,
+    title?: ReactNode,
     items: DropdownItemProps[],
     className?: string,
     disabled?: boolean,
@@ -17,76 +18,81 @@ interface DropdownProps {
 }
 
 interface DropdownItemProps {
-    icon: ReactNode,
-    title: string,
-    action?: () => void,
+    type?: 'button' | 'link',
+    icon?: ReactNode,
+    label: string,
+    className?: string,
+    onClick?: () => void,
+    href?: string
 }
 
 export default function Dropdown({ align = 'center', showCaret = true, ...props }: DropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="relative">
+        <div className="relative text-xs" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 cursor-pointer"
+                className="
+                    flex items-center gap-1 content-center
+                    p-2
+                    hover:bg-zinc-400 dark:hover:bg-zinc-800
+                    text-zinc-900 hover:text-zinc-900 dark:text-zinc-200 dark:hover:text-zinc-200 hover:no-underline
+                    rounded-xl
+                    transition duration-500
+                    cursor-pointer
+                "
             >
-                <div className={props.className}>
-                    {props.button}
-                </div>
+                {props.children && (
+                    <div className={props.className}>
+                        {props.children}
+                    </div>
+                )}
                 {showCaret && (
-                    <div>
-                        <CaretDownFill size={16} className={clsx(isOpen ? "rotate-180" : "", "transition duration-500")} />
+                    <div className="text-xs">
+                        <CaretDownFill className={clsx(isOpen ? "rotate-180" : "", "transition duration-500")} />
                     </div>
                 )}
             </button>
-            {isOpen && (
-                <div className={clsx(
-                    "absolute top-full mt-2 w-fit min-w-full z-5",
-                    align === 'left' ? " left-full transform -translate-x-full" : "",
-                    align === 'right' ? " right-full transform translate-x-full" : "",
-                    align === 'center' ? " left-1/2 transform -translate-x-1/2" : ""
-                )}>
-                    <div className="
-                        p-1
-                        flex flex-col items-stretch justify-stretch gap-1
-                        shadow-2xl shadow-black/10 dark:shadow-white/10
-                        border border-solid rounded-xl
-                        border-zinc-300 bg-zinc-200/50 dark:border-zinc-700 dark:bg-zinc-800/50
-                        backdrop-blur-xs
-                    ">
-                        {props.children &&
-                            <>
-                                {props.children}
-                                <Spacer vertical space={5} />
-                            </>
-                        }
-                        <ul className="flex flex-col items-stretch justify-stretch gap-1">
-                            {props.items.map((item, index) => (
-                                <DropdownItem key={index} icon={item.icon} title={item.title} action={item.action} />
-                            ))}
-                        </ul>
-                    </div>
+            <div className={clsx(
+                "absolute w-fit min-w-52 z-[5]",
+                align === 'left' ? "translate-y-full" : "",
+                align === 'right' ? "right-full translate-y-full transform -translate-x-8/12" : "",
+                align === 'center' ? "translate-y-full -translate-x-1/2" : ""
+            )}>
+                <div
+                    className={clsx(
+                        `
+                            overflow-hidden
+                            p-6
+                            flex-col items-stretch justify-stretch gap-1
+                            shadow-2xl shadow-black/10 dark:shadow-white/10
+                            border border-solid rounded-4xl
+                            border-zinc-400/40 dark:border-zinc-800/40
+                            backdrop-blur-md bg-zinc-100/50 dark:bg-zinc-950/50
+                            transition-all duration-500
+                        `, isOpen ? "flex" : "hidden"
+                    )}
+                >
+                    {props.title &&
+                        <>
+                            <div className="font-bold">{props.title}</div>
+                            <Spacer space={10} />
+                        </>
+                    }
+                    <ul className="flex flex-col items-stretch justify-stretch gap-1">
+                        {props.items.map((item, index) => (
+                            <li key={index} className="flex flex-col whitespace-nowrap">
+                                {item.type === 'button' ?
+                                    <MenuButton icon={item.icon} label={item.label} onClick={item.onClick} /> :
+                                    <MenuLink icon={item.icon} label={item.label} href={item.href} />
+                                }
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-            )}
+            </div>
         </div>
-    );
-}
-
-function DropdownItem(props: DropdownItemProps) {
-    return (
-        <li onClick={props.action} className="flex gap-2 p-2 hover:bg-zinc-500/50 cursor-pointer rounded-lg transition duration-500 whitespace-nowrap">
-            <button
-                className="flex items-center gap-2 text-left"
-                onClick={() => {
-                    props.action?.();
-                }}
-                type="button"
-            >
-                <div>{props.icon}</div>
-                <div>{props.title}</div>
-            </button>
-        </li>
     );
 }

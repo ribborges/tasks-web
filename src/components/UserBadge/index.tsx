@@ -27,7 +27,7 @@ export default function UserBadge() {
 
     return (
         <Dropdown
-            align="left"
+            align="right"
             showCaret={false}
             disabled={!user}
             className="
@@ -40,26 +40,28 @@ export default function UserBadge() {
             items={[
                 {
                     icon: <Person />,
-                    title: "Profile",
-                    action: profileModal
+                    label: "Profile",
+                    onClick: profileModal
                 },
                 {
                     icon: <Gear />,
-                    title: "Settings",
-                    action: settingsModal
+                    label: "Settings",
+                    onClick: settingsModal
                 },
                 {
                     icon: <BoxArrowRight />,
-                    title: "Logout",
-                    action: logout
+                    label: "Logout",
+                    onClick: logout
                 }
             ]}
-            button={<ProfilePic src={user?.profilePic} alt={user?.username} loading={!user} />}
+            title={
+                <div className="flex gap-2 m-1">
+                    <ProfilePic className="h-16 w-16" src={user?.profilePic} alt={user?.username} loading={!user} />
+                    <UserInfo name={user?.name} username={user?.username} />
+                </div>
+            }
         >
-            <div className="flex gap-2 m-1">
-                <ProfilePic className="h-16 w-16" src={user?.profilePic} alt={user?.username} loading={!user} />
-                <UserInfo name={user?.name} username={user?.username} />
-            </div>
+            <ProfilePic src={user?.profilePic} alt={user?.username} loading={!user} />
         </Dropdown>
     );
 }
