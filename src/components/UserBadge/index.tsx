@@ -39,16 +39,19 @@ export default function UserBadge() {
             "
             items={[
                 {
+                    type: "button",
                     icon: <Person />,
                     label: "Profile",
                     onClick: profileModal
                 },
                 {
+                    type: "button",
                     icon: <Gear />,
                     label: "Settings",
                     onClick: settingsModal
                 },
                 {
+                    type: "button",
                     icon: <BoxArrowRight />,
                     label: "Logout",
                     onClick: logout
