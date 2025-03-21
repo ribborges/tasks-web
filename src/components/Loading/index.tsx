@@ -11,13 +11,8 @@ function Loading() {
 
 function Spinner() {
     return (
-        <div className="
-            p-1
-            bg-zinc-200 dark:bg-zinc-900
-            border border-solid rounded-full
-            border-zinc-300 dark:border-zinc-800
-        ">
-            <ArrowRepeat className="animate-spin text-4xl text-zinc-500" />
+        <div className="flex justify-center items-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-solid border-zinc-800 dark:border-zinc-200 m-12" />
         </div>
     );
 }
