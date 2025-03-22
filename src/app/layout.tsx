@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react"
 import clsx from "clsx";
 import { Noto_Sans } from 'next/font/google';
 
@@ -32,6 +33,7 @@ export default function RootLayout({
                         {children}
                     </ToastProvider>
                 </ModalProvider>
+                <Analytics />
             </body>
         </html>
     );
