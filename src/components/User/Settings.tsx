@@ -17,6 +17,7 @@ export default function Settings() {
                     <span>Backend source: <Anchor href="https://github.com/ribborges/tasks-api" target={'_blank'}>Github</Anchor></span>
                     <span>WebApp source: <Anchor href="https://github.com/ribborges/tasks-web" target={'_blank'}>Github</Anchor></span>
                     <span>Licensed under: <Anchor href="https://www.mozilla.org/en-US/MPL/2.0/" target={'_blank'}>Mozilla Public License v2.0</Anchor></span>
+                    <span>v1.1.0</span>
                 </div>
             </div>
             <div>
