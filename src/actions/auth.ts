@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { LoginResponse } from "@/interfaces/auth";
 import { loginUser, logoutUser, registerUser } from "@/services/auth.service";
 import { LoginFormSchema, FormState, RegisterFormSchema } from "@/lib/definitions";
+import { cookieOpt } from "@/config/cookies";
 
 export async function logout() {
     await logoutUser()
@@ -64,7 +65,7 @@ export async function login(state: FormState, formData: FormData): Promise<FormS
             }
 
             const { token, ...user } = res.data as LoginResponse;
-            (await cookieStore).set("token", token);
+            (await cookieStore).set("token", token, cookieOpt);
 
             return { message: "Login successful" };
         })
@@ -115,7 +116,7 @@ export async function register(state: FormState, formData: FormData): Promise<Fo
             }
 
             const { token, ...user } = res.data as LoginResponse;
-            (await cookieStore).set("token", token);
+            (await cookieStore).set("token", token, cookieOpt);
 
             return { message: "Registration successful" };
         })
