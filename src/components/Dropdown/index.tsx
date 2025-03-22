@@ -56,9 +56,9 @@ export default function Dropdown({ align = 'center', showCaret = true, ...props 
                 )}
             </button>
             <div className={clsx(
-                "absolute w-fit min-w-52 z-[5]",
-                align === 'left' ? "translate-y-full" : "",
-                align === 'right' ? "right-full translate-y-full transform -translate-x-8/12" : "",
+                "absolute w-fit min-w-52 z-[5] top-0 bottom-0",
+                align === 'left' ? "left-0 translate-y-full" : "",
+                align === 'right' ? "right-0 translate-y-full" : "",
                 align === 'center' ? "translate-y-full -translate-x-1/2" : ""
             )}>
                 <div
