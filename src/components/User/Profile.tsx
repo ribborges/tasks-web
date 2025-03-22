@@ -88,7 +88,7 @@ export default function Profile() {
     return (
         <>
             {isLoading ? <div className="absolute z-2"><Loading /></div> : <></>}
-            <div className="flex flex-col flex-1 w-full px-4 gap-4">
+            <div className="flex flex-1 flex-col justify-between gap-4 p-8">
                 <div className="flex items-center gap-4">
                     <ProfilePic className="h-24 w-24" src={user?.profilePic} alt={user?.username} />
                     <UserInfo size="2xl" name={userData.name} username={userData.username} />

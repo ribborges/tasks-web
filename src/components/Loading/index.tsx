@@ -1,5 +1,3 @@
-import { ArrowRepeat } from "react-bootstrap-icons";
-
 function Loading() {
     return (
         <div className="flex flex-col gap-24 justify-center items-center bg-white dark:bg-black h-screen w-screen z-2">
@@ -9,10 +7,10 @@ function Loading() {
     );
 }
 
-function Spinner() {
+function Spinner({ size = 32 }: { size?: number }) {
     return (
         <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-solid border-zinc-800 dark:border-zinc-200 m-12" />
+            <div style={{ height: size, width: size }} className="animate-spin rounded-full border-t-2 border-b-2 border-solid border-zinc-800 dark:border-zinc-200" />
         </div>
     );
 }

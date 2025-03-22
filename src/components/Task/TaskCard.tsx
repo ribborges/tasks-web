@@ -82,9 +82,9 @@ export default function TaskCard(props: TaskCardProps) {
     return (
         <div className="
             flex flex-row items-center gap-2 p-3
-            bg-zinc-100 dark:bg-zinc-900
+            bg-zinc-100 dark:bg-zinc-950
             border border-solid rounded-xl
-            border-zinc-200 dark:border-zinc-800
+            border-zinc-200 dark:border-zinc-900
         ">
             <div className={clsx(
                 "h-8 w-1 rounded-full",
