@@ -1,13 +1,27 @@
+import { useActionState, useTransition } from "react";
 import { BoxArrowRight, Gear, Person } from "react-bootstrap-icons";
 
 import Dropdown from "@/components/Dropdown";
 import { useUserStore } from "@/lib/store";
 import useModal from '@/hooks/useModal';
 import { Profile, ProfilePic, Settings, UserInfo } from "@/components/User";
+import { logout } from "@/actions/auth";
+import { Spinner } from "@/components/Loading";
+import { logoutUser } from "@/services/auth.service";
+import { redirect } from "next/navigation";
 
 export default function UserBadge() {
     const { user } = useUserStore();
-    const { logout } = useUserStore();
+
+    const [state, action, pending] = useActionState(logout, null);
+    const [isPending, startTransition] = useTransition();
+
+    const handleLogout = () => {
+        startTransition(() => {
+            action(); // Trigger the logout action within a transition
+        });
+    };
+    //const { logout } = useUserStore();
 
     const { show } = useModal();
 
@@ -52,9 +66,9 @@ export default function UserBadge() {
                 },
                 {
                     type: "button",
-                    icon: <BoxArrowRight />,
-                    label: "Logout",
-                    onClick: logout
+                    icon: pending || isPending ? <Spinner size={12} /> : <BoxArrowRight />,
+                    label: pending || isPending ? "Logging out..." : "Logout",
+                    onClick: handleLogout
                 }
             ]}
             title={
