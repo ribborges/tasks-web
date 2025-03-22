@@ -4,32 +4,22 @@ import { useRouter } from "next/navigation";
 import { Calendar2Fill, CollectionFill, HouseFill, PlusSquareFill, StarFill } from "react-bootstrap-icons";
 
 import Header from "@/components/Header";
-import { Loading } from "@/components/Loading";
+import { Spinner } from "@/components/Loading";
 import Navbar from "@/components/Navbar";
-import { useAuth } from "@/hooks/useAuth";
-import Redirect from "@/components/Redirect";
-import { useUserStore } from "@/lib/store";
 import { MenuButton, Toggle } from "@/components/Input";
 import useModal from "@/hooks/useModal";
 import { AddTask } from "@/components/Task";
 import { AddCategory } from "@/components/Category";
+import useCheckUser from "@/hooks/useCheckUser";
+import useLoadData from "@/hooks/useLoadData";
 
 export default function DashboardLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
-    const { isLoading } = useAuth();
-    const { user } = useUserStore();
-
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    if (!user) {
-        return <Redirect path="/" />
-    }
-
+    const { userLoading } = useCheckUser();
+    const { dataLoading } = useLoadData();
     const router = useRouter();
 
     const { show } = useModal();
@@ -50,18 +40,24 @@ export default function DashboardLayout({
                 <Header />
                 <div className="flex-1 flex overflow-hidden flex-col-reverse lg:flex-row">
                     <Navbar>
-                        <MenuButton className="text-xs flex-col" icon={<HouseFill size={18} />} label="Tasks" onClick={() => router.push('/dashboard')} />
-                        <MenuButton className="text-xs flex-col" icon={<Calendar2Fill size={18} />} label="Calendar" onClick={() => router.push('/dashboard/calendar')} />
-                        <MenuButton className="text-xs flex-col" icon={<StarFill size={18} />} label="Important" onClick={() => router.push('/dashboard/important')} />
-                        <MenuButton className="text-xs flex-col" icon={<PlusSquareFill size={18} />} label="Add" onClick={addModal} />
-                        <MenuButton className="text-xs flex-col" icon={<CollectionFill size={18} />} label="Categories" />
+                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<HouseFill size={18} />} label="Tasks" onClick={() => router.push('/dashboard')} />
+                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<Calendar2Fill size={18} />} label="Calendar" onClick={() => router.push('/dashboard/calendar')} />
+                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<StarFill size={18} />} label="Important" onClick={() => router.push('/dashboard/important')} />
+                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<PlusSquareFill size={18} />} label="Add" onClick={addModal} />
+                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<CollectionFill size={18} />} label="Categories" onClick={() => router.push('/dashboard/categories')} />
                     </Navbar>
                     <div className="
                         flex flex-col flex-1 gap-2
                         m-0.5 lg:m-1
                         overflow-hidden
                     ">
-                        {children}
+                        {
+                            userLoading || dataLoading ?
+                                <div className="flex justify-center items-center h-full w-full">
+                                    <Spinner size={64} />
+                                </div> :
+                                children
+                        }
                     </div>
                 </div>
             </div>
