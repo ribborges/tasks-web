@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 
 interface MenuButtonProps {
+    hideLabelOnMobile?: boolean;
     label?: string;
     icon?: ReactNode;
     className?: string;
@@ -20,26 +21,26 @@ const menuOptStyle = `
     cursor-pointer
 `;
 
-export function MenuButton({ label, icon, className, onClick }: { onClick?: () => void } & MenuButtonProps) {
+export function MenuButton({ hideLabelOnMobile, label, icon, className, onClick }: { onClick?: () => void } & MenuButtonProps) {
     return (
         <button
             className={clsx(menuOptStyle, className)}
             onClick={onClick}
         >
             {icon && icon}
-            {label && <span>{label}</span>}
+            {label && <span className={hideLabelOnMobile ? "hidden md:block" : ""}>{label}</span>}
         </button>
     );
 }
 
-export function MenuLink({ label, icon, className, href }: { href?: string } & MenuButtonProps) {
+export function MenuLink({ hideLabelOnMobile, label, icon, className, href }: { href?: string } & MenuButtonProps) {
     return (
         <a
             className={clsx(menuOptStyle, className)}
             href={href}
         >
             {icon && icon}
-            {label && <span>{label}</span>}
+            {label && <span className={hideLabelOnMobile ? "hidden md:block" : ""}>{label}</span>}
         </a>
     );
 }
