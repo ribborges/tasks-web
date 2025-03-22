@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins } from 'next/font/google';
+import clsx from "clsx";
+import { Noto_Sans } from 'next/font/google';
 
-import "@/styles/global.css";
 import ModalProvider from "@/providers/Modal";
 import { AuthProvider } from "@/providers/AuthProvider";
 
-const poppins = Poppins({ weight: ["300", "400", "500", "700"], subsets: ["latin"], display: "swap", adjustFontFallback: false });
+import "@/styles/global.css";
+import ToastProvider from "@/providers/ToastProvider";
+
+const notoSans = Noto_Sans({
+    weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+    subsets: ["latin"],
+    display: "swap",
+    adjustFontFallback: false
+});
 
 export const metadata: Metadata = {
     title: "Tasks App",
@@ -19,10 +27,12 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={`bg-white dark:bg-black text-zinc-950 dark:text-zinc-100 ${poppins.className}`}>
+            <body className={clsx("bg-white dark:bg-black text-zinc-950 dark:text-zinc-100", notoSans.className)}>
                 <AuthProvider>
                     <ModalProvider>
-                        {children}
+                        <ToastProvider>
+                            {children}
+                        </ToastProvider>
                     </ModalProvider>
                 </AuthProvider>
             </body>
