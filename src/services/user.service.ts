@@ -2,12 +2,12 @@ import { AxiosError } from "axios";
 
 import { api } from "@/api";
 
-async function getLoggedUser(token?: string) {
+async function getLoggedUser(token: string) {
     try {
         const res = await api.get("/user", {
             withCredentials: true,
             headers: {
-                cookie: token ? `token=${token}` : undefined
+                cookie: `token=${token}`
             }
         });
 
@@ -19,14 +19,21 @@ async function getLoggedUser(token?: string) {
     }
 }
 
-async function UpdateUser(userId: string, data: {
-    username?: string,
-    name?: string,
-    profilePic?: string,
-}) {
+async function updateUser(
+    userId: string,
+    data: {
+        username?: string,
+        name?: string,
+        profilePic?: string,
+    },
+    token: string
+) {
     try {
         const res = await api.patch(`/user/${userId}`, data, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                cookie: `token=${token}`
+            }
         });
 
         return res;
@@ -37,13 +44,20 @@ async function UpdateUser(userId: string, data: {
     }
 }
 
-async function ChangePassword(userId: string, password: {
-    password: string,
-    newPassword: string,
-}) {
+async function changePassword(
+    userId: string,
+    password: {
+        password: string,
+        newPassword: string,
+    },
+    token: string
+) {
     try {
         const res = await api.patch(`/password/${userId}`, password, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                cookie: `token=${token}`
+            }
         });
 
         return res;
@@ -54,4 +68,4 @@ async function ChangePassword(userId: string, password: {
     }
 }
 
-export { getLoggedUser, UpdateUser, ChangePassword };
+export { getLoggedUser, updateUser, changePassword };

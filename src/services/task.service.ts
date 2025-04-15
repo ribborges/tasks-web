@@ -3,12 +3,15 @@ import { AxiosError } from "axios";
 import { api } from "@/api";
 import { TaskData } from "@/interfaces/task";
 
-async function GetTasks(userId: string) {
+async function getTasks(userId: string, token: string) {
     try {
         const res = await api.get("/tasks", {
             withCredentials: true,
             params: {
                 userId: userId
+            },
+            headers: {
+                cookie: `token=${token}`
             }
         });
 
@@ -20,10 +23,13 @@ async function GetTasks(userId: string) {
     }
 }
 
-async function RemoveTask(taskId: string) {
+async function removeTask(taskId: string, token: string) {
     try {
         const res = await api.delete(`/task/${taskId}`, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                cookie: `token=${token}`
+            }
         });
 
         return res;
@@ -34,14 +40,17 @@ async function RemoveTask(taskId: string) {
     }
 }
 
-async function CreateTask({
-    name,
-    description,
-    dueDate,
-    categoryId,
-    status,
-    isImportant
-}: TaskData) {
+async function createTask(
+    {
+        name,
+        description,
+        dueDate,
+        categoryId,
+        status,
+        isImportant
+    }: TaskData,
+    token: string
+) {
     try {
         const res = await api.post("/task", {
             name,
@@ -51,7 +60,10 @@ async function CreateTask({
             status,
             isImportant
         }, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                cookie: `token=${token}`
+            }
         });
 
         return res;
@@ -62,17 +74,24 @@ async function CreateTask({
     }
 }
 
-async function UpdateTask(taskId: string, data: {
-    name?: string,
-    description?: string,
-    dueDate?: string,
-    categoryId?: string,
-    status?: string,
-    isImportant?: boolean
-}) {
+async function updateTask(
+    taskId: string,
+    data: {
+        name?: string,
+        description?: string,
+        dueDate?: string,
+        categoryId?: string,
+        status?: string,
+        isImportant?: boolean
+    },
+    token: string
+) {
     try {
         const res = await api.patch(`/task/${taskId}`, data, {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                cookie: `token=${token}`
+            }
         });
 
         return res;
@@ -83,4 +102,4 @@ async function UpdateTask(taskId: string, data: {
     }
 }
 
-export { GetTasks, RemoveTask, CreateTask, UpdateTask };
+export { getTasks, removeTask, createTask, updateTask };
