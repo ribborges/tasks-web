@@ -2,9 +2,9 @@
 
 import { cookies } from "next/headers";
 
-import { getLoggedUser } from "@/services/user.service";
+import { getCategories } from "@/services/category.service";
 
-export async function fetchUser() {
+export async function fetchCategories(userId: string) {
     const cookieStore = cookies();
     const tokenCookie = (await cookieStore).get("token");
 
@@ -12,7 +12,7 @@ export async function fetchUser() {
         return { message: "No token found", error: true };
     }
 
-    return await getLoggedUser(tokenCookie?.value)
+    return await getCategories(userId, tokenCookie.value)
         .then((res) => {
             if (!res) {
                 return { message: "An error occurred", error: true };
@@ -22,11 +22,14 @@ export async function fetchUser() {
                 return { message: res.status + ": " + res.data, error: true };
             }
 
-            const { token, ...user } = res?.data;
+            const data = res?.data;
 
-            return { token, user };
-        })
-        .catch((err) => {
+            if (Array.isArray(data)) {
+                return data;
+            } else {
+                return [];
+            }
+        }).catch((error) => {
             return { message: "An error occurred", error: true };
         });
 }
