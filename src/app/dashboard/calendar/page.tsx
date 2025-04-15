@@ -26,8 +26,8 @@ export default function CalendarPage() {
             <Title>
                 <Calendar /> Your calendar
             </Title>
-            <DateSelector locale='en-US' onChange={handleDateChange} value={date} />
             <div className="flex flex-col gap-4 box-border w-full p-4 overflow-auto">
+                <DateSelector locale='en-US' onChange={handleDateChange} value={date} />
                 <TaskList
                     tasks={
                         tasks.filter(task => task.dueDate && removeTime(task.dueDate) === removeTime(date.toISOString()) && task.status !== "completed")

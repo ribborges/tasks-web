@@ -47,8 +47,8 @@ export default function DashboardLayout({
                         <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<CollectionFill size={18} />} label="Categories" onClick={() => router.push('/dashboard/categories')} />
                     </Navbar>
                     <div className="
-                        flex flex-col flex-1 gap-2
-                        m-0.5 lg:m-1
+                        flex flex-col flex-1
+                        m-0 lg:m-1
                         overflow-hidden
                     ">
                         {
