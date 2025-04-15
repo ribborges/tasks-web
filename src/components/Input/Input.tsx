@@ -4,14 +4,7 @@ import { ReactNode, useState, ChangeEvent } from 'react';
 import { Check, CircleFill, EyeFill, EyeSlashFill } from 'react-bootstrap-icons';
 import { clsx } from 'clsx';
 
-interface inputGroupProps {
-    className?: string,
-    icon?: ReactNode,
-    label?: string,
-    labelInside?: boolean,
-    htmlFor?: string,
-    children?: ReactNode
-}
+import {InputGroup} from './InputGroup';
 
 interface inputProps {
     disabled?: boolean,
@@ -24,6 +17,7 @@ interface inputProps {
     accept?: string,
     value?: string | number | boolean,
     className?: string,
+    rootClassName?: string,
     icon?: ReactNode,
     placeholder?: string,
     label?: string,
@@ -40,57 +34,13 @@ const inputStyle = `
 
 const inputPadding = "p-2 lg:p-4";
 
-function InputGroup(props: inputGroupProps) {
-    return (
-        <div className="flex flex-col">
-            {
-                props.label && !props.labelInside ?
-                    <label htmlFor={props.htmlFor} className="ml-2 font-bold">
-                        {props.label}
-                    </label> : <></>
-            }
-            <div className={clsx(
-                props.className || "",
-                `
-                m-1
-                relative
-                flex flex-nowrap items-stretch flex-1
-                w-auto h-auto
-                box-border
-                rounded-xl border-2 border-solid border-zinc-200 dark:border-zinc-800
-                hover:shadow-2xl focus:shadow-2xl
-                hover:shadow-zinc-950/20 focus:shadow-zinc-950/20
-                dark:hover:shadow-zinc-200/20 dark:focus:shadow-zinc-200/20
-                transition duration-500
-                `
-            )}>
-                <div className="flex gap-2 items-center p-2 lg:p-4">
-                    {
-                        props.icon ?
-                            <div>
-                                {props.icon}
-                            </div> : <></>
-                    }
-                    {
-                        props.label && props.labelInside ?
-                            <label htmlFor={props.htmlFor} className="ml-2 font-bold">
-                                {props.label}
-                            </label> : <></>
-                    }
-                </div>
-                {props.children}
-            </div>
-        </div>
-    );
-}
-
 function Input(props: inputProps) {
     const [showPassword, setShowPassword] = useState(false);
 
     switch (props.type) {
         case "textarea":
             return (
-                <InputGroup htmlFor={props.id} className="flex-col" icon={props.icon} label={props.label}>
+                <InputGroup htmlFor={props.id} className="flex-col" rootClassName={props.rootClassName} icon={props.icon} label={props.label}>
                     <textarea
                         className={clsx(inputStyle, inputPadding)}
                         id={props.id}
@@ -203,7 +153,7 @@ function Input(props: inputProps) {
 
         case "range":
             return (
-                <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
+                <InputGroup rootClassName={props.rootClassName} htmlFor={props.id} icon={props.icon} label={props.label}>
                     <div>
                         <input
                             className={clsx(inputStyle, inputPadding)}
@@ -221,7 +171,7 @@ function Input(props: inputProps) {
 
         case "select":
             return (
-                <InputGroup htmlFor={props.id} icon={props.icon} label={props.label}>
+                <InputGroup rootClassName={props.rootClassName} htmlFor={props.id} icon={props.icon} label={props.label}>
                     <select
                         className={clsx(inputStyle, "flex-1")}
                         id={props.id}
@@ -237,7 +187,7 @@ function Input(props: inputProps) {
 
         case "password":
             return (
-                <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
+                <InputGroup rootClassName={props.rootClassName} htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
                         className={clsx(inputStyle, inputPadding, "w-full")}
                         type={showPassword ? "text" : "password"}
@@ -259,7 +209,7 @@ function Input(props: inputProps) {
 
         case "color":
             return (
-                <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
+                <InputGroup rootClassName={props.rootClassName} htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
                         className={clsx(inputStyle, "w-full")}
                         type={props.type}
@@ -280,7 +230,7 @@ function Input(props: inputProps) {
 
         default:
             return (
-                <InputGroup htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
+                <InputGroup rootClassName={props.rootClassName} htmlFor={props.id} className={props.className} icon={props.icon} label={props.label}>
                     <input
                         className={clsx(inputStyle, inputPadding, "w-full")}
                         type={props.type}
