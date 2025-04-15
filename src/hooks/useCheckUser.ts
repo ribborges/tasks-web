@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useUserStore } from "@/lib/store";
-import { getLoggedUser } from "@/services/user.service";
+import { fetchUser } from "@/actions/user.actions";
 
 export default function useCheckUser() {
     const [userLoading, setUserLoading] = useState(true);
@@ -9,15 +9,13 @@ export default function useCheckUser() {
 
     useEffect(() => {
         const loadUser = async () => {
-            await getLoggedUser()
-                .then((res) => {
-                    const { token, ...user } = res?.data;
-                    setToken(token);
-                    setUser(user);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+            const result = await fetchUser();
+            if (result) {
+                const { token, user } = result;
+                
+                setToken(token);
+                setUser(user);
+            }
         };
 
         if (user === undefined) {

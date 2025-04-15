@@ -2,10 +2,13 @@ import { AxiosError } from "axios";
 
 import { api } from "@/api";
 
-async function getLoggedUser() {
+async function getLoggedUser(token?: string) {
     try {
         const res = await api.get("/user", {
-            withCredentials: true
+            withCredentials: true,
+            headers: {
+                cookie: token ? `token=${token}` : undefined
+            }
         });
 
         return res;
