@@ -6,7 +6,7 @@ import { clsx } from 'clsx';
 import useModal from '@/hooks/useModal';
 import { RemoveTask, UpdateTask } from "@/services/task.service";
 import { useCategoryStore, useTaskStore } from "@/lib/store";
-import { EditTask } from "@/components/Task";
+import EditTask from "@/components/forms/EditTask";
 import Collapse from "@/components/Collapse";
 import { formatDate } from "@/utils/formatDate";
 

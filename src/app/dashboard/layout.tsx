@@ -8,8 +8,8 @@ import { Spinner } from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import { MenuButton, Toggle } from "@/components/Input";
 import useModal from "@/hooks/useModal";
-import { AddTask } from "@/components/Task";
-import { AddCategory } from "@/components/Category";
+import AddTask from "@/components/forms/AddTask";
+import AddCategory from "@/components/forms/AddCategory";
 import useCheckUser from "@/hooks/useCheckUser";
 import useLoadData from "@/hooks/useLoadData";
 
