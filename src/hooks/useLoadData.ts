@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { useCategoryStore, useTaskStore, useUserStore } from "@/lib/store";
-import { GetCategories } from "@/services/category.service";
-import { GetTasks } from "@/services/task.service";
+import { fetchCategories } from "@/actions/category.actions";
+import { fetchTasks } from "@/actions/task.actions";
 
 export default function useLoadData() {
     const [dataLoading, setDataLoading] = useState(true);
@@ -12,35 +12,25 @@ export default function useLoadData() {
 
     const loadData = useCallback(async () => {
         if (user) {
-            await GetCategories(user?.id).then((res) => {
-                const data = res?.data;
+            const categories = await fetchCategories(user?.id);
 
-                if (Array.isArray(data)) {
-                    setCategories(data);
-                } else {
-                    setCategories([]);
-                }
-            }).catch((error) => {
-                console.error("Error fetching categories:", error);
+            if (Array.isArray(categories)) {
+                setCategories(categories);
+            } else {
                 setCategories([]);
-            });
+            }
 
-            await GetTasks(user?.id).then((res) => {
-                const data = res?.data;
+            const tasks = await fetchTasks(user?.id);
 
-                if (Array.isArray(data)) {
-                    setTasks(data);
-                } else {
-                    setTasks([]);
-                }
-            }).catch((error) => {
-                console.error("Error fetching tasks:", error);
+            if (Array.isArray(tasks)) {
+                setTasks(tasks);
+            } else {
                 setTasks([]);
-            });
+            }
 
             setDataLoading(false);
         }
-    }, [user, GetTasks, GetCategories, setTasks, setCategories]);
+    }, [user, fetchCategories, fetchTasks, setTasks, setCategories]);
 
     useEffect(() => {
         loadData();

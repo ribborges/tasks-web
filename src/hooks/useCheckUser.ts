@@ -10,11 +10,14 @@ export default function useCheckUser() {
     useEffect(() => {
         const loadUser = async () => {
             const result = await fetchUser();
-            if (result) {
+            
+            if ('token' in result && 'user' in result) {
                 const { token, user } = result;
-                
+
                 setToken(token);
                 setUser(user);
+            } else {
+                console.error("Error fetching user:", result.message);
             }
         };
 
