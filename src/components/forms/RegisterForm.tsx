@@ -6,7 +6,7 @@ import { EnvelopeFill, KeyFill, PersonBadgeFill, PersonFill } from "react-bootst
 import { Button, Input } from "@/components/Input";
 import { handleInputChange } from "@/utils/handleInputChange";
 import { Spinner } from "@/components/Loading";
-import { register } from "@/actions/auth";
+import { register } from "@/actions/auth.actions";
 import Validation from "@/components/Validation";
 
 export default function RegisterForm() {

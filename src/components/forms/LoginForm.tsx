@@ -6,7 +6,7 @@ import { KeyFill, PersonBadgeFill } from "react-bootstrap-icons";
 import { Button, Input } from "@/components/Input";
 import { handleInputChange } from "@/utils/handleInputChange";
 import { Spinner } from "@/components/Loading";
-import { login } from "@/actions/auth";
+import { login } from "@/actions/auth.actions";
 import Validation from "@/components/Validation";
 
 export default function LoginForm() {

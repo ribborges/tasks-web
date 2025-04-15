@@ -5,7 +5,7 @@ import Dropdown from "@/components/Dropdown";
 import { useUserStore } from "@/lib/store";
 import useModal from '@/hooks/useModal';
 import { Profile, ProfilePic, Settings, UserInfo } from "@/components/User";
-import { logout } from "@/actions/auth";
+import { logout } from "@/actions/auth.actions";
 import { Spinner } from "@/components/Loading";
 import { logoutUser } from "@/services/auth.service";
 import { redirect } from "next/navigation";
