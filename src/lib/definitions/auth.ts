@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const LoginFormSchema = z.object({
+const LoginFormSchema = z.object({
     username: z
         .string()
         .min(1, { message: 'Username must be at least 1 character long' })
@@ -11,7 +11,7 @@ export const LoginFormSchema = z.object({
         .trim()
 });
 
-export const RegisterFormSchema = z.object({
+const RegisterFormSchema = z.object({
     name: z
         .string()
         .min(2, { message: 'Name must be at least 2 characters long' })
@@ -35,14 +35,4 @@ export const RegisterFormSchema = z.object({
         .regex(/[^a-zA-Z0-9]/, { message: 'Password must contain at least one special character.' })
 });
 
-export type FormState =
-    | {
-        errors?: {
-            name?: string[]
-            email?: string[]
-            username?: string[]
-            password?: string[]
-        }
-        message?: string
-    }
-    | undefined
+export { LoginFormSchema, RegisterFormSchema };
