@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { clsx } from 'clsx';
 
 import { InputGroup } from "./Input";
@@ -18,6 +18,7 @@ interface OptionSelectorProps {
 }
 
 interface OptionItemProps {
+    id?: string;
     label?: string;
     value: string;
     children?: ReactNode;
@@ -34,8 +35,11 @@ function OptionSelector({
     value,
     onChange,
 }: OptionSelectorProps) {
+    const [state, setState] = useState<any>();
+
     const handleOptionSelect = (newValue: string) => {
         value = newValue;
+        setState(newValue);
 
         if (onChange) {
             const event = {
@@ -56,22 +60,33 @@ function OptionSelector({
                     options?.map((option) => (
                         <OptionItem
                             key={option.value}
+                            id={option.value}
                             label={option.label}
                             value={option.value}
                             children={option.children}
-                            isSelected={value === option.value}
+                            isSelected={option.value == state}
                             onClick={handleOptionSelect}
                         />
                     ))
                 }
             </div>
+            {/* Hidden input for form submission */}
+            {name && (
+                <input
+                    type="hidden"
+                    name={name}
+                    value={state || ''}
+                />
+            )}
         </InputGroup>
     );
 }
 
-function OptionItem({ label, value, children, isSelected, onClick }: OptionItemProps) {
+function OptionItem({ id, label, value, children, isSelected, onClick }: OptionItemProps) {
     return (
-        <button
+        <div
+            id={id}
+            role="option"
             className={clsx(
                 `
                     flex flex-col items-center gap-2
@@ -83,14 +98,13 @@ function OptionItem({ label, value, children, isSelected, onClick }: OptionItemP
                 `,
                 isSelected ? "border-indigo-600 bg-indigo-600/50" : "border-zinc-200 dark:border-zinc-800"
             )}
-            type="button"
             onClick={() => {
                 onClick && onClick(value)
             }}
         >
             {children}
             {label && <span className="text-sm">{label}</span>}
-        </button>
+        </div>
     );
 }
 
