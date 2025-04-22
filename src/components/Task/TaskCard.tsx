@@ -4,11 +4,11 @@ import { Check, PencilSquare, Star, StarFill, TrashFill } from "react-bootstrap-
 import { clsx } from 'clsx';
 
 import useModal from '@/hooks/useModal';
-import { RemoveTask, UpdateTask } from "@/services/task.service";
 import { useCategoryStore, useTaskStore } from "@/lib/store";
 import EditTask from "@/components/forms/EditTask";
 import Collapse from "@/components/Collapse";
 import { formatDate } from "@/utils/formatDate";
+import { completeTask, deleteTask, setIsImportant } from "@/actions/task.actions";
 
 interface TaskCardProps {
     taskID: string;
@@ -23,42 +23,6 @@ export default function TaskCard(props: TaskCardProps) {
     const task = getTask(props?.taskID);
     const category = getCategory(task ? task.categoryId : '');
 
-    const completeTask = () => {
-        if (task) UpdateTask(task?.id, {
-            status: 'completed'
-        })
-            .then(response => {
-                if (response?.status !== 200) {
-                    console.error('Error updating task:', response);
-                    return;
-                }
-
-                updateTask(task.id, {
-                    ...task,
-                    status: 'completed'
-                });
-            })
-            .catch(error => console.error('There has been a problem with your fetch operation: ', error));
-    }
-
-    const setIsImportant = () => {
-        if (task) UpdateTask(task?.id, {
-            isImportant: !task.isImportant
-        })
-            .then(response => {
-                if (response?.status !== 200) {
-                    console.error('Error updating task:', response);
-                    return;
-                }
-
-                updateTask(task.id, {
-                    ...task,
-                    isImportant: !task.isImportant
-                });
-            })
-            .catch(error => console.error('There has been a problem with your fetch operation: ', error));
-    }
-
     const editModal = () => {
         show({
             title: 'Edit Task',
@@ -66,17 +30,43 @@ export default function TaskCard(props: TaskCardProps) {
         });
     }
 
-    const deleteTask = () => {
-        if (task) RemoveTask(task.id)
-            .then(response => {
-                if (response?.status !== 200) {
-                    console.error('Error removing task:', response);
-                    return;
-                }
+    const callCompleteTask = async () => {
+        if (task) {
+            await completeTask(task.id)
+                .then((res) => {
+                    if (res === true) {
+                        updateTask(task.id, {
+                            ...task,
+                            status: 'completed'
+                        });
+                    }
+                });
+        }
+    }
 
-                removeTask(task.id);
-            })
-            .catch(error => console.error('There has been a problem with your fetch operation: ', error));
+    const callSetIsImportant = async () => {
+        if (task) {
+            await setIsImportant(task.id, !task.isImportant)
+                .then((res) => {
+                    if (res === true) {
+                        updateTask(task.id, {
+                            ...task,
+                            isImportant: !task.isImportant
+                        });
+                    }
+                });
+        }
+    }
+
+    const callDeleteTask = async () => {
+        if (task) {
+            await deleteTask(task.id)
+                .then((res) => {
+                    if (res === true) {
+                        removeTask(task.id);
+                    }
+                });
+        }
     };
 
     return (
@@ -103,7 +93,7 @@ export default function TaskCard(props: TaskCardProps) {
                     `, task?.status === 'completed' ? "border-indigo-600 bg-indigo-600/50 hover:bg-indigo-600" :
                     "bg-zinc-300 dark:bg-zinc-800 border-zinc-400 dark:border-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-700"
                 )}
-                onClick={completeTask}
+                onClick={callCompleteTask}
             >
                 <Check className="h-5/6 w-5/6 text-black dark:text-white" />
             </button>
@@ -118,7 +108,7 @@ export default function TaskCard(props: TaskCardProps) {
             <div className="flex items-center gap-4">
                 <button
                     className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-yellow-400 transition duration-500"
-                    onClick={setIsImportant}
+                    onClick={callSetIsImportant}
                 >
                     {task?.isImportant ? <StarFill /> : <Star />}
                 </button>
@@ -130,7 +120,7 @@ export default function TaskCard(props: TaskCardProps) {
                 </button>
                 <button
                     className="border-none hover:bg-transparent focus:bg-transparent hover:shadow-none hover:text-red-400 transition duration-500"
-                    onClick={deleteTask}
+                    onClick={callDeleteTask}
                 >
                     <TrashFill />
                 </button>
