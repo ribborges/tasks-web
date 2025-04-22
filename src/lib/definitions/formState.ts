@@ -1,13 +1,11 @@
 type FormState =
     | {
         errors?: {
-            name?: string[]
-            email?: string[]
-            username?: string[]
-            password?: string[]
+            [key: string]: string[] | string | undefined
         }
         message?: string
     }
-    | undefined;
+    | undefined
+    | any
 
 export type { FormState };
