@@ -117,7 +117,7 @@ export async function deleteTask(taskId: string) {
         });
 }
 
-export async function editTask(taskId: string, formData: FormData): Promise<FormState> {
+export async function editTask(state: FormState, formData: FormData): Promise<FormState> {
     const cookieStore = cookies();
     const tokenCookie = (await cookieStore).get("token");
 
@@ -126,6 +126,7 @@ export async function editTask(taskId: string, formData: FormData): Promise<Form
     }
 
     const validatedFields = UpdateTaskFormSchema.safeParse({
+        taskId: formData.get("taskId"),
         name: formData.get("name"),
         description: formData.get("description"),
         dueDate: formData.get("dueDate"),
@@ -147,7 +148,7 @@ export async function editTask(taskId: string, formData: FormData): Promise<Form
         };
     }
 
-    const { name, description, dueDate, categoryId, status, isImportant } = validatedFields.data;
+    const { taskId, name, description, dueDate, categoryId, status, isImportant } = validatedFields.data;
 
     return await updateTask(taskId, {
         name,
