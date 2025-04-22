@@ -11,12 +11,15 @@ import { handleInputChange } from "@/utils/handleInputChange";
 import { TaskData } from "@/interfaces/task";
 import { editTask } from "@/actions/task.actions";
 import Validation from "@/components/Validation";
+import useModal from "@/hooks/useModal";
 
 interface EditTaskModalProps {
     task: TaskSchema;
 }
 
 export default function EditTask(props: EditTaskModalProps) {
+    const { hide } = useModal();
+
     const { categories } = useCategoryStore();
     const { updateTask } = useTaskStore();
 
@@ -52,6 +55,7 @@ export default function EditTask(props: EditTaskModalProps) {
                 status: state.status,
                 isImportant: state.isImportant
             });
+            hide();
         }
     }, [state]);
 
