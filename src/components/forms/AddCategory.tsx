@@ -1,19 +1,21 @@
 'use client';
 
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { Collection, Palette } from "react-bootstrap-icons";
 
-import { Loading } from "@/components/Loading";
+import { Spinner } from "@/components/Loading";
 import { Button, Input } from "@/components/Input";
 import { handleInputChange } from "@/utils/handleInputChange";
-import { useCategoryStore, useUserStore } from "@/lib/store";
+import { useCategoryStore } from "@/lib/store";
 import { CategoryData } from "@/interfaces/category";
-import { CreateCategory } from "@/services/category.service";
+import { newCategory } from "@/actions/category.actions";
+import Validation from "../Validation";
 
 export default function AddCategory() {
-    const { user } = useUserStore();
     const { addCategory } = useCategoryStore();
-    const [isLoading, setIsLoading] = useState(false);
+
+    const [state, action, pending] = useActionState(newCategory, undefined);
+
     const [categoryData, setCategoryData] = useState<CategoryData>({
         name: '',
         color: '#999999',
@@ -21,71 +23,48 @@ export default function AddCategory() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => handleInputChange(e, setCategoryData);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-
-        if (user?.id) {
-            await CreateCategory(categoryData)
-                .then((res) => {
-                    if (!res) {
-                        console.error('Error creating category: no response');
-                        return;
-                    }
-
-                    if (res?.status !== 201) {
-                        console.error(`${res.status}: ${res.data}`);
-                        return;
-                    }
-
-                    addCategory(res.data);
-                    setIsLoading(false);
-                    setCategoryData({
-                        name: '',
-                        color: '#999999',
-                    });
-                })
-                .catch((error) => {
-                    console.error('There has been a problem with your fetch operation: ', error);
-                });
+    useEffect(() => {
+        if (state?.id) {
+            addCategory(state);
+            setCategoryData({
+                name: '',
+                color: '#999999',
+            });
         }
-
-        setIsLoading(false);
-    }
+    }, [state]);
 
     return (
-        <>
-            {isLoading ? <div className="absolute z-2"><Loading /></div> : <></>}
-            <div className="flex flex-col flex-1 w-full">
-                <form className="flex flex-1 flex-col gap-2 px-4">
-                    <Input
-                        id="name"
-                        value={categoryData?.name}
-                        onChange={handleChange}
-                        type="text"
-                        name="name"
-                        label="Name"
-                        icon={<Collection />}
-                    />
-                    <Input
-                        id="color"
-                        value={categoryData?.color}
-                        onChange={handleChange}
-                        type="color"
-                        name="color"
-                        label="Color"
-                        icon={<Palette />}
-                    />
-                    <div className="flex justify-end">
-                        <Button disabled={
-                            !categoryData.name ||
-                            !categoryData.color
-                        } type="button" onClick={handleSubmit}>
-                            Add Category
-                        </Button>
-                    </div>
-                </form>
-            </div>
-        </>
+        <div className="flex flex-col flex-1 w-full">
+            <form action={action} className="flex flex-1 flex-col gap-2 px-4">
+                <Input
+                    id="name"
+                    value={categoryData?.name}
+                    onChange={handleChange}
+                    type="text"
+                    name="name"
+                    label="Name"
+                    icon={<Collection />}
+                />
+                <Validation error={state?.errors?.name} />
+                <Input
+                    id="color"
+                    value={categoryData?.color}
+                    onChange={handleChange}
+                    type="color"
+                    name="color"
+                    label="Color"
+                    icon={<Palette />}
+                />
+                <Validation error={state?.errors?.color} />
+                <div className="flex justify-end">
+                    <Button
+                        type="submit"
+                        disabled={pending}
+                    >
+                        {pending ? <Spinner size={24} /> : "Add Category"}
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 }
