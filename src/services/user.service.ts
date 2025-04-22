@@ -24,6 +24,7 @@ async function updateUser(
     data: {
         username?: string,
         name?: string,
+        email?: string,
         profilePic?: string,
     },
     token: string
