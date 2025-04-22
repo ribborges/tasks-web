@@ -1,6 +1,6 @@
 'use client';
 
-import { CollectionFill } from "react-bootstrap-icons";
+import { Collection, CollectionFill } from "react-bootstrap-icons";
 
 import { TaskList } from "@/components/Task";
 import { Blanckspace } from "@/components/Separator";
@@ -16,7 +16,7 @@ export default function CalendarPage() {
     return (
         <>
             <Title>
-                <CollectionFill /> Categories
+                <Collection /> Categories
             </Title>
             <div className="flex flex-col gap-4 box-border w-full p-4 overflow-auto">
                 <Filter id="add" items={[
