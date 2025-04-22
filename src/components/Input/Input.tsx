@@ -14,6 +14,8 @@ interface inputProps {
     onChange?: (e: ChangeEvent<any>) => void,
     pattern?: string,
     minLength?: number,
+    required?: boolean,
+    maxLength?: number,
     accept?: string,
     value?: string | number | boolean,
     className?: string,
@@ -46,8 +48,12 @@ function Input(props: inputProps) {
                         id={props.id}
                         name={props.name}
                         value={props.value as string}
+                        minLength={props.minLength}
+                        maxLength={props.maxLength}
                         onChange={props.onChange}
                         placeholder={props.placeholder}
+                        required={props.required}
+                        disabled={props.disabled}
                     />
                 </InputGroup>
             );
@@ -89,6 +95,7 @@ function Input(props: inputProps) {
                                 props.onChange(event);
                             }
                         }}
+                        required={props.required}
                         disabled={props.disabled}
                     />
                     <Check className='absolute w-6 h-6 m-[6px] self-center hidden peer-checked:block pointer-events-none' />
@@ -132,6 +139,7 @@ function Input(props: inputProps) {
                         name={props.name}
                         value={props.value as string}
                         onChange={props.onChange}
+                        required={props.required}
                         disabled={props.disabled}
                     />
                     <CircleFill className='absolute w-3 h-3 m-[12px] self-center hidden peer-checked:block pointer-events-none' />
@@ -162,6 +170,7 @@ function Input(props: inputProps) {
                             name={props.name}
                             value={props.value as string}
                             onChange={props.onChange}
+                            required={props.required}
                             disabled={props.disabled}
                         />
                     </div>
@@ -178,6 +187,8 @@ function Input(props: inputProps) {
                         name={props.name}
                         value={props.value as string}
                         onChange={props.onChange}
+                        required={props.required}
+                        disabled={props.disabled}
                     >
                         {props.children}
                     </select>
@@ -196,8 +207,10 @@ function Input(props: inputProps) {
                         value={props.value as string}
                         pattern={props.pattern}
                         minLength={props.minLength}
+                        maxLength={props.maxLength}
                         onChange={props.onChange}
                         placeholder={props.placeholder}
+                        required={props.required}
                         disabled={props.disabled}
                     />
                     <button className="p-4 hover:opacity-50 transition duration-500" type='button' onClick={() => setShowPassword(!showPassword)}>
@@ -218,9 +231,9 @@ function Input(props: inputProps) {
                         value={props.value as string}
                         pattern={props.pattern}
                         accept={props.accept}
-                        minLength={props.minLength}
                         onChange={props.onChange}
                         placeholder={props.placeholder}
+                        required={props.required}
                         disabled={props.disabled}
                     />
                     <span className="flex items-center p-2 text-sm">{props.value}</span>
@@ -240,8 +253,10 @@ function Input(props: inputProps) {
                         pattern={props.pattern}
                         accept={props.accept}
                         minLength={props.minLength}
+                        maxLength={props.maxLength}
                         onChange={props.onChange}
                         placeholder={props.placeholder}
+                        required={props.required}
                         disabled={props.disabled}
                     />
                 </InputGroup>
