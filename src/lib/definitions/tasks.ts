@@ -14,7 +14,8 @@ const NewTaskFormSchema = z.object({
     categoryId: z
         .string()
         .min(1, { message: 'Category is required' })
-        .trim(),
+        .trim()
+        .optional(),
     status: z
         .enum(['pending', 'in-progress', 'completed']),
     isImportant: z
@@ -23,4 +24,26 @@ const NewTaskFormSchema = z.object({
         .optional()
 });
 
-export { NewTaskFormSchema };
+const UpdateTaskFormSchema = z.object({
+    name: z
+        .string()
+        .optional(),
+    description: z
+        .string()
+        .optional(),
+    dueDate: z
+        .string()
+        .optional(),
+    categoryId: z
+        .string()
+        .optional(),
+    status: z
+        .enum(['pending', 'in-progress', 'completed'])
+        .optional(),
+    isImportant: z
+        .string()
+        .nullable()
+        .optional()
+});
+
+export { NewTaskFormSchema, UpdateTaskFormSchema };

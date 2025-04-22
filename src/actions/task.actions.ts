@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 import { getTasks, createTask, removeTask, updateTask } from "@/services/task.service";
 import { FormState } from "@/lib/definitions";
-import { NewTaskFormSchema } from "@/lib/definitions/tasks";
+import { NewTaskFormSchema, UpdateTaskFormSchema } from "@/lib/definitions/tasks";
 
 export async function fetchTasks(userId: string) {
     const cookieStore = cookies();
@@ -125,7 +125,7 @@ export async function editTask(taskId: string, formData: FormData): Promise<Form
         return { message: "No token found", errors: { token: "Token is missing" } };
     }
 
-    const validatedFields = NewTaskFormSchema.safeParse({
+    const validatedFields = UpdateTaskFormSchema.safeParse({
         name: formData.get("name"),
         description: formData.get("description"),
         dueDate: formData.get("dueDate"),
@@ -163,10 +163,11 @@ export async function editTask(taskId: string, formData: FormData): Promise<Form
             }
 
             if (!res?.status.toString().startsWith("2")) {
+                console.log("res", res.data);
                 return { message: res.status + ": " + res.data };
             }
 
-            return res.data;
+            return true;
         }).catch((error) => {
             return { message: "An error occurred" };
         });
