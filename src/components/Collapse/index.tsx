@@ -20,7 +20,7 @@ export default function Collapse({ title, showCaret = true, themed = true, class
     }
 
     return (
-        <details className={clsx("flex gap-5 cursor-pointer", className || '')}>
+        <details className={clsx("flex flex-col gap-2 cursor-pointer", className || '')}>
             <summary
                 onClick={handleClick}
                 className={clsx(
