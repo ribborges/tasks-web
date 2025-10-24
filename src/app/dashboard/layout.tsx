@@ -1,11 +1,13 @@
 'use client';
 
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
 import { Calendar2Fill, CollectionFill, HouseFill, PlusSquareFill, StarFill } from "react-bootstrap-icons";
 
 import Header from "@/components/Header";
 import { Spinner } from "@/components/Loading";
-import Navbar from "@/components/Navbar";
+import { Bottombar } from "@/components/Bottombar";
+import { Sidebar, SidebarToggle, SidebarContent, SidebarItem } from "@/components/Sidebar";
 import { MenuButton, Toggle } from "@/components/Input";
 import useModal from "@/hooks/useModal";
 import AddTask from "@/components/forms/AddTask";
@@ -39,13 +41,83 @@ export default function DashboardLayout({
             <div className="flex flex-col h-screen overflow-hidden">
                 <Header />
                 <div className="flex-1 flex overflow-hidden flex-col-reverse lg:flex-row">
-                    <Navbar>
-                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<HouseFill size={18} />} label="Tasks" onClick={() => router.push('/dashboard')} />
-                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<Calendar2Fill size={18} />} label="Calendar" onClick={() => router.push('/dashboard/calendar')} />
-                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<StarFill size={18} />} label="Important" onClick={() => router.push('/dashboard/important')} />
-                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<PlusSquareFill size={18} />} label="Add" onClick={addModal} />
-                        <MenuButton hideLabelOnMobile className="text-xs flex-col" icon={<CollectionFill size={18} />} label="Categories" onClick={() => router.push('/dashboard/categories')} />
-                    </Navbar>
+                    <Sidebar defaultExpanded={false} className="hidden md:block">
+                        <SidebarToggle />
+                        <SidebarContent>
+                            <SidebarItem>{(context) => <MenuButton
+                                className={context.isExpanded ? "" : "justify-center"}
+                                icon={<HouseFill />}
+                                label={
+                                    <span
+                                        className={clsx(
+                                            "text-sm transition duration-500",
+                                            context.isExpanded ? "opacity-100 translate-x-0" : "absolute opacity-0 -translate-x-2 w-0"
+                                        )}
+                                    >Tasks</span>
+                                }
+                                onClick={() => router.push('/dashboard')}
+                            />}</SidebarItem>
+                            <SidebarItem>{(context) => <MenuButton
+                                className={context.isExpanded ? "" : "justify-center"}
+                                icon={<Calendar2Fill />}
+                                label={
+                                    <span
+                                        className={clsx(
+                                            "text-sm transition duration-500",
+                                            context.isExpanded ? "opacity-100 translate-x-0" : "absolute opacity-0 -translate-x-2 w-0"
+                                        )}
+                                    >Calendar</span>
+                                }
+                                onClick={() => router.push('/dashboard/calendar')}
+                            />}</SidebarItem>
+                            <SidebarItem>{(context) => <MenuButton
+                                className={context.isExpanded ? "" : "justify-center"}
+                                icon={<StarFill />}
+                                label={
+                                    <span
+                                        className={clsx(
+                                            "text-sm transition duration-500",
+                                            context.isExpanded ? "opacity-100 translate-x-0" : "absolute opacity-0 -translate-x-2 w-0"
+                                        )}
+                                    >Important</span>
+                                }
+                                onClick={() => router.push('/dashboard/important')}
+                            />}</SidebarItem>
+                            <SidebarItem>{(context) => <MenuButton
+                                className={context.isExpanded ? "" : "justify-center"}
+                                icon={<PlusSquareFill />}
+                                label={
+                                    <span
+                                        className={clsx(
+                                            "text-sm transition duration-500",
+                                            context.isExpanded ? "opacity-100 translate-x-0" : "absolute opacity-0 -translate-x-2 w-0"
+                                        )}
+                                    >Add</span>
+                                }
+                                onClick={addModal}
+                            />}</SidebarItem>
+                            <SidebarItem>{(context) => <MenuButton
+                                className={context.isExpanded ? "" : "justify-center"}
+                                icon={<CollectionFill />}
+                                label={
+                                    <span
+                                        className={clsx(
+                                            "text-sm transition duration-500",
+                                            context.isExpanded ? "opacity-100 translate-x-0" : "absolute opacity-0 -translate-x-2 w-0"
+                                        )}
+                                    >Categories</span>
+                                }
+                                onClick={() => router.push('/dashboard/categories')}
+                            />}</SidebarItem>
+                        </SidebarContent>
+                    </Sidebar>
+                    <Bottombar className="block md:hidden">
+                        <MenuButton className="flex-col" icon={<HouseFill size={24} />} onClick={() => router.push('/dashboard')} />
+                        <MenuButton className="flex-col" icon={<Calendar2Fill size={24} />} onClick={() => router.push('/dashboard/calendar')} />
+                        <MenuButton className="flex-col" icon={<PlusSquareFill size={24} />} onClick={addModal} />
+                        <MenuButton className="flex-col" icon={<CollectionFill size={24} />} onClick={() => router.push('/dashboard/categories')} />
+                        <MenuButton className="flex-col" icon={<StarFill size={24} />} onClick={() => router.push('/dashboard/important')} />
+                    </Bottombar>
                     <div className="
                         flex flex-col flex-1
                         m-0 lg:m-1
