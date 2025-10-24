@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Calendar2Fill, CollectionFill, HouseFill, PlusSquareFill, StarFill } from "react-bootstrap-icons";
 
@@ -23,6 +23,7 @@ export default function DashboardLayout({
     const { userLoading } = useCheckUser();
     const { dataLoading } = useLoadData();
     const router = useRouter();
+    const pathname = usePathname();
 
     const { show } = useModal();
 
@@ -45,7 +46,10 @@ export default function DashboardLayout({
                         <SidebarToggle />
                         <SidebarContent>
                             <SidebarItem>{(context) => <MenuButton
-                                className={context.isExpanded ? "" : "justify-center"}
+                                className={clsx(
+                                    pathname === "/dashboard" ? "bg-zinc-200 dark:bg-zinc-900" : "",
+                                    context.isExpanded ? "" : "justify-center"
+                                )}
                                 icon={<HouseFill />}
                                 label={
                                     <span
@@ -58,7 +62,10 @@ export default function DashboardLayout({
                                 onClick={() => router.push('/dashboard')}
                             />}</SidebarItem>
                             <SidebarItem>{(context) => <MenuButton
-                                className={context.isExpanded ? "" : "justify-center"}
+                                className={clsx(
+                                    pathname === "/dashboard/calendar" ? "bg-zinc-200 dark:bg-zinc-900" : "",
+                                    context.isExpanded ? "" : "justify-center"
+                                )}
                                 icon={<Calendar2Fill />}
                                 label={
                                     <span
@@ -71,7 +78,10 @@ export default function DashboardLayout({
                                 onClick={() => router.push('/dashboard/calendar')}
                             />}</SidebarItem>
                             <SidebarItem>{(context) => <MenuButton
-                                className={context.isExpanded ? "" : "justify-center"}
+                                className={clsx(
+                                    pathname === "/dashboard/important" ? "bg-zinc-200 dark:bg-zinc-900" : "",
+                                    context.isExpanded ? "" : "justify-center"
+                                )}
                                 icon={<StarFill />}
                                 label={
                                     <span
@@ -97,7 +107,10 @@ export default function DashboardLayout({
                                 onClick={addModal}
                             />}</SidebarItem>
                             <SidebarItem>{(context) => <MenuButton
-                                className={context.isExpanded ? "" : "justify-center"}
+                                className={clsx(
+                                    pathname === "/dashboard/categories" ? "bg-zinc-200 dark:bg-zinc-900" : "",
+                                    context.isExpanded ? "" : "justify-center"
+                                )}
                                 icon={<CollectionFill />}
                                 label={
                                     <span
@@ -112,11 +125,11 @@ export default function DashboardLayout({
                         </SidebarContent>
                     </Sidebar>
                     <Bottombar className="block md:hidden">
-                        <MenuButton className="flex-col" icon={<HouseFill size={24} />} onClick={() => router.push('/dashboard')} />
-                        <MenuButton className="flex-col" icon={<Calendar2Fill size={24} />} onClick={() => router.push('/dashboard/calendar')} />
-                        <MenuButton className="flex-col" icon={<PlusSquareFill size={24} />} onClick={addModal} />
-                        <MenuButton className="flex-col" icon={<CollectionFill size={24} />} onClick={() => router.push('/dashboard/categories')} />
-                        <MenuButton className="flex-col" icon={<StarFill size={24} />} onClick={() => router.push('/dashboard/important')} />
+                        <MenuButton className={clsx("flex-col", pathname === "/dashboard" ? "bg-indigo-500 dark:bg-indigo-800" : "")} icon={<HouseFill size={18} />} onClick={() => router.push('/dashboard')} />
+                        <MenuButton className={clsx("flex-col", pathname === "/dashboard/calendar" ? "bg-indigo-500 dark:bg-indigo-800" : "")} icon={<Calendar2Fill size={18} />} onClick={() => router.push('/dashboard/calendar')} />
+                        <MenuButton className="flex-col" icon={<PlusSquareFill size={18} />} onClick={addModal} />
+                        <MenuButton className={clsx("flex-col", pathname === "/dashboard/categories" ? "bg-indigo-500 dark:bg-indigo-800" : "")} icon={<CollectionFill size={18} />} onClick={() => router.push('/dashboard/categories')} />
+                        <MenuButton className={clsx("flex-col", pathname === "/dashboard/important" ? "bg-indigo-500 dark:bg-indigo-800" : "")} icon={<StarFill size={18} />} onClick={() => router.push('/dashboard/important')} />
                     </Bottombar>
                     <div className="
                         flex flex-col flex-1
