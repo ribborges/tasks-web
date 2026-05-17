@@ -58,12 +58,12 @@ export async function newTask(state: FormState, formData: FormData): Promise<For
     if (!validatedFields.success) {
         return {
             errors: {
-                name: validatedFields.error.formErrors.fieldErrors.name,
-                description: validatedFields.error.formErrors.fieldErrors.description,
-                dueDate: validatedFields.error.formErrors.fieldErrors.dueDate,
-                categoryId: validatedFields.error.formErrors.fieldErrors.categoryId,
-                status: validatedFields.error.formErrors.fieldErrors.status,
-                isImportant: validatedFields.error.formErrors.fieldErrors.isImportant
+                name: validatedFields.error.flatten((i) => i.message).fieldErrors.name,
+                description: validatedFields.error.flatten((i) => i.message).fieldErrors.description,
+                dueDate: validatedFields.error.flatten((i) => i.message).fieldErrors.dueDate,
+                categoryId: validatedFields.error.flatten((i) => i.message).fieldErrors.categoryId,
+                status: validatedFields.error.flatten((i) => i.message).fieldErrors.status,
+                isImportant: validatedFields.error.flatten((i) => i.message).fieldErrors.isImportant
             }
         };
     }
@@ -138,12 +138,12 @@ export async function editTask(state: FormState, formData: FormData): Promise<Fo
     if (!validatedFields.success) {
         return {
             errors: {
-                name: validatedFields.error.formErrors.fieldErrors.name,
-                description: validatedFields.error.formErrors.fieldErrors.description,
-                dueDate: validatedFields.error.formErrors.fieldErrors.dueDate,
-                categoryId: validatedFields.error.formErrors.fieldErrors.categoryId,
-                status: validatedFields.error.formErrors.fieldErrors.status,
-                isImportant: validatedFields.error.formErrors.fieldErrors.isImportant
+                name: validatedFields.error.flatten((i) => i.message).fieldErrors.name,
+                description: validatedFields.error.flatten((i) => i.message).fieldErrors.description,
+                dueDate: validatedFields.error.flatten((i) => i.message).fieldErrors.dueDate,
+                categoryId: validatedFields.error.flatten((i) => i.message).fieldErrors.categoryId,
+                status: validatedFields.error.flatten((i) => i.message).fieldErrors.status,
+                isImportant: validatedFields.error.flatten((i) => i.message).fieldErrors.isImportant
             }
         };
     }

@@ -50,10 +50,10 @@ export async function editUser(state: FormState, formData: FormData): Promise<Fo
     if (!validatedFields.success) {
         return {
             errors: {
-                userId: validatedFields.error.formErrors.fieldErrors.userId,
-                name: validatedFields.error.formErrors.fieldErrors.name,
-                username: validatedFields.error.formErrors.fieldErrors.username,
-                email: validatedFields.error.formErrors.fieldErrors.email
+                userId: validatedFields.error.flatten((i) => i.message).fieldErrors.userId,
+                name: validatedFields.error.flatten((i) => i.message).fieldErrors.name,
+                username: validatedFields.error.flatten((i) => i.message).fieldErrors.username,
+                email: validatedFields.error.flatten((i) => i.message).fieldErrors.email
             }
         };
     }
@@ -98,9 +98,9 @@ export async function editPassword(state: FormState, formData: FormData): Promis
     if (!validatedFields.success) {
         return {
             errors: {
-                userId: validatedFields.error.formErrors.fieldErrors.userId,
-                password: validatedFields.error.formErrors.fieldErrors.password,
-                newPassword: validatedFields.error.formErrors.fieldErrors.newPassword
+                userId: validatedFields.error.flatten((i) => i.message).fieldErrors.userId,
+                password: validatedFields.error.flatten((i) => i.message).fieldErrors.password,
+                newPassword: validatedFields.error.flatten((i) => i.message).fieldErrors.newPassword
             }
         };
     }
