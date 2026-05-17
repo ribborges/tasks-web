@@ -43,8 +43,8 @@ export async function login(state: FormState, formData: FormData): Promise<FormS
     if (!validatedFields.success) {
         return {
             errors: {
-                username: validatedFields.error.formErrors.fieldErrors.username,
-                password: validatedFields.error.formErrors.fieldErrors.password
+                username: validatedFields.error.flatten((i) => i.message).fieldErrors.username,
+                password: validatedFields.error.flatten((i) => i.message).fieldErrors.password
             }
         };
     }
@@ -90,10 +90,10 @@ export async function register(state: FormState, formData: FormData): Promise<Fo
     if (!validatedFields.success) {
         return {
             errors: {
-                name: validatedFields.error.formErrors.fieldErrors.name,
-                username: validatedFields.error.formErrors.fieldErrors.username,
-                email: validatedFields.error.formErrors.fieldErrors.email,
-                password: validatedFields.error.formErrors.fieldErrors.password
+                name: validatedFields.error.flatten((i) => i.message).fieldErrors.name,
+                username: validatedFields.error.flatten((i) => i.message).fieldErrors.username,
+                email: validatedFields.error.flatten((i) => i.message).fieldErrors.email,
+                password: validatedFields.error.flatten((i) => i.message).fieldErrors.password
             }
         };
     }
